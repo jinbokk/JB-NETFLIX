@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import API from "../api/api";
 
 const Banner = () => {
   return (
-    <div>Banner</div>
-  )
-}
+    <div>
+      <API />
+    </div>
+  );
+};
 
-export default Banner
+export default Banner;
