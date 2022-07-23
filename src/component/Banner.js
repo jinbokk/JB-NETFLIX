@@ -1,5 +1,5 @@
 import React from "react";
-import API from "../api/api";
+import API from "../redux/api";
 
 const Banner = () => {
   return (
