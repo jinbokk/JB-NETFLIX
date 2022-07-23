@@ -8,7 +8,7 @@ const Navbar = () => {
     <div className="nav">
       <img className="nav_logo" src={logo} alt="" />
       <Link to="/">HOME</Link>
-      <Link to="/movies:id">MOVIE</Link>
+      <Link to="/movies">MOVIE</Link>
     </div>
   );
 };

@@ -32,10 +32,10 @@
   position: relative;
   z-index: 1;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .nav a:hover {
   color: gray;
-  transition: 0.5s;
+  transition: 0.3s;
 }
