@@ -16,12 +16,21 @@ function getMovies() {
       `/upcoming?api_key=${API_KEY}&language=en-US&page=1`
     );
 
-    const [popularMoviesData, topRatedMoviesData, upcomingMoviesData] =
+    const [popularMoviesJson, topRatedMoviesJson, upcomingMoviesJson] =
       await Promise.all([
         getPopularMovies,
         getTopRatedMovies,
         getUpcomingMovies,
       ]);
+
+    dispatch({
+      type: "GET_MOVIES_SUCCESS",
+      payload: {
+        popularMoviesJson: popularMoviesJson,
+        topRatedMoviesJson: topRatedMoviesJson,
+        upcomingMoviesJson: upcomingMoviesJson,
+      },
+    });
   };
 }
 

@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
 import Banner from "../component/Banner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 
 const Home = () => {
   const dispatch = useDispatch();
+
+  const { popularMoviesData, topRatedMoviesData, upcomingMoviesData } =
+    useSelector((state) => state.movie);
+
   useEffect(() => {
     dispatch(movieActions.getMovies());
   }, []);
 
   return (
     <div>
-      Home
-      <Banner/>
+      {popularMoviesData.results && <Banner popularMovies={popularMoviesData.results[0]}/>}
     </div>
   );
 };
