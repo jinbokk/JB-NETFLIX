@@ -1,34 +1,16 @@
-import React, { useSelector } from "react";
-import { useDispatch } from "react-redux/es/exports";
-import YouTube, { YouTubeProps } from "react-youtube";
+import React from "react";
+import MovieVideo from "./MovieVideo";
 
-const PreviewCard = () => {
+const PreviewCard = ({ item }) => {
+  const movieID = item.id;
 
-  // function playVideo() {
-  //   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-  //     // access to player in all event handlers via event.target
-  //     event.target.pauseVideo();
-  //   };
-
-  //   const opts: YouTubeProps["opts"] = {
-  //     height: "390",
-  //     width: "640",
-  //     playerVars: {
-  //       // https://developers.google.com/youtube/player_parameters
-  //       autoplay: 1,
-  //     },
-  //   };
-
-  //   return (
-  //     <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
-  //   );
-  // }
-  // const dispatch = useDispatch();
-
-  // const { popularMoviesData, topRatedMoviesData, upcomingMoviesData } =
-  //   useSelector((state) => state.movie);
-
-  return <div className="previewCard">PreviewCard</div>;
+  return (
+    <div>
+      <div className="previewVideo">
+        <MovieVideo movieID={movieID} />
+      </div>
+    </div>
+  );
 };
 
 export default PreviewCard;

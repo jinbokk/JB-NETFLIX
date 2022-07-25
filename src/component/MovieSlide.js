@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 export default function MovieSlide({ movies }) {
+
   return (
     <Swiper
       slidesPerView={8}
@@ -23,9 +24,9 @@ export default function MovieSlide({ movies }) {
       modules={[Navigation]}
     >
       {movies &&
-        movies.map((item, index) => (
+        movies.map((item) => (
           <SwiperSlide>
-            <MovieCard item={item} key={index} />
+            <MovieCard movie={item} key={item.id} />
           </SwiperSlide>
         ))}
     </Swiper>

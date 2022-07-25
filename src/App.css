@@ -23,14 +23,14 @@
   object-fit: contain;
   z-index: 1;
   margin-right: 20px;
-  padding-left: 4%;
+  padding-left: 40px;
 }
 
 .nav a {
   font-weight: bold;
   text-decoration: none;
   color: rgb(220, 220, 220);
-  margin-left: 30px;
+  margin-left: 40px;
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -40,6 +40,12 @@
 .nav a:hover {
   color: gray;
   transition: 0.3s;
+}
+
+/* ------------------------home------------------------ */
+
+.home h1 {
+  padding-left: 40px;
 }
 
 /* ------------------------loadingSpinner------------------------ */
@@ -72,6 +78,7 @@
 .banner h1 {
   font-size: 5vw;
   font-weight: bold;
+  padding-left: 0;
 }
 
 .banner p {
@@ -87,7 +94,7 @@
   justify-content: center;
   height: 100%;
   width: 50vw;
-  padding-left: 60px;
+  padding-left: 40px;
 }
 
 /* ------------------------swiper------------------------ */
@@ -143,6 +150,14 @@
 /* ------------------------previewCard------------------------ */
 
 .previewCard {
-  width: 300px;
-  height: 400px;
+  position: absolute;
+  z-index: 10;
+  width: 400px;
+  height: 900px;
+  background-color: red;
+}
+
+.previewVideo {
+  height: 40px;
+  width: 80px;
 }

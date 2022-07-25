@@ -36,7 +36,7 @@ const Home = () => {
       <ClipLoader color="red" loading={loading} size={300} />
     </div>
   ) : (
-    <div>
+    <div className="home">
       <Banner movie={popularMoviesData.results[0]} />
       <h1>POPULAR MOVIES</h1>
       <MovieSlide movies={popularMoviesData.results} />
