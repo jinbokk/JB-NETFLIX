@@ -1,7 +1,7 @@
 import React from "react";
 
-const Banner = ({ popularMovies }) => {
-  const bannerPosterURL = popularMovies.poster_path;
+const Banner = ({ movie }) => {
+  const bannerPosterURL = movie.poster_path;
 
   return (
     <>
@@ -15,8 +15,8 @@ const Banner = ({ popularMovies }) => {
         }}
       >
         <div className="banner_text">
-          <h1>{popularMovies.original_title}</h1>
-          <p>{popularMovies.overview}</p>
+          <h1>{movie.original_title}</h1>
+          <p>{movie.overview}</p>
         </div>
       </div>
     </>

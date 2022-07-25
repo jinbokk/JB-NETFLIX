@@ -2,6 +2,9 @@ let initialState = {
   popularMoviesData: {},
   topRatedMoviesData: {},
   upcomingMoviesData: {},
+  // popularMoviesVideo: {},
+  // topRatedMoviesVideo: {},
+  // upcomingMoviesVideo: {},
 };
 
 function movieReducer(state = initialState, action) {
@@ -13,6 +16,9 @@ function movieReducer(state = initialState, action) {
         popularMoviesData: payload.popularMoviesJson.data,
         topRatedMoviesData: payload.topRatedMoviesJson.data,
         upcomingMoviesData: payload.upcomingMoviesJson.data,
+        // popularMoviesVideo: payload.popularMoviesJson.data.results.id,
+        // topRatedMoviesVideo: payload.topRatedMoviesJson.data.results.id,
+        // upcomingMoviesVideo: payload.upcomingMoviesJson.data.results.id,
       };
     default:
       return { ...state };
