@@ -16,7 +16,9 @@ const MovieCard = ({ item }) => {
           ")",
       }}
       onMouseOver={viewPreviewCard}
-    ></div>
+    >
+      {PreviewCard}
+    </div>
   );
 };
 

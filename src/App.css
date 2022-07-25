@@ -42,6 +42,16 @@
   transition: 0.3s;
 }
 
+/* ------------------------loadingSpinner------------------------ */
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 60px);
+  align-items: center;
+}
+
 /* ------------------------banner------------------------ */
 
 .banner {
@@ -65,7 +75,7 @@
 }
 
 .banner p {
-  font-size: .9vw;
+  font-size: 0.9vw;
   line-height: 30px;
 }
 
@@ -87,6 +97,16 @@
   height: 300px;
 }
 
+/* .swiper::before {
+  z-index: 2;
+  position: absolute;
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: radial-gradient(transparent, rgba(0, 0, 0, 0.6));
+} */
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
@@ -103,6 +123,11 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: rgb(180, 0, 0) !important;
 }
 
 /* ------------------------movieCard------------------------ */
