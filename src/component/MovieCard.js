@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PreviewCard from "./PreviewCard";
 
-
 const MovieCard = ({ movie }) => {
-
-
   const movieCardImg = movie.poster_path;
 
   const [hover, setHover] = useState(false);
-
-  // useEffect(()=>{},[])
 
   return (
     <div
