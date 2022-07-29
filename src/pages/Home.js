@@ -15,22 +15,6 @@ const Home = () => {
     dispatch(movieActions.getMovies());
   }, []);
 
-  // if (loading === true) {
-  //   return <ClipLoader color="red" loading={loading} size={300} />;
-  // } else {
-  //   return (
-  //     <div>
-  //       <Banner movie={popularMoviesData.results[0]} />
-  //       <h1>POPULAR MOVIES</h1>
-  //       <MovieSlide movies={popularMoviesData.results} />
-  //       <h1>TOP RATED MOVIES</h1>
-  //       <MovieSlide movies={topRatedMoviesData.results} />
-  //       <h1>UPCOMING MOVIES</h1>
-  //       <MovieSlide movies={upcomingMoviesData.results} />
-  //     </div>
-  //   );
-  // }
-
   return loading ? (
     <div className="loadingSpinner">
       <ClipLoader color="red" loading={loading} size={300} />
@@ -38,11 +22,26 @@ const Home = () => {
   ) : (
     <div className="home">
       <Banner movie={popularMoviesData.results[0]} />
-      <h1>POPULAR MOVIES</h1>
+      <h1>
+        <span style={{ color: "red", fontSize: "22px", marginRight: "10px" }}>
+          &#10095;
+        </span>
+        POPULAR MOVIES
+      </h1>
       <MovieSlide movies={popularMoviesData.results} />
-      <h1>TOP RATED MOVIES</h1>
+      <h1>
+        <span style={{ color: "red", fontSize: "22px", marginRight: "10px" }}>
+          &#10095;
+        </span>
+        TOP RATED MOVIES
+      </h1>
       <MovieSlide movies={topRatedMoviesData.results} />
-      <h1>UPCOMING MOVIES</h1>
+      <h1>
+        <span style={{ color: "red", fontSize: "22px", marginRight: "10px" }}>
+          &#10095;
+        </span>
+        UPCOMING MOVIES
+      </h1>
       <MovieSlide movies={upcomingMoviesData.results} />
     </div>
   );

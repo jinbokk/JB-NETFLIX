@@ -33,11 +33,11 @@ const MovieCard = ({ movie }) => {
       onMouseLeave={handleMouseLeave}
     >
       {hover ? (
-        <div className="previewCard">
+        <div>
           <PreviewCard movie={movie} />
         </div>
       ) : (
-        false
+        null
       )}
     </div>
   );

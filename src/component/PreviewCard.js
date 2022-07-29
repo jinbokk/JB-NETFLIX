@@ -49,6 +49,12 @@ const PreviewCard = ({ movie }) => {
         <span className="previewCard_vote_average">
           <span>SCORE</span>
           <span>{movie.vote_average}</span>
+          <span>RATED</span>
+          {movie.adult === false ? (
+            <span className="G_rated">G</span>
+          ) : (
+            <span className="adult_rated">18+</span>
+          )}
         </span>
         <div className="previewCard_genre">
           {movie.genre_ids.map((id) => (
