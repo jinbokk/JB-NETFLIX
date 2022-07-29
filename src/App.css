@@ -61,16 +61,16 @@
 /* ------------------------banner------------------------ */
 
 .banner {
-  height: 80vh;
+  height: 85vh;
   width: 100%;
-  background-size: cover;
-  background-position: 50%;
+  /* background-size: cover; */
+  background-position: 100%;
 }
 
 .banner::before {
   position: absolute;
   content: "";
-  height: 80vh;
+  height: 85vh;
   width: 100%;
   background: linear-gradient(to right, black, transparent);
 }
@@ -102,6 +102,7 @@
 .swiper {
   width: 100%;
   height: 300px;
+  overflow: visible !important;
 }
 
 /* .swiper::before {
@@ -115,7 +116,7 @@
 } */
 
 .swiper-slide {
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   background: rgb(25, 25, 25);
   display: -webkit-box;
@@ -150,14 +151,45 @@
 /* ------------------------previewCard------------------------ */
 
 .previewCard {
-  position: absolute;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #141414;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 10;
-  width: 400px;
-  height: 900px;
-  background-color: red;
+  width: 320px;
+  height: 400px;
 }
 
 .previewVideo {
-  height: 40px;
-  width: 80px;
+  margin-bottom: 5%;
+}
+
+.previewCard_info {
+  padding: 10px;
+}
+
+.previewCard_title {
+  font-size: 22px;
+  font-weight: bold;
+}
+.previewCard_vote_average {
+  display: inline;
+  padding: 4px;
+  margin-left: 15px;
+  border-radius: 15%;
+  /* vertical-align: middle; */
+  background-color: orange;
+  color: rgb(30, 30, 30);
+  font-weight: bold;
+}
+.previewCard_genre {
+}
+
+.previewCard_release_date {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }

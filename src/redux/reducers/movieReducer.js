@@ -3,7 +3,7 @@ let initialState = {
   topRatedMoviesData: {},
   upcomingMoviesData: {},
   loading: true,
-  movieVideos: {},
+  movieKey: {},
 };
 
 function movieReducer(state = initialState, action) {
@@ -25,7 +25,7 @@ function movieReducer(state = initialState, action) {
     case "STORE_MOVIE_ID_SUCCESS":
       return {
         ...state,
-        movieVideos: payload.movieVideos,
+        movieKey: payload.movieKey,
       };
 
     case "GET_MOVIES_FAILURE":

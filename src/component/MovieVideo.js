@@ -1,46 +1,27 @@
 import React from "react";
 import YouTube from "react-youtube";
+import { useSelector } from "react-redux/es/exports";
 
-function MovieVideo({ movieKey }) {
+function MovieVideo() {
+  const movieKey = useSelector((state) => state.movie.movieKey);
+  console.log("movieKey is", movieKey);
+
   const opts = {
-    height: "180",
+    height: "200",
     width: "320",
     playerVars: {
       autoplay: 1,
       controls: 0,
       fs: 0,
-      modestbranding: 0,
       showinfo: 0,
-      disablekb: 1,
-      start: 30,
+      // rel: 0,
+      // iv_load_policy: 1,
+      // playsinline:1,
+      // start: 10,
     },
   };
 
   return <YouTube videoId={movieKey} opts={opts} />;
-  // return <YouTube videoId="O63ZtKG8FfQ" opts={opts} />;
 }
-
-// class MovieVideo extends React.Component {
-
-//   render() {
-//     const opts = {
-//       height: "180",
-//       width: "320",
-//       playerVars: {
-//         autoplay: 1,
-//         controls: 0,
-//         fs: 0,
-//         modestbranding: 0,
-//         showinfo: 0,
-//         disablekb: 1,
-//         start: 30,
-//       },
-//     };
-
-//     return (
-//       <YouTube videoId="O63ZtKG8FfQ" opts={opts}/>
-//     );
-//   }
-// }
 
 export default MovieVideo;

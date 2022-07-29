@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 export default function MovieSlide({ movies }) {
-
   return (
     <Swiper
       slidesPerView={8}
