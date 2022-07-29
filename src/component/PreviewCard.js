@@ -2,10 +2,14 @@ import React, { useEffect } from "react";
 import MovieVideo from "./MovieVideo";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import api from "../redux/api";
-import Movies from "../pages/Movies";
 
 const PreviewCard = ({ movie }) => {
   console.log("pm is", movie);
+
+  const genreList = useSelector((state) => state.movie.genreListData.genres);
+
+  console.log("genre is", genreList);
+
   const dispatch = useDispatch();
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -14,7 +18,7 @@ const PreviewCard = ({ movie }) => {
 
   const getMovieKey = async () => {
     const selectedMovieJson = await api.get(
-      `/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
+      `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
     console.log("data is", selectedMovieJson);
     console.log("key is", selectedMovieJson.data.results[0].key);
@@ -41,10 +45,17 @@ const PreviewCard = ({ movie }) => {
       </div>
       <div className="previewCard_info">
         <span className="previewCard_title">{movie.title}</span>
-        <span className="previewCard_vote_average">{movie.vote_average}</span>
-        <div className="previewCard_genre">genre {movie.genre_ids}</div>
-        <div className="previewCard_release_date">
-          <div>release {movie.release_date}</div>
+        <div className="previewCard_release_date">{movie.release_date}</div>
+        <span className="previewCard_vote_average">
+          <span>SCORE</span>
+          <span>{movie.vote_average}</span>
+        </span>
+        <div className="previewCard_genre">
+          {movie.genre_ids.map((id) => (
+            <span className="previewCard_genre_tag">
+              {genreList.find((item) => item.id === id).name}
+            </span>
+          ))}
         </div>
       </div>
     </div>

@@ -8,23 +8,32 @@ function getMovies() {
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const getPopularMovies = api.get(
-        `/popular?api_key=${API_KEY}&language=en-US&page=1`
+        `/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
 
       const getTopRatedMovies = api.get(
-        `/top_rated?api_key=${API_KEY}&language=en-US&page=1`
+        `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
       );
 
       const getUpcomingMovies = api.get(
-        `/upcoming?api_key=${API_KEY}&language=en-US&page=1`
+        `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`
       );
 
-      const [popularMoviesJson, topRatedMoviesJson, upcomingMoviesJson] =
-        await Promise.all([
-          getPopularMovies,
-          getTopRatedMovies,
-          getUpcomingMovies,
-        ]);
+      const getGenres = api.get(
+        `/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      );
+
+      const [
+        popularMoviesJson,
+        topRatedMoviesJson,
+        upcomingMoviesJson,
+        GenresJson,
+      ] = await Promise.all([
+        getPopularMovies,
+        getTopRatedMovies,
+        getUpcomingMovies,
+        getGenres,
+      ]);
 
       dispatch({
         type: "GET_MOVIES_SUCCESS",
@@ -32,6 +41,7 @@ function getMovies() {
           popularMoviesJson: popularMoviesJson,
           topRatedMoviesJson: topRatedMoviesJson,
           upcomingMoviesJson: upcomingMoviesJson,
+          movieGenresJson: GenresJson,
         },
       });
     } catch (error) {

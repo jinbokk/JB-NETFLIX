@@ -4,6 +4,7 @@ let initialState = {
   upcomingMoviesData: {},
   loading: true,
   movieKey: {},
+  genreList: {},
 };
 
 function movieReducer(state = initialState, action) {
@@ -19,6 +20,7 @@ function movieReducer(state = initialState, action) {
         popularMoviesData: payload.popularMoviesJson.data,
         topRatedMoviesData: payload.topRatedMoviesJson.data,
         upcomingMoviesData: payload.upcomingMoviesJson.data,
+        genreListData: payload.movieGenresJson.data,
         loading: false,
       };
 

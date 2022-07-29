@@ -161,6 +161,7 @@
   z-index: 10;
   width: 320px;
   height: 400px;
+  word-break: break-all;
 }
 
 .previewVideo {
@@ -168,6 +169,7 @@
 }
 
 .previewCard_info {
+  width: 100%;
   padding: 10px;
 }
 
@@ -175,21 +177,50 @@
   font-size: 22px;
   font-weight: bold;
 }
+
 .previewCard_vote_average {
-  display: inline;
+  width: 300px;
+  text-align: right;
+}
+
+.previewCard_vote_average span:first-child {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.previewCard_vote_average span:nth-child(2) {
+  display: inline-block;
   padding: 4px;
-  margin-left: 15px;
+  width: 38px;
+  text-align: center;
+  margin-top: 20px;
   border-radius: 15%;
-  /* vertical-align: middle; */
   background-color: orange;
   color: rgb(30, 30, 30);
+  font-size: 20px;
   font-weight: bold;
 }
+
 .previewCard_genre {
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.previewCard_genre_tag {
+  display: inline;
+  /* width: 100%; */
+  white-space: nowrap;
+  line-height: 40px;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: red;
 }
 
 .previewCard_release_date {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  font-size: 12px;
 }

@@ -11,7 +11,7 @@ const MovieCard = ({ movie }) => {
     setDelayHandler(
       setTimeout(() => {
         setHover(true);
-      }, 600)
+      }, 700)
     );
   };
 
