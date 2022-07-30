@@ -264,8 +264,39 @@
   font-size: 12px;
 }
 
+/* ------------------------Movies------------------------ */
+
+.MoviesPage {
+  display: flex;
+}
+
+.MoviesHandler {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  width: 35vw;
+  height: 100vh;
+}
+
 /* ------------------------MovieList------------------------ */
 
 .MovieList {
+  background-color: blue;
+  position: absolute;
+  right: 0;
+  width: 65vw;
+
   padding-top: 60px;
+}
+
+.movieCardList {
+  width: 30%;
+  height: 200px;
+  margin: 20px;
+  border-radius: 20px;
+  background-position: center;
+  background-size: cover;
 }

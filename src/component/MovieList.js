@@ -2,18 +2,25 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useSelector } from "react-redux";
+import "bootstrap/dist/css/bootstrap-grid.min.css";
 
-const MovieList = () => {
-  const popularMoviesData = useSelector((state) => state.movie);
-
+const MovieList = ({ movies }) => {
   return (
-    <Container fluid>
+    <Container>
       <Row>
-        <Col>1 of 1</Col>
-        <Col>1 of 1</Col>
-        <Col>1 of 1</Col>
-        <Col>1 of 1</Col>
+        {movies.map((item, index) => (
+          <Col
+            key={index}
+            md={3}
+            className="movieCardList"
+            style={{
+              backgroundImage:
+                "url(" +
+                `	https://www.themoviedb.org/t/p/w440_and_h660_face${item.poster_path}` +
+                ")",
+            }}
+          ></Col>
+        ))}
       </Row>
     </Container>
   );

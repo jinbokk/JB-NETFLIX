@@ -23,16 +23,22 @@ function getMovies() {
         `/genre/movie/list?api_key=${API_KEY}&language=en-US`
       );
 
+      const getNowPlayingMovies = api.get(
+        `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`
+      );
+
       const [
         popularMoviesJson,
         topRatedMoviesJson,
         upcomingMoviesJson,
         GenresJson,
+        NowPlayingMoviesJson,
       ] = await Promise.all([
         getPopularMovies,
         getTopRatedMovies,
         getUpcomingMovies,
         getGenres,
+        getNowPlayingMovies,
       ]);
 
       dispatch({
@@ -42,6 +48,7 @@ function getMovies() {
           topRatedMoviesJson: topRatedMoviesJson,
           upcomingMoviesJson: upcomingMoviesJson,
           movieGenresJson: GenresJson,
+          NowPlayingMoviesJson: NowPlayingMoviesJson,
         },
       });
     } catch (error) {
