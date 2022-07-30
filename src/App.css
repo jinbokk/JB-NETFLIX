@@ -1,7 +1,7 @@
 /* ------------------------nav------------------------ */
 
 .nav {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   display: flex;
   justify-content: left;
@@ -11,7 +11,7 @@
 }
 
 .nav::before {
-  position: absolute;
+  position: fixed;
   left: 0;
   width: 100%;
   height: 60px;
@@ -292,11 +292,17 @@
   padding-top: 60px;
 }
 
-.movieCardList {
-  width: 30%;
-  height: 200px;
-  margin: 20px;
-  border-radius: 20px;
+.movieListCard {
+  width: 400px;
+  aspect-ratio: 4 / 6;
+  margin: 10px;
+  border-radius: 10px;
   background-position: center;
   background-size: cover;
+  transition: 0.3s;
+}
+
+.movieListCard:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
 }

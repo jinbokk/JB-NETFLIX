@@ -11,8 +11,10 @@ const MovieList = ({ movies }) => {
         {movies.map((item, index) => (
           <Col
             key={index}
+            sm={4}
             md={3}
-            className="movieCardList"
+            lg={2}
+            className="movieListCard"
             style={{
               backgroundImage:
                 "url(" +
