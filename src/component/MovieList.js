@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useSelector } from "react-redux";
 
-const MovieCollection = () => {
+const MovieList = () => {
   const popularMoviesData = useSelector((state) => state.movie);
 
   return (
@@ -19,4 +19,4 @@ const MovieCollection = () => {
   );
 };
 
-export default MovieCollection;
+export default MovieList;

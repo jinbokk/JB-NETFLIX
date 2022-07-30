@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { ClipLoader } from "react-spinners";
-import MovieCollection from "../component/MovieCollection";
+import MovieList from "../component/MovieList";
 
 const Movies = () => {
   const { popularMoviesData, topRatedMoviesData, upcomingMoviesData, loading } =
@@ -17,8 +17,8 @@ const Movies = () => {
       <ClipLoader color="red" loading={loading} size={300} />
     </div>
   ) : (
-    <div className="MovieCollection">
-      <MovieCollection />
+    <div className="MovieList">
+      <MovieList />
     </div>
   );
 };
