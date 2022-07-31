@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { ClipLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
+import Slider from "react-slick";
 
 const Movies = () => {
   const { NowPlayingMoviesData, loading } = useSelector((state) => state.movie);
@@ -23,7 +24,18 @@ const Movies = () => {
     </div>
   ) : (
     <div className="MoviesPage">
-      <div className="MoviesHandler">MoviesHandler Section</div>
+      <div>
+        <div className="MoviesHandler">
+          MoviesHandler Section
+          <Slider
+            getAriaLabel={() => "Year range"}
+            value={30}
+            // onChange={handleChange}
+            valueLabelDisplay="auto"
+            // getAriaValueText={valuetext}
+          />
+        </div>
+      </div>
       <div className="MovieList">
         <MovieList movies={NowPlayingMoviesData.results} />
       </div>
