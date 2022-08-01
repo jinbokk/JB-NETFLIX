@@ -24,7 +24,7 @@ const MovieList = ({ movies }) => {
                 `	https://www.themoviedb.org/t/p/w440_and_h660_face${item.poster_path}` +
                 ")",
             }}
-            onClick={() => navigate(`/movies/:${item.id}`)}
+            onClick={() => navigate(`/movies/${item.id}`)}
           ></Col>
         ))}
       </Row>

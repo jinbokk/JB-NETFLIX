@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { ClipLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
-import { Link } from "react-router-dom";
 // import Slider from "react-slick";
 
 const Movies = () => {
