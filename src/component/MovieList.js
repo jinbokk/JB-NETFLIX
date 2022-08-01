@@ -3,8 +3,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap-grid.min.css";
+import { useNavigate } from "react-router-dom";
 
 const MovieList = ({ movies }) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Row>
@@ -21,6 +24,7 @@ const MovieList = ({ movies }) => {
                 `	https://www.themoviedb.org/t/p/w440_and_h660_face${item.poster_path}` +
                 ")",
             }}
+            onClick={() => navigate(`/movies/:${item.id}`)}
           ></Col>
         ))}
       </Row>
