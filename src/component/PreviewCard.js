@@ -20,8 +20,6 @@ const PreviewCard = ({ movie }) => {
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
-    // console.log("data is", selectedMovieJson);
-    // console.log("key is", selectedMovieJson.data.results[0].key);
     const movieKey = selectedMovieJson.data.results[0].key;
 
     dispatch({
