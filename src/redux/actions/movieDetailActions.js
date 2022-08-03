@@ -67,3 +67,4 @@ function getMovieDetail() {
 export const movieDetailActions = {
   getMovieDetail,
 };
+
