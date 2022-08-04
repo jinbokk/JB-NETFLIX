@@ -4,17 +4,12 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import api from "../redux/api";
 
 const PreviewCard = ({ movie }) => {
-  console.log("pm is", movie);
-
   const genreList = useSelector((state) => state.movie.genreListData.genres);
-
-  console.log("genre is", genreList);
 
   const dispatch = useDispatch();
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   const movie_id = movie.id;
-  console.log("movie id is", movie_id);
 
   const getMovieKey = async () => {
     const selectedMovieJson = await api.get(
@@ -28,12 +23,18 @@ const PreviewCard = ({ movie }) => {
         movieKey: movieKey,
       },
     });
-
-    return movieKey;
   };
 
   useEffect(() => {
     getMovieKey();
+    return () => {
+      dispatch({
+        type: "STORE_MOVIE_KEY_SUCCESS",
+        payload: {
+          movieKey: null,
+        },
+      });
+    };
   }, []);
 
   return (

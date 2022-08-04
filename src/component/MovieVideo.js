@@ -4,7 +4,6 @@ import { useSelector } from "react-redux/es/exports";
 
 function MovieVideo() {
   const movieKey = useSelector((state) => state.movie.movieKey);
-  console.log("movieKey is", movieKey);
 
   const opts = {
     height: "200",

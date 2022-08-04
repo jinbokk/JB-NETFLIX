@@ -1,14 +1,19 @@
 import api from "../api";
-import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { movieActions } from "./movieActions";
+// import { useDispatch } from "react-redux";
 
-function getMovieDetail() {
+function getMovieDetail(movie_id) {
   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const { loading } = useSelector((state) => state.movie);
+  // const dispatch = useDispatch();
 
-  const movie_id = useSelector((state) => state.movie.movieId);
+  // useEffect(() => {
+  //   movieActions.getMovies();
+  // }, []);
 
-  const dispatch = useDispatch();
+  // const movie_id = useSelector((state) => state.movie.movieId);
 
   return async (dispatch) => {
     try {
@@ -67,4 +72,3 @@ function getMovieDetail() {
 export const movieDetailActions = {
   getMovieDetail,
 };
-
