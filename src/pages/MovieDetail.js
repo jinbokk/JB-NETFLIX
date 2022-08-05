@@ -6,12 +6,11 @@ import { movieDetailActions } from "../redux/actions/movieDetailActions";
 const MovieDetail = () => {
   const movie_id = useParams().id;
 
-  movieDetailActions.getMovieDetail(movie_id);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: "STORE_MOVIE_ID_SUCCESS", payload: movie_id });
+    movieDetailActions.getMovieDetail(movie_id);
   }, []);
 
   const { popularMoviesData, topRatedMoviesData, upcomingMoviesData, loading } =
