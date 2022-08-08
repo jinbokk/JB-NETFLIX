@@ -312,3 +312,11 @@
   width: 400px;
   height: auto;
 }
+
+/* ------------------------MovieList------------------------ */
+
+.movie_detail_img {
+  width: 100vw;
+  height: 50vh;
+  background-size: cover;
+}

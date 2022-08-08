@@ -31,7 +31,7 @@ const PreviewCard = ({ movie }) => {
       dispatch({
         type: "STORE_MOVIE_KEY_SUCCESS",
         payload: {
-          movieKey: null,
+          movieKey: {},
         },
       });
     };

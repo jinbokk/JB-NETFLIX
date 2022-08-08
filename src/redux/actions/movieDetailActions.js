@@ -1,31 +1,31 @@
 import api from "../api";
 
-function getMovieDetail() {
-  const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
+function getMovieDetail(movie_id) {
   return async (dispatch) => {
     try {
       dispatch({ type: "GET_MOVIE_DETAIL_REQUEST" });
 
-      // const getMovieDetailJson = api.get(
-      //   `/movie/${movie_id}?api_key=${API_KEY}&language=en-US`
-      // );
+      const getMovieDetailJson = api.get(
+        `/movie/${movie_id}?api_key=${API_KEY}&language=en-US`
+      );
 
-      // const getMovieVideos = api.get(
-      //   `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
-      // );
+      const getMovieVideos = api.get(
+        `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
+      );
 
-      // const getMovieReviews = api.get(
-      //   `/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
-      // );
+      const getMovieReviews = api.get(
+        `/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
+      );
 
-      // const getRecommendMovies = api.get(
-      //   `/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
-      // );
+      const getRecommendMovies = api.get(
+        `/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
+      );
 
-      // const getSimilarMovies = api.get(
-      //   `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=11`
-      // );
+      const getSimilarMovies = api.get(
+        `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=11`
+      );
 
       const [
         MovieDetailJson,

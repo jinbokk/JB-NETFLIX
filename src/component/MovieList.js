@@ -11,9 +11,9 @@ const MovieList = ({ movies }) => {
   return (
     <Container>
       <Row>
-        {movies.map((item, index) => (
+        {movies.map((item) => (
           <Col
-            key={index}
+            key={item.id}
             sm={4}
             md={3}
             lg={2}

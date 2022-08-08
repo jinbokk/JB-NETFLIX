@@ -3,7 +3,7 @@ import Banner from "../component/Banner";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import MovieSlide from "../component/MovieSlide";
-import ClipLoader from "react-spinners/ClipLoader";
+import { FadeLoader } from "react-spinners";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,12 @@ const Home = () => {
 
   return loading ? (
     <div className="loadingSpinner">
-      <ClipLoader color="red" loading={loading} size={300} />
+      <FadeLoader
+        color="red"
+        loading={loading}
+        size={15}
+        speedMultiplier={3}
+      />
     </div>
   ) : (
     <div className="home">

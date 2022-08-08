@@ -25,6 +25,17 @@ function movieDetailReducer(state = initialState, action) {
         loading: false,
       };
 
+    case "MOVIE_DETAIL_INITIALIZE":
+      return {
+        ...state,
+        MovieDetailData: {},
+        MovieVideos: {},
+        MovieReviews: {},
+        RecommendMovies: {},
+        SimilarMovies: {},
+        loading: true,
+      };
+
     case "GET_MOVIE_DETAIL_FAILURE":
       return alert(`Sorry,\n"${payload.error.message}"`);
 

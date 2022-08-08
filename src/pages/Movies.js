@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
-import { ClipLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
 // import Slider from "react-slick";
 
@@ -20,7 +20,12 @@ const Movies = () => {
 
   return loading ? (
     <div className="loadingSpinner">
-      <ClipLoader color="red" loading={loading} size={300} />
+      <FadeLoader
+        color="red"
+        loading={loading}
+        size={15}
+        speedMultiplier={3}
+      />
     </div>
   ) : (
     <div className="MoviesPage">
