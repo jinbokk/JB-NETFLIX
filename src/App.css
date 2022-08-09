@@ -320,3 +320,13 @@
   height: 50vh;
   background-size: cover;
 }
+
+/* ------------------------MovieReview------------------------ */
+
+.reviewer_info {
+  display: flex;
+}
+
+.reviewer_img {
+  filter: brightness(75%);
+}
