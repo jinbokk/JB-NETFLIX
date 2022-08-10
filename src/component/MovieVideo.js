@@ -6,8 +6,8 @@ function MovieVideo() {
   const movieKey = useSelector((state) => state.movie.movieKey);
 
   const opts = {
-    height: "200",
-    width: "320",
+    height: "100%",
+    width: "100%",
     playerVars: {
       autoplay: 1,
       controls: 0,

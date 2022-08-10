@@ -39,7 +39,7 @@ const PreviewCard = ({ movie }) => {
 
   return (
     <div className="previewCard">
-      <div className="previewVideo">
+      <div className="previewVideo_container">
         <MovieVideo />
       </div>
       <div className="previewCard_info">

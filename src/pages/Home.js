@@ -17,34 +17,23 @@ const Home = () => {
 
   return loading ? (
     <div className="loadingSpinner">
-      <FadeLoader
-        color="red"
-        loading={loading}
-        size={15}
-        speedMultiplier={3}
-      />
+      <FadeLoader color="red" loading={loading} size={15} speedMultiplier={3} />
     </div>
   ) : (
     <div className="home">
       <Banner movie={popularMoviesData.results[0]} />
       <h1>
-        <span style={{ color: "red", fontSize: "22px", marginRight: "10px" }}>
-          &#10095;
-        </span>
+        <span className="subTitle">&#10095;</span>
         POPULAR MOVIES
       </h1>
       <MovieSlide movies={popularMoviesData.results} />
       <h1>
-        <span style={{ color: "red", fontSize: "22px", marginRight: "10px" }}>
-          &#10095;
-        </span>
+        <span className="subTitle">&#10095;</span>
         TOP RATED MOVIES
       </h1>
       <MovieSlide movies={topRatedMoviesData.results} />
       <h1>
-        <span style={{ color: "red", fontSize: "22px", marginRight: "10px" }}>
-          &#10095;
-        </span>
+        <span className="subTitle">&#10095;</span>
         UPCOMING MOVIES
       </h1>
       <MovieSlide movies={upcomingMoviesData.results} />
