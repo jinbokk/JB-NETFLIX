@@ -12,15 +12,21 @@ function MovieVideo() {
       autoplay: 1,
       controls: 0,
       fs: 0,
-      showinfo: 0,
-      // rel: 0,
+      rel: 0,
+      // showinfo: 0,
       // iv_load_policy: 1,
       // playsinline:1,
       // start: 10,
     },
   };
 
-  return <YouTube videoId={movieKey} opts={opts} />;
+  return (
+    <div className="video_container">
+      <div className="video">
+        <YouTube videoId={movieKey} opts={opts} />
+      </div>
+    </div>
+  );
 }
 
 export default MovieVideo;

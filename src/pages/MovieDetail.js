@@ -72,12 +72,9 @@ const MovieDetail = () => {
               ")",
           }}
         >
-          <div className="Video_container_detail">
-            <div className="video">
-              <MovieVideo />
-            </div>
-          </div>
+          <MovieVideo />
         </div>
+
         <div className="MovieDetail_Info">
           <h1>{MovieDetailData.original_title}</h1>
           <p>{MovieDetailData.overview}</p>
