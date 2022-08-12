@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { movieDetailActions } from "../redux/actions/movieDetailActions";
 import { FadeLoader } from "react-spinners";
+import api from "../redux/api";
 import MovieReview from "../component/MovieReview";
 import MovieSlide from "../component/MovieSlide";
 import MovieVideo from "../component/MovieVideo";
-import api from "../redux/api";
+import TextAnimation from "../component/TextAnimation";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
@@ -28,6 +31,16 @@ const MovieDetail = () => {
     SimilarMovies,
     loading,
   } = useSelector((state) => state.movieDetail);
+
+  // const [animate, setAnimate] = useState(false);
+  // const animateTrigger = () => {
+  //   setAnimate(true);
+  //   console.log("animation fire");
+  // };
+
+  // setTimeout(() => {
+  //   animateTrigger();
+  // }, 1000);
 
   const getMovieKey = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
@@ -71,36 +84,46 @@ const MovieDetail = () => {
               `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${MovieDetailData.poster_path}` +
               ")",
           }}
-        >
-          <MovieVideo />
-        </div>
-
-        <div className="MovieDetail_Info">
-          <h1>{MovieDetailData.original_title}</h1>
-          <p>{MovieDetailData.overview}</p>
-          {MovieDetailData.genres.map((item) => (
-            <span>{item.name}</span>
-          ))}
-        </div>
+        ></div>
+        <MovieVideo />
+        <TextAnimation props={MovieDetailData} />
       </div>
 
-      <div>
-        {MovieReviews.data.results.map((item) => {
-          if (
-            item.author_details.avatar_path !== null &&
-            item.author_details.avatar_path.includes("https") === true
-          ) {
-            let avatar_path = item.author_details.avatar_path.slice(32);
-            return <MovieReview avatar_path={avatar_path} item={item} />;
-          } else if (item.author_details.avatar_path == null) {
-            let avatar_path = "";
-            return <MovieReview avatar_path={avatar_path} item={item} />;
-          } else {
-            let avatar_path = item.author_details.avatar_path;
-            console.log("avatar_path is", avatar_path);
-            return <MovieReview avatar_path={avatar_path} item={item} />;
-          }
-        })}
+      <div className="MovieDetail_section">
+        <h1>
+          <span className="subTitle">&#10095;</span>
+          REVIEWS
+        </h1>
+        <Row>
+          {MovieReviews.data.results.map((item) => {
+            if (
+              item.author_details.avatar_path !== null &&
+              item.author_details.avatar_path.includes("https") === true
+            ) {
+              let avatar_path = item.author_details.avatar_path.slice(32);
+              return (
+                <Col lg={4}>
+                  <MovieReview avatar_path={avatar_path} item={item} />
+                </Col>
+              );
+            } else if (item.author_details.avatar_path == null) {
+              let avatar_path = "";
+              return (
+                <Col lg={4}>
+                  <MovieReview avatar_path={avatar_path} item={item} />
+                </Col>
+              );
+            } else {
+              let avatar_path = item.author_details.avatar_path;
+              console.log("avatar_path is", avatar_path);
+              return (
+                <Col lg={4}>
+                  <MovieReview avatar_path={avatar_path} item={item} />
+                </Col>
+              );
+            }
+          })}
+        </Row>
       </div>
       <div>
         <h1>

@@ -13,6 +13,7 @@ function MovieVideo() {
       controls: 0,
       fs: 0,
       rel: 0,
+      loop: 1,
       // showinfo: 0,
       // iv_load_policy: 1,
       // playsinline:1,

@@ -54,6 +54,9 @@
 
 .home h1 {
   padding-left: 20px;
+  position: relative;
+  z-index: 1;
+  font-size: 25px;
 }
 
 /* ------------------------loadingSpinner------------------------ */
@@ -76,12 +79,14 @@
   top: 0;
   height: 56.25vw;
   max-height: 90vh;
+  margin-bottom: -15vh;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
 }
 
 .banner {
   background-position: 50%;
   background-size: cover;
+  /* margin-bottom: 30px; */
   bottom: 0;
   left: 0;
   opacity: 1;
@@ -100,20 +105,24 @@
   height: 56.25vw;
   max-height: 90vh;
   width: 100%;
-  background: linear-gradient(to right, black, transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent),
+    linear-gradient(to top, black, transparent 200px);
   pointer-events: none;
 }
 
 .banner h1 {
-  font-size: 5vw;
+  font-size: 4vw;
   font-weight: bold;
   padding-left: 0;
   width: 100vw;
 }
 
 .banner p {
-  font-size: 1vw;
+  font-size: 0.8vw;
   line-height: 30px;
+  overflow: scroll;
+  height: 56.25vw;
+  margin-bottom: 25vh;
 }
 
 .banner_text {
@@ -121,9 +130,10 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   height: 100%;
   width: 50vw;
+  padding-top: 8.5vw;
   padding-left: 40px;
 }
 
@@ -135,15 +145,17 @@
   overflow: visible !important;
 }
 
-/* .swiper::before {
+.swiper::before {
   z-index: 2;
   position: absolute;
   content: "";
   left: 0;
   width: 100%;
   height: 300px;
-  background: radial-gradient(transparent, rgba(0, 0, 0, 0.6));
-} */
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent 200px),
+    linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent 200px);
+  pointer-events: none;
+}
 
 .swiper-slide {
   text-align: left;
@@ -166,6 +178,7 @@
 .swiper-button-next,
 .swiper-button-prev {
   color: rgb(180, 0, 0) !important;
+  font-weight: bolder;
 }
 
 /* ------------------------movieCard------------------------ */
@@ -176,6 +189,7 @@
   background-size: cover;
   background-position: 50%;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 /* ------------------------previewCard------------------------ */
@@ -196,16 +210,15 @@
 }
 
 .video_container {
-  /* position: relative; */
-  /* width: 100%; */
   /* height: 56.25vw; */
+  /* margin-top: -10%; */
+  /* margin-bottom: 50px; */
   position: relative;
+  top: -90px;
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
-  /* margin-top: -10%; */
   overflow: hidden;
-  margin-bottom: 50px;
 }
 
 .video_container iframe {
@@ -345,6 +358,8 @@
   font-size: 22px;
   margin-right: 10px;
   padding-left: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ------------------------MovieList------------------------ */
@@ -390,7 +405,6 @@
   height: 56.25vw;
   max-height: 80vh;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
-  margin-bottom: 30px;
 }
 
 .MovieDetail_Img {
@@ -398,10 +412,10 @@
   background-size: cover;
   bottom: 0;
   left: 0;
-  opacity: 1;
-  position: absolute;
   right: 0;
   top: 0;
+  opacity: 1;
+  position: absolute;
   width: 100%;
 }
 
@@ -415,9 +429,17 @@
   pointer-events: none;
 }
 
+.MovieDetail_section {
+  position: relative;
+  top: -20px;
+  background-color: #141414;
+  padding-top: 20px;
+}
+
 .MovieDetail_Info {
   position: absolute;
   top: 10vw;
+  width: 40vw;
   color: white;
   padding-left: 40px;
 }
@@ -449,11 +471,41 @@
 }
 
 /* ------------------------MovieReview------------------------ */
+.review_card {
+  height: 200px;
+  overflow: hidden;
+  padding: 20px;
+  padding-top: 10px;
+  margin-bottom: 40px;
+}
+
+.review_card::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  padding: 20px;
+  padding-top: 10px;
+  height: 200px;
+  width: 100%;
+  background: linear-gradient(to top, #141414, transparent 50px);
+}
+
+.review_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
+}
 
 .reviewer_info {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
 }
 
-.reviewer_img {
-  filter: brightness(75%);
-}
+/* .review_info {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+} */

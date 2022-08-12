@@ -6,33 +6,54 @@ import { useState } from "react";
 const MovieReview = ({ avatar_path, item }) => {
   const [modalShow, setModalShow] = useState(false);
   return (
-    <>
-      <div className="reviewer_info">
+    <div className="review_card">
+      <div className="review_container">
+        <div className="reviewer_info">
+          <div
+            style={{
+              // display: "inline-block",
+              // verticalAlign: "middle",
+              backgroundImage:
+                "url(" + `https://www.gravatar.com/avatar${avatar_path}` + ")",
+              width: 50,
+              height: 50,
+              borderRadius: 50,
+              marginRight: 10,
+              backgroundSize: "cover",
+              filter: "brightness(75%)",
+            }}
+          ></div>
+
+          <div style={{ fontSize: "25px", fontWeight: "bold" }}>
+            {item.author}
+          </div>
+          <div
+            style={{
+              color: "red",
+              fontSize: "20px",
+              fontWeight: "bold",
+              paddingLeft: "20px",
+            }}
+          >
+            {item.author_details.rating} / 10
+          </div>
+        </div>
+
         <div
-          className="reviewer_img"
-          style={{
-            backgroundImage:
-              "url(" + `https://www.gravatar.com/avatar${avatar_path}` + ")",
-            width: 50,
-            height: 50,
-            borderRadius: 50,
-            marginRight: 10,
-            backgroundSize: "cover",
-          }}
-        ></div>
-        <h3>{item.author}</h3>
+          style={{ fontSize: "12px", fontWeight: "bold", paddingRight: "20px" }}
+        >
+          {item.updated_at.slice(0, 10)}
+        </div>
       </div>
+
       <p>{item.content}</p>
-      <p>UPDATED AT {item.updated_at.slice(0, 10)}</p>
-      <p>RATING {item.author_details.rating} / 10</p>
-      <>
+      <div>
         <Button variant="primary" onClick={() => setModalShow(true)}>
           Launch vertically centered modal
         </Button>
-
         <ModalCentered show={modalShow} onHide={() => setModalShow(false)} />
-      </>
-    </>
+      </div>
+    </div>
   );
 };
 
