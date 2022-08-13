@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
+import MovieSearchSlider from "../component/MovieSearchSlider";
+import MovieSearchButton from "../component/MovieSearchButton";
 // import Slider from "react-slick";
 
 const Movies = () => {
-  const { NowPlayingMoviesData, loading } = useSelector((state) => state.movie);
+  const { NowPlayingMoviesData, genreListData, loading } = useSelector(
+    (state) => state.movie
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(movieActions.getMovies());
@@ -20,25 +24,20 @@ const Movies = () => {
 
   return loading ? (
     <div className="loadingSpinner">
-      <FadeLoader
-        color="red"
-        loading={loading}
-        size={15}
-        speedMultiplier={3}
-      />
+      <FadeLoader color="red" loading={loading} size={15} speedMultiplier={3} />
     </div>
   ) : (
     <div className="MoviesPage">
       <div>
         <div className="MoviesHandler">
-          MoviesHandler Section
-          {/* <Slider
-            getAriaLabel={() => "Year range"}
-            value={30}
-            // onChange={handleChange}
-            valueLabelDisplay="auto"
-            // getAriaValueText={valuetext}
-          /> */}
+          <div className="MoviesHandler_container">
+            <h2>YEAR FILTER</h2>
+            <MovieSearchSlider min={1990} max={2020} />
+            <h2>IBM SCORE FILTER</h2>
+            <MovieSearchSlider min={1} max={10} />
+            <h2>GENRES</h2>
+            <MovieSearchButton genres={genreListData.genres}/>
+          </div>
         </div>
       </div>
       <div className="MovieList">

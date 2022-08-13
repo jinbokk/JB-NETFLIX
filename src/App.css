@@ -140,10 +140,24 @@
 /* ------------------------swiper------------------------ */
 
 .swiper {
-  width: 100%;
+  width: 100vw;
+  /* padding-bottom: 56.25%; */
   height: 300px;
-  overflow: visible !important;
+  aspect-ratio: 3 / 2;
+  overflow: hidden !important;
 }
+
+/* @media screen and (min-width: 640px) {
+  .swiper {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper {
+    width: 768px;
+  }
+} */
 
 .swiper::before {
   z-index: 2;
@@ -344,13 +358,27 @@
 
 .MoviesHandler {
   position: fixed;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: red;
-  width: 35vw;
+  background-color: #141414;
+  width: 400px;
   height: 100vh;
+}
+
+.MoviesHandler_container {
+  padding-left: 40px;
+}
+.css-1iqhxdk-MuiButtonBase-root-MuiButton-root {
+  margin-right: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.css-itasnx-MuiButtonBase-root-MuiButton-root {
+  margin-right: 10px !important;
+  margin-bottom: 10px !important;
 }
 
 .subTitle {
@@ -365,16 +393,18 @@
 /* ------------------------MovieList------------------------ */
 
 .MovieList {
-  background-color: blue;
-  position: absolute;
-  right: 0;
+  background-color: #141414;
+  position: relative;
+  left: 400px;
   width: 65vw;
-
   padding-top: 60px;
 }
 
 .movieListCard {
-  width: 400px;
+  /* width: 300px !important; */
+  /* max-width: 90% !important; */
+  overflow: hidden;
+  margin: 20px;
   aspect-ratio: 4 / 6;
   margin: 10px;
   border-radius: 10px;
@@ -384,7 +414,7 @@
 }
 
 .movieListCard:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
   transition: 0.3s;
 }
 

@@ -11,8 +11,6 @@ const MovieReview = ({ avatar_path, item }) => {
         <div className="reviewer_info">
           <div
             style={{
-              // display: "inline-block",
-              // verticalAlign: "middle",
               backgroundImage:
                 "url(" + `https://www.gravatar.com/avatar${avatar_path}` + ")",
               width: 50,
@@ -24,7 +22,12 @@ const MovieReview = ({ avatar_path, item }) => {
             }}
           ></div>
 
-          <div style={{ fontSize: "25px", fontWeight: "bold" }}>
+          <div
+            style={{
+              fontSize: "25px",
+              fontWeight: "bold",
+            }}
+          >
             {item.author}
           </div>
           <div
@@ -35,7 +38,11 @@ const MovieReview = ({ avatar_path, item }) => {
               paddingLeft: "20px",
             }}
           >
-            {item.author_details.rating} / 10
+            {item.author_details.rating ? (
+              <p>{item.author_details.rating} / 10</p>
+            ) : (
+              <p style={{ color: "gray", fontSize: 8 }}>NOT SCORED</p>
+            )}
           </div>
         </div>
 
@@ -45,7 +52,6 @@ const MovieReview = ({ avatar_path, item }) => {
           {item.updated_at.slice(0, 10)}
         </div>
       </div>
-
       <p>{item.content}</p>
       <div>
         <Button variant="primary" onClick={() => setModalShow(true)}>
