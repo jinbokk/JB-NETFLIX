@@ -22,7 +22,7 @@ export default function MovieSlide({ movies }) {
       navigation={true}
       modules={[Navigation]}
       breakpoints={{
-        // when window width is >= 640px
+        // when window width is >= X px
         0: {
           slidesPerView: 2,
           slidesPerGroup: 2,
@@ -35,10 +35,6 @@ export default function MovieSlide({ movies }) {
           slidesPerView: 8,
           slidesPerGroup: 8,
         },
-        // when window width is >= 768px
-        // 768: {
-        //   slidesPerView: 8,
-        // },
       }}
     >
       {movies &&
