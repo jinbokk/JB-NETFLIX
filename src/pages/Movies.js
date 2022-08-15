@@ -31,12 +31,9 @@ const Movies = () => {
       <div>
         <div className="MoviesHandler">
           <div className="MoviesHandler_container">
-            <h2>YEAR FILTER</h2>
-            <MovieSearchSlider min={1990} max={2020} />
-            <h2>IBM SCORE FILTER</h2>
-            <MovieSearchSlider min={1} max={10} />
-            <h2>GENRES</h2>
-            <MovieSearchButton genres={genreListData.genres}/>
+            <MovieSearchSlider min={1990} max={2020} text={"YEAR FILTER"} />
+            <MovieSearchSlider min={1} max={10} text={"IBM SCORE FILTER"} />
+            <MovieSearchButton genres={genreListData.genres} text={"GENRES"} />
           </div>
         </div>
       </div>

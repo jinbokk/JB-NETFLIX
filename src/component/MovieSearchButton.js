@@ -1,34 +1,61 @@
 import * as React from "react";
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { Box, Grid } from "@mui/material";
-import ToggleButtons from "./ToggleButtons";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MuiToggleButton from "@mui/material/ToggleButton";
+import { styled } from "@mui/material/styles";
 
-export default function MovieSearchButton({ genres }) {
-  const [color, setColor] = useState("secondary");
+export default function MovieSearchButton({ genres, text }) {
+  const [formats, setFormats] = useState(() => ["on", "off"]);
 
-  const toggleButton = (item) => {
-    console.log(item, "Clicked");
-    color === "secondary" ? setColor("primary") : setColor("secondary");
-  }; // 모든 버튼이 리렌더링되어 색깔이 바뀌는 현상 발생.
+  const handleFormat = (event, newFormats) => {
+    setFormats(newFormats);
+  };
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#ff5f52",
+        main: "#c62828",
+        dark: "#8e0000",
+        contrastText: "#ffffff",
+      },
+      secondary: {
+        light: "#83312c",
+        main: "#510002",
+        dark: "#310000",
+        contrastText: "#aaaaaa",
+      },
+    },
+  });
+
+  const ToggleButton = styled(MuiToggleButton)({
+    "&.MuiToggleButton-root": {
+      fontWeight: "bold",
+      color: "white",
+      backgroundColor: theme.palette.secondary.dark,
+    },
+    "&.MuiToggleButton-root:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+    "&.Mui-selected,&.Mui-selected:hover": {
+      backgroundColor: theme.palette.primary.main,
+    },
+  });
 
   return (
-    <>
-      <Stack direction="row" spacing={2}>
-        <Box sx={{ width: "100%" }}>
-          <Grid
-            xs={400}
-            // container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            {genres.map((item) => (
-              <ToggleButtons genres={item.name} />
-            ))}
-          </Grid>
-        </Box>
-      </Stack>
-    </>
+    <ThemeProvider theme={theme}>
+      <h2>{text}</h2>
+      {genres.map((item) => (
+        <ToggleButtonGroup
+          value={formats}
+          onChange={handleFormat}
+          color="primary"
+        >
+          <ToggleButton value={item.name}>{item.name}</ToggleButton>
+        </ToggleButtonGroup>
+      ))}
+    </ThemeProvider>
   );
 }
