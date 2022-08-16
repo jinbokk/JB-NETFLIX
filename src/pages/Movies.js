@@ -5,6 +5,7 @@ import { FadeLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
 import MovieSearchSlider from "../component/MovieSearchSlider";
 import MovieSearchButton from "../component/MovieSearchButton";
+import MovieSearchInput from "../component/MovieSearchInput";
 // import Slider from "react-slick";
 
 const Movies = () => {
@@ -25,6 +26,7 @@ const Movies = () => {
       <div>
         <div className="MoviesHandler">
           <div className="MoviesHandler_container">
+            <MovieSearchInput />
             <MovieSearchSlider min={1990} max={2020} text={"YEAR FILTER"} />
             <MovieSearchSlider min={1} max={10} text={"IBM SCORE FILTER"} />
             <MovieSearchButton genres={genreListData.genres} text={"GENRES"} />

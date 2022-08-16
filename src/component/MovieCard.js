@@ -11,6 +11,7 @@ const MovieCard = ({ movie }) => {
 
   const handleMouseEnter = () => {
     setIsMounted(true);
+    console.log("Mounted");
     setDelayHandler(
       setTimeout(() => {
         setHover(true);
@@ -21,6 +22,7 @@ const MovieCard = ({ movie }) => {
   const handleMouseLeave = () => {
     clearTimeout(delayHandler);
     setIsMounted(false);
+    console.log("Unmounted");
     setHover(false);
   };
 
@@ -35,23 +37,24 @@ const MovieCard = ({ movie }) => {
   };
 
   return (
-    <div
-      className="movieCard"
-      style={{
-        backgroundImage:
-          "url(" +
-          `	https://www.themoviedb.org/t/p/w440_and_h660_face${movieCardImg}` +
-          ")",
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <>
       {hover ? (
-        <div>
+        <div className="preview_modal_container">
           <PreviewCard movie={movie} />
         </div>
       ) : null}
-    </div>
+      <div
+        className="movieCard"
+        style={{
+          backgroundImage:
+            "url(" +
+            `	https://www.themoviedb.org/t/p/w440_and_h660_face${movieCardImg}` +
+            ")",
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      ></div>
+    </>
   );
 };
 
