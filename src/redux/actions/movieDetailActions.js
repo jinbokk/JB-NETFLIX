@@ -2,7 +2,7 @@ import api from "../api";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-function getMovieDetail(movie_id) {
+function getMovieDetail(movie_id, pageNum) {
   return async (dispatch) => {
     try {
       dispatch({ type: "GET_MOVIE_DETAIL_REQUEST" });
@@ -16,15 +16,15 @@ function getMovieDetail(movie_id) {
       );
 
       const getMovieReviews = api.get(
-        `/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
+        `/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNum}`
       );
 
       const getRecommendMovies = api.get(
-        `/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
+        `/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US&page=${pageNum}`
       );
 
       const getSimilarMovies = api.get(
-        `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=11`
+        `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=${pageNum}`
       );
 
       const [

@@ -33,6 +33,19 @@ function movieReducer(state = initialState, action) {
         movieKey: payload.movieKey,
       };
 
+    case "RESET_MOVIE_STORE_SUCCESS":
+      return {
+        ...state,
+        popularMoviesData: {},
+        topRatedMoviesData: {},
+        upcomingMoviesData: {},
+        loading: true,
+        movieId: {},
+        movieKey: {},
+        genreListData: {},
+        NowPlayingMoviesData: {},
+      };
+
     case "GET_MOVIES_FAILURE":
       return alert(`Sorry,\n"${payload.error.message}"`);
 

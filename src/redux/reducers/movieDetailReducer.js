@@ -25,7 +25,7 @@ function movieDetailReducer(state = initialState, action) {
         loading: false,
       };
 
-    case "MOVIE_DETAIL_INITIALIZE":
+    case "RESET_MOVIE_DETAIL_STORE_SUCCESS":
       return {
         ...state,
         MovieDetailData: {},

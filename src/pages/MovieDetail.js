@@ -10,6 +10,7 @@ import MovieVideo from "../component/MovieVideo";
 import TextAnimation from "../component/TextAnimation";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import { padding } from "@mui/system";
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,9 @@ const MovieDetail = () => {
   const movie_id = useParams().id;
 
   useEffect(() => {
-    dispatch(movieDetailActions.getMovieDetail(movie_id));
+    dispatch(movieDetailActions.getMovieDetail(movie_id, 3));
     return () => {
-      dispatch({ type: "MOVIE_DETAIL_INITIALIZE" });
+      dispatch({ type: "RESET_MOVIE_DETAIL_STORE_SUCCESS" });
     };
   }, [movie_id]);
 
@@ -84,17 +85,20 @@ const MovieDetail = () => {
               `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${MovieDetailData.poster_path}` +
               ")",
           }}
-        ></div>
-        <MovieVideo />
+        >
+          <div className="video_container">{/* <MovieVideo /> */}</div>
+        </div>
+
         <TextAnimation props={MovieDetailData} />
       </div>
 
       <div className="MovieDetail_section">
-        <h1>
+        <h1 style={{ marginTop: "0" }}>
           <span className="subTitle">&#10095;</span>
           REVIEWS
         </h1>
         <Row>
+          {MovieReviews.data.results}?
           {MovieReviews.data.results.map((item) => {
             if (
               item.author_details.avatar_path !== null &&
@@ -123,26 +127,33 @@ const MovieDetail = () => {
               );
             }
           })}
+          :
+          <h3
+            style={{ textAlign: "center", fontSize: "30px", padding: "30px" }}
+          >
+            No Reviews
+          </h3>
         </Row>
-      </div>
-      <div>
-        <h1>
-          <span>
-            <span className="subTitle">&#10095;</span>
-          </span>
-          SIMILAR MOVIES
-        </h1>
-        <MovieSlide movies={SimilarMovies.data.results} />
-      </div>
 
-      <div>
-        <h1>
-          <span>
-            <span className="subTitle">&#10095;</span>
-          </span>
-          RECOMMEND MOVIES
-        </h1>
-        <MovieSlide movies={RecommendMovies.data.results} />
+        <div>
+          <h1>
+            <span>
+              <span className="subTitle">&#10095;</span>
+            </span>
+            SIMILAR MOVIES
+          </h1>
+          <MovieSlide movies={SimilarMovies.data.results} />
+        </div>
+
+        <div>
+          <h1>
+            <span>
+              <span className="subTitle">&#10095;</span>
+            </span>
+            RECOMMEND MOVIES
+          </h1>
+          <MovieSlide movies={RecommendMovies.data.results} />
+        </div>
       </div>
     </>
   );

@@ -21,13 +21,7 @@ function MovieVideo() {
     },
   };
 
-  return (
-    <div className="video_container">
-      <div className="video">
-        <YouTube videoId={movieKey} opts={opts} />
-      </div>
-    </div>
-  );
+  return <YouTube videoId={movieKey} opts={opts} />;
 }
 
 export default MovieVideo;

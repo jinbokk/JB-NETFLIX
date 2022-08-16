@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import PreviewCard from "./PreviewCard";
+import styled from "styled-components";
 
 const MovieCard = ({ movie }) => {
   const movieCardImg = movie.poster_path;
 
   const [hover, setHover] = useState(false);
   const [delayHandler, setDelayHandler] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const handleMouseEnter = () => {
+    setIsMounted(true);
     setDelayHandler(
       setTimeout(() => {
         setHover(true);
@@ -17,7 +20,18 @@ const MovieCard = ({ movie }) => {
 
   const handleMouseLeave = () => {
     clearTimeout(delayHandler);
+    setIsMounted(false);
     setHover(false);
+  };
+
+  const toggleAnimation = () => {
+    return isMounted ? (
+      <div>
+        <PreviewCard movie={movie} />
+      </div>
+    ) : (
+      "animation:fadeOut .3s"
+    );
   };
 
   return (
@@ -36,9 +50,7 @@ const MovieCard = ({ movie }) => {
         <div>
           <PreviewCard movie={movie} />
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
     </div>
   );
 };

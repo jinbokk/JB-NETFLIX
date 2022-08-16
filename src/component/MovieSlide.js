@@ -14,7 +14,7 @@ export default function MovieSlide({ movies }) {
       spaceBetween={10}
       slidesPerGroup={4}
       speed={1000}
-      loop={true}
+      loop={true}d
       loopFillGroupWithBlank={false}
       pagination={{
         clickable: true,
