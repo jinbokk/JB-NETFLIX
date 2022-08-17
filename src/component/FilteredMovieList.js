@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 
-const MovieList = ({ movies }) => {
+const FilteredMovieList = ({ movies }) => {
   const navigate = useNavigate();
 
   return (
@@ -35,4 +35,4 @@ const MovieList = ({ movies }) => {
   );
 };
 
-export default MovieList;
+export default FilteredMovieList;

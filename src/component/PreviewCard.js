@@ -32,10 +32,7 @@ const PreviewCard = ({ movie }) => {
     getMovieKey();
     return () => {
       dispatch({
-        type: "STORE_MOVIE_KEY_SUCCESS",
-        payload: {
-          movieKey: {},
-        },
+        type: "RESET_MOVIE_KEY_SUCCESS",
       });
     };
   }, []);

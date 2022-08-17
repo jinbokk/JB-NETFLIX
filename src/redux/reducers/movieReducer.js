@@ -33,6 +33,12 @@ function movieReducer(state = initialState, action) {
         movieKey: payload.movieKey,
       };
 
+    case "RESET_MOVIE_KEY_SUCCESS":
+      return {
+        ...state,
+        movieKey: {},
+      };
+
     case "RESET_MOVIE_STORE_SUCCESS":
       return {
         ...state,

@@ -7,18 +7,18 @@ function getSearchedMovies(query, pageNum) {
     try {
       dispatch({ type: "GET_MOVIES_SEARCH_REQUEST" });
 
-      const getSearchedMovies = await api.get(
+      const SearchedMovies = await api.get(
         `/search/movie?api_key=${API_KEY}&language=en-US&page=${pageNum}&query=${query}`
       );
 
       dispatch({
-        type: "GET_SEARCHED_MOVIES_SUCCESS",
+        type: "GET_MOVIES_SEARCH_SUCCESS",
         payload: {
-          getSearchedMoviesJson: getSearchedMovies,
+          SearchedMoviesJson: SearchedMovies,
         },
       });
     } catch (error) {
-      dispatch({ type: "GET_SEARCHED_MOVIES_FAILURE", payload: { error } });
+      dispatch({ type: "GET_MOVIES_SEARCH_FAILURE", payload: { error } });
     }
   };
 }

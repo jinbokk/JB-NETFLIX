@@ -1,5 +1,5 @@
 let initialState = {
-  getSearchedMoviesData: {},
+  SearchedMoviesData: {},
   searchKeyword: {},
   loading: true,
 };
@@ -11,27 +11,35 @@ function movieSearchReducer(state = initialState, action) {
     case "GET_MOVIES_SEARCH_REQUEST":
       return { ...state };
 
-    case "GET_SEARCHED_MOVIES_SUCCESS":
+    case "GET_MOVIES_SEARCH_SUCCESS":
       return {
         ...state,
-        getSearchedMoviesData: payload.getSearchedMoviesJson.data,
+        SearchedMoviesData: payload.SearchedMoviesJson.data,
         loading: false,
       };
 
-    case "GET_SEARCHED_MOVIES_FAILURE":
-      // return alert(`Sorry,\n"${payload.error.message}"`);
-      // return { ...state, message: "There's no movie you're looking for" };
+    case "GET_MOVIES_SEARCH_FAILURE":
+      return alert(
+        `Sorry, "${payload.error.message}"\nPlease enter the movie name`
+      );
+    // return alert(`Sorry,\n"${payload.error.message}"`);
 
-      return (document.getElementById("MovieList_wrapper").innerHTML = `
-      <h2 class="noResultMessage">
-      There's no movie you're looking for
-      </h2>
-      `);
+    // return (document.getElementById(
+    //   'MovieList_wrapper'
+    // ).innerHTML = `<h2 class="noResultMessage">Please enter the movie name</h2>`);
 
     case "SEARCH_KEYWORD_STORE_SUCCESS":
       return {
         ...state,
         searchKeyword: payload.keyword,
+      };
+
+    case "RESET_MOVIES_SEARCH_SUCCESS":
+      return {
+        ...state,
+        SearchedMoviesData: {},
+        searchKeyword: {},
+        loading: true,
       };
 
     default:

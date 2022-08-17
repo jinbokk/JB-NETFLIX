@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { movieSearchActions } from "../redux/actions/movieSearchActions";
 
-const MovieSearchInput = () => {
+const MovieSearchInput = ({ show }) => {
   const dispatch = useDispatch();
 
   const theme = createTheme({
@@ -36,11 +36,29 @@ const MovieSearchInput = () => {
           sx={{ width: "310px" }}
           onKeyPress={function storeKeyword(e) {
             if (e.key === "Enter") {
+              show(false);
               dispatch({
                 type: "SEARCH_KEYWORD_STORE_SUCCESS",
                 payload: { keyword: e.target.value },
               });
               dispatch(movieSearchActions.getSearchedMovies(e.target.value, 1));
+              // dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
+
+              // if (e.target.value === !undefined) {
+              //   show(false);
+              //   dispatch({
+              //     type: "SEARCH_KEYWORD_STORE_SUCCESS",
+              //     payload: { keyword: e.target.value },
+              //   });
+              //   dispatch(
+              //     movieSearchActions.getSearchedMovies(e.target.value, 1)
+              //   );
+              //   // dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
+              // } else {
+              //   document.getElementById(
+              //     "MovieList_wrapper"
+              //   ).innerHTML += `<h2 class="noResultMessage">Please enter the movie name</h2>`;
+              // }
             }
           }}
         />

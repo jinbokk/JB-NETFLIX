@@ -50,11 +50,12 @@ export default function MovieSearchButton({ genres, text }) {
   return (
     <ThemeProvider theme={theme}>
       <h2>{text}</h2>
-      {genres.map((item) => (
+      {genres.map((item, index) => (
         <ToggleButtonGroup
           value={formats}
           onChange={handleFormat}
           color="primary"
+          key={index}
         >
           <ToggleButton value={item.name}>{item.name}</ToggleButton>
         </ToggleButtonGroup>
