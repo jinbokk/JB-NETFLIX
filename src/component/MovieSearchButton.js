@@ -35,12 +35,15 @@ export default function MovieSearchButton({ genres, text }) {
       fontWeight: "bold",
       color: "white",
       backgroundColor: theme.palette.secondary.dark,
+      transition: ".3s",
     },
     "&.MuiToggleButton-root:hover": {
       backgroundColor: theme.palette.primary.dark,
+      transition: ".3s",
     },
     "&.Mui-selected,&.Mui-selected:hover": {
       backgroundColor: theme.palette.primary.main,
+      transition: ".3s",
     },
   });
 

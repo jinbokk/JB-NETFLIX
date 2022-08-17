@@ -12,7 +12,7 @@ const Home = () => {
     useSelector((state) => state.movie);
 
   useEffect(() => {
-    dispatch(movieActions.getMovies(3));
+    dispatch(movieActions.getMovies(1));
     return () => {
       dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
     };

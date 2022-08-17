@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
+import { useDispatch } from "react-redux";
+import { movieSearchActions } from "../redux/actions/movieSearchActions";
 
 const MovieSearchInput = () => {
+  const dispatch = useDispatch();
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -22,22 +25,27 @@ const MovieSearchInput = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      {/* <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: "300px" },
-        }}
-        autoComplete="off"
-      > */}
+    <>
       <h2>SEARCH</h2>
-      <TextField
-        id="filled-basic"
-        label="Title,Actor,Genres"
-        variant="standard"
-      />
-      {/* </Box> */}
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <TextField
+          id="search_input"
+          variant="filled"
+          label="Movie Title"
+          color="primary"
+          sx={{ width: "310px" }}
+          onKeyPress={function storeKeyword(e) {
+            if (e.key === "Enter") {
+              dispatch({
+                type: "SEARCH_KEYWORD_STORE_SUCCESS",
+                payload: { keyword: e.target.value },
+              });
+              dispatch(movieSearchActions.getSearchedMovies(e.target.value, 1));
+            }
+          }}
+        />
+      </ThemeProvider>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PreviewCard from "./PreviewCard";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
   const movieCardImg = movie.poster_path;
@@ -9,6 +10,7 @@ const MovieCard = ({ movie }) => {
   const [delayHandler, setDelayHandler] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
+  const navigate = useNavigate();
   const handleMouseEnter = () => {
     setIsMounted(true);
     console.log("Mounted");
@@ -51,6 +53,7 @@ const MovieCard = ({ movie }) => {
             `	https://www.themoviedb.org/t/p/w440_and_h660_face${movieCardImg}` +
             ")",
         }}
+        onClick={() => navigate(`/movies/${movie.id}`)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       ></div>

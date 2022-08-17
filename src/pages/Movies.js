@@ -6,15 +6,20 @@ import MovieList from "../component/MovieList";
 import MovieSearchSlider from "../component/MovieSearchSlider";
 import MovieSearchButton from "../component/MovieSearchButton";
 import MovieSearchInput from "../component/MovieSearchInput";
-// import Slider from "react-slick";
 
 const Movies = () => {
   const { NowPlayingMoviesData, genreListData, loading } = useSelector(
     (state) => state.movie
   );
+
+  const { getSearchedMoviesData, searchKeyword } = useSelector(
+    (state) => state.movieSearch
+  );
+
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(movieActions.getMovies(3));
+    dispatch(movieActions.getMovies(1));
   }, []);
 
   return loading ? (
@@ -33,8 +38,16 @@ const Movies = () => {
           </div>
         </div>
       </div>
-      <div className="MovieList">
+      <div className="MovieListWrapper" id="MovieList_wrapper">
         <MovieList movies={NowPlayingMoviesData.results} />
+        {/* if search한 데이터가 있다면, 그걸 보여준다? */}
+        {/* if 스크롤이 끝까지 가면, getMovies(page2)한다음, MovieList 추가*/}
+        {console.log(searchKeyword)}
+        {/* {searchKeyword === {} ? (
+          <MovieList movies={NowPlayingMoviesData.results} />
+        ) : (
+          <MovieList movies={getSearchedMoviesData.results} />
+        )} */}
       </div>
     </div>
   );

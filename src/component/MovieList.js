@@ -8,26 +8,28 @@ const MovieList = ({ movies }) => {
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <Row>
-        {movies.map((item) => (
-          <Col
-            key={item.id}
-            sm={4}
-            md={3}
-            lg={2}
-            className="movieListCard"
-            style={{
-              backgroundImage:
-                "url(" +
-                `	https://www.themoviedb.org/t/p/w440_and_h660_face${item.poster_path}` +
-                ")",
-            }}
-            onClick={() => navigate(`/movies/${item.id}`)}
-          ></Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      <Container>
+        <Row>
+          {movies.map((item) => (
+            <Col
+              key={item.id}
+              sm={4}
+              md={3}
+              lg={2}
+              className="movieListCard"
+              style={{
+                backgroundImage:
+                  "url(" +
+                  `	https://www.themoviedb.org/t/p/w440_and_h660_face${item.poster_path}` +
+                  ")",
+              }}
+              onClick={() => navigate(`/movies/${item.id}`)}
+            ></Col>
+          ))}
+        </Row>
+      </Container>
+    </>
   );
 };
 

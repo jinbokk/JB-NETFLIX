@@ -3,11 +3,15 @@
 .nav {
   position: fixed;
   z-index: 10;
+  width: 100%;
+  height: 60px;
+}
+
+.nav_wrapper {
   display: flex;
   justify-content: left;
   align-items: center;
-  width: 100%;
-  height: 60px;
+  margin-top: 20px;
 }
 
 .nav::before {
@@ -25,8 +29,8 @@
   width: 100px;
   object-fit: contain;
   z-index: 1;
-  margin-right: 20px;
-  padding-left: 40px;
+  /* margin-right: 20px; */
+  /* padding-left: 40px; */
   cursor: pointer;
 }
 
@@ -471,11 +475,15 @@
 
 /* ------------------------MovieList------------------------ */
 
-.MovieList {
+.MovieListWrapper {
   background-color: #141414;
   position: relative;
   left: 400px;
   width: 65vw;
+  height: 100vh;
+}
+
+.MovieListWrapper .container {
   padding-top: 60px;
 }
 
@@ -636,3 +644,32 @@
   justify-content: right;
   align-items: center;
 } */
+
+/* ------------------------MovieSearch------------------------ */
+
+#search_input {
+  transition: 0.5s;
+  /* border-radius: 15px; */
+  background-color: #4f0000;
+  color: #fff;
+}
+
+#search_input:focus {
+  transition: 0.5s;
+  /* border-radius: 15px; */
+  background-color: #820000;
+  color: #fff;
+}
+
+#search_input-label {
+  color: #fff;
+}
+
+.noResultMessage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
