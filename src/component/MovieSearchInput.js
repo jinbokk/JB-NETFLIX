@@ -3,6 +3,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { movieSearchActions } from "../redux/actions/movieSearchActions";
+import MuiToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { styled } from "@mui/material/styles";
 
 const MovieSearchInput = ({ show }) => {
   const dispatch = useDispatch();
@@ -24,10 +27,54 @@ const MovieSearchInput = ({ show }) => {
     },
   });
 
+  const ToggleButton = styled(MuiToggleButton)({
+    "&.MuiToggleButton-root": {
+      fontWeight: "bold",
+      color: "white",
+      backgroundColor: theme.palette.secondary.dark,
+      transition: ".3s",
+    },
+    "&.MuiToggleButton-root:hover": {
+      backgroundColor: theme.palette.primary.dark,
+      transition: ".3s",
+    },
+    "&.Mui-selected,&.Mui-selected:hover": {
+      backgroundColor: theme.palette.primary.main,
+      transition: ".3s",
+    },
+  });
+
+  const [select, setSelect] = React.useState("ALL");
+
+  const handleselect = (event, newSelect) => {
+    setSelect(newSelect);
+  };
+
   return (
     <>
-      <h2>SEARCH</h2>
       <ThemeProvider theme={theme}>
+        <div className="searchBar">
+          <h2>SEARCH</h2>
+          <ToggleButtonGroup
+            color="primary"
+            value={select}
+            exclusive
+            onChange={handleselect}
+            size="small"
+            aria-label="Include Movie Video"
+          >
+            <ToggleButton value="ALL" aria-label="ALL">
+              ALL
+            </ToggleButton>
+            <ToggleButton
+              value="Include Movie Video"
+              aria-label="Include Movie Video"
+            >
+              Include Movie Video
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+
         <TextField
           id="search_input"
           variant="filled"

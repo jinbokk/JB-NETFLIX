@@ -665,6 +665,21 @@
   color: #fff;
 }
 
+.searchBar {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.searchBar h2 {
+  margin-right: 25px;
+}
+
+.searchBar button {
+  padding: 10px;
+  height: 30px;
+}
+
 .noResultMessage {
   height: 100%;
   display: flex;
