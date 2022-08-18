@@ -1,7 +1,7 @@
 import api from "../api";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-// let keyWord;
+// let keyword;
 // let sortBy;
 // let withGenres;
 // let includeVideo;
@@ -9,7 +9,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 // let primaryReleaseDateLte;
 
 function getSearchedMovies(
-  keyWord,
+  keyword,
   sortBy,
   withGenres,
   includeVideo,
@@ -21,7 +21,7 @@ function getSearchedMovies(
       dispatch({ type: "GET_MOVIES_SEARCH_REQUEST" });
 
       const SearchedMovies = await api.get(
-        `/discover/movie?api_key=${API_KEY}&language=en-US&with_keywords=${keyWord}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}
+        `/discover/movie?api_key=${API_KEY}&language=en-US&with_keywords=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}
         &primary_release_date.gte=${primaryReleaseDateGte}&primary_release_date.lte=${primaryReleaseDateLte}&page=1`
       );
 

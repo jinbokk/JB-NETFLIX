@@ -4,12 +4,29 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MuiToggleButton from "@mui/material/ToggleButton";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
 
 export default function MovieSearchButton({ genres, text }) {
+  const dispatch = useDispatch();
+
   const [formats, setFormats] = useState(() => ["on", "off"]);
+
+  // const [selectedGenre, setSelectedGenre] = useState([]);
 
   const handleFormat = (event, newFormats) => {
     setFormats(newFormats);
+    // setSelectedGenre((prevGenres) => [...prevGenres, event.target.innerText]);
+    console.log(event.target);
+    dispatch({
+      type: "STORE_MOVIES_SEARCH_PARAMS_SUCCESS",
+      payload: {
+        value: event.target.value,
+        index: event.target.value,
+        toggle: false,
+      },
+    });
+
+    console.log(event.target.innerText);
   };
 
   const theme = createTheme({

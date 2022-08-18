@@ -22,7 +22,7 @@ const Movies = () => {
   );
   console.log("NowPlayingMoviesData is", NowPlayingMoviesData);
 
-  const { SearchedMoviesData, searchKeyword } = useSelector(
+  const { SearchedMoviesData, keyword } = useSelector(
     (state) => state.movieSearch
   );
   console.log("SearchedMoviesData is", SearchedMoviesData);
@@ -57,7 +57,7 @@ const Movies = () => {
         {/* if search한 데이터가 있다면, 그걸 보여준다? */}
         {/* if 스크롤이 끝까지 가면, getMovies(page2)한다음, MovieList 추가*/}
 
-        {/* {searchKeyword === {} ? (
+        {/* {keyword === {} ? (
           <MovieList movies={NowPlayingMoviesData.results} />
         ) : (
           <MovieList movies={SearchedMoviesData.results} />
