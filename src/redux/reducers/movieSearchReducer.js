@@ -3,7 +3,7 @@ let initialState = {
   keyword: {},
   loading: true,
   sortBy: {},
-  withGenres: [],
+  withGenres: {},
   includeVideo: {},
   primaryReleaseDateGte: {},
   primaryReleaseDateLte: {},
@@ -14,7 +14,8 @@ function movieSearchReducer(state = initialState, action) {
 
   switch (type) {
     case "STORE_MOVIES_SEARCH_PARAMS_SUCCESS": {
-      return { ...state, withGenres: [payload.value, ...state.withGenres] };
+      return { ...state, withGenres: payload };
+      // return { ...state, withGenres: [...state.withGenres, payload.value] };
 
       //   const index = state.withGenres.findIndex(
       //     (genres) => genres.index !== payload.index
