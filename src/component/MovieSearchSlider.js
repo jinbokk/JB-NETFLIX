@@ -36,6 +36,13 @@ export default function MovieSearchSlider({ min, max, text }) {
     }
   };
 
+  // button 처럼, arary를 하나 만든다 (전역스코프로)
+  // array에 value[min,max]를 push한다
+
+  // issue! 슬라이더에서 1px 단위로 push가 실행된다. setValue가 된 다음 바꾸려면?
+
+  // 해당 array를 dispatch하여 store에 저장한다.
+
   return (
     <ThemeProvider theme={theme}>
       <h2>{text}</h2>
