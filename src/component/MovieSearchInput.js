@@ -50,6 +50,14 @@ const MovieSearchInput = ({ show }) => {
     setSelect(newSelect);
   };
 
+  const test = (toggle) => {
+    console.log("button clicked");
+    dispatch({
+      type: "INCLUDE_MOVIE_VIDEO_TOGGLE_SUCCESS",
+      payload: toggle,
+    });
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -63,12 +71,17 @@ const MovieSearchInput = ({ show }) => {
             size="small"
             aria-label="Include Movie Video"
           >
-            <ToggleButton value="ALL" aria-label="ALL">
+            <ToggleButton
+              value="ALL"
+              aria-label="ALL"
+              onClick={() => test(false)}
+            >
               ALL
             </ToggleButton>
             <ToggleButton
               value="Include Movie Video"
               aria-label="Include Movie Video"
+              onClick={() => test(true)}
             >
               Include Movie Video
             </ToggleButton>
@@ -88,7 +101,7 @@ const MovieSearchInput = ({ show }) => {
                 type: "SEARCH_KEYWORD_STORE_SUCCESS",
                 payload: { keyword: e.target.value },
               });
-              dispatch(movieSearchActions.getSearchedMovies(e.target.value, 1));
+              dispatch(movieSearchActions.getSearchedMovies(e.target.value));
               // dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
 
               // if (e.target.value === !undefined) {

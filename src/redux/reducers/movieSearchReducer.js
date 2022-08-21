@@ -70,6 +70,12 @@ function movieSearchReducer(state = initialState, action) {
         primaryReleaseDateLte: payload.vote_lte,
       };
 
+    case "INCLUDE_MOVIE_VIDEO_TOGGLE_SUCCESS":
+      return {
+        ...state,
+        includeVideo: payload,
+      };
+
     case "RESET_MOVIES_SEARCH_SUCCESS":
       return {
         ...state,
