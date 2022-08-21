@@ -16,16 +16,13 @@ const Movies = () => {
     dispatch(movieActions.getMovies(1));
   }, []);
 
-
   const { NowPlayingMoviesData, genreListData, loading } = useSelector(
     (state) => state.movie
   );
-  console.log("NowPlayingMoviesData is", NowPlayingMoviesData);
 
   const { SearchedMoviesData, keyword } = useSelector(
     (state) => state.movieSearch
   );
-  console.log("SearchedMoviesData is", SearchedMoviesData);
 
   const [show, setShow] = useState(true);
 
@@ -39,8 +36,18 @@ const Movies = () => {
         <div className="MoviesHandler">
           <div className="MoviesHandler_container">
             <MovieSearchInput show={setShow} />
-            <MovieSearchSlider min={1990} max={2020} text={"YEAR FILTER"} />
-            <MovieSearchSlider min={1} max={10} text={"IBM SCORE FILTER"} />
+            <MovieSearchSlider
+              min={1990}
+              max={2020}
+              text={"YEAR FILTER"}
+              id={"year"}
+            />
+            <MovieSearchSlider
+              min={1}
+              max={10}
+              text={"IBM SCORE FILTER"}
+              id={"score"}
+            />
             <MovieSearchButton genres={genreListData.genres} text={"GENRES"} />
           </div>
         </div>

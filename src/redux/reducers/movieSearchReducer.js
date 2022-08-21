@@ -7,6 +7,8 @@ let initialState = {
   includeVideo: {},
   primaryReleaseDateGte: {},
   primaryReleaseDateLte: {},
+  voteAverageGte: {},
+  voteAverageLte: {},
 };
 
 function movieSearchReducer(state = initialState, action) {
@@ -52,6 +54,20 @@ function movieSearchReducer(state = initialState, action) {
       return {
         ...state,
         keyword: payload.keyword,
+      };
+
+    case "RELEASE_DATE_FILTER_STORE_SUCCESS":
+      return {
+        ...state,
+        primaryReleaseDateGte: payload.date_gte,
+        primaryReleaseDateLte: payload.date_lte,
+      };
+
+    case "SCORE_FILTER_STORE_SUCCESS":
+      return {
+        ...state,
+        primaryReleaseDateGte: payload.vote_gte,
+        primaryReleaseDateLte: payload.vote_lte,
       };
 
     case "RESET_MOVIES_SEARCH_SUCCESS":

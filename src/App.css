@@ -688,3 +688,12 @@
   align-items: center;
   margin: 0;
 }
+
+.filter_slider_value input {
+  color: rgb(220, 220, 220);
+  font-weight: bold;
+  font-size: 22px;
+  background-color: transparent;
+  border: none;
+  width: 55px;
+}
