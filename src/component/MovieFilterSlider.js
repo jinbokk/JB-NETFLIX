@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 
 // const minMaxYear = [];
 
-export default function MovieSearchSlider({ min, max, text, id }) {
+export default function MovieFilterSlider({ min, max, text, id }) {
   const theme = createTheme({
     palette: {
       primary: {

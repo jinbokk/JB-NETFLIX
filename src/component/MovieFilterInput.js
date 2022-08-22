@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
-import { movieSearchActions } from "../redux/actions/movieSearchActions";
+import { movieFilterActions } from "../redux/actions/movieFilterActions";
 import MuiToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { styled } from "@mui/material/styles";
 
-const MovieSearchInput = ({ show }) => {
+const MovieFilterInput = ({ show }) => {
   const dispatch = useDispatch();
 
   const theme = createTheme({
@@ -87,7 +87,7 @@ const MovieSearchInput = ({ show }) => {
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
-
+        
         <TextField
           id="search_input"
           variant="filled"
@@ -101,7 +101,9 @@ const MovieSearchInput = ({ show }) => {
                 type: "SEARCH_KEYWORD_STORE_SUCCESS",
                 payload: { keyword: e.target.value },
               });
-              dispatch(movieSearchActions.getSearchedMovies(e.target.value));
+              dispatch(movieFilterActions.getFilteredMovies(e.target.value));
+              
+              
               // dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
 
               // if (e.target.value === !undefined) {
@@ -111,7 +113,7 @@ const MovieSearchInput = ({ show }) => {
               //     payload: { keyword: e.target.value },
               //   });
               //   dispatch(
-              //     movieSearchActions.getSearchedMovies(e.target.value, 1)
+              //     movieFilterActions.getFilteredMovies(e.target.value, 1)
               //   );
               //   // dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
               // } else {
@@ -127,4 +129,4 @@ const MovieSearchInput = ({ show }) => {
   );
 };
 
-export default MovieSearchInput;
+export default MovieFilterInput;

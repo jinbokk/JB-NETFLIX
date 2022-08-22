@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import movieReducer from "./movieReducer";
 import movieDetailReducer from "./movieDetailReducer";
-import movieSearchReducer from "./movieSearchReducer";
+import movieFilterReducer from "./movieFilterReducer";
 
 export default combineReducers({
   movie: movieReducer,
   movieDetail: movieDetailReducer,
-  movieSearch: movieSearchReducer,
+  movieFilter: movieFilterReducer,
 });

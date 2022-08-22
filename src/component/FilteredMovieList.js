@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const FilteredMovieList = ({ movies }) => {
   const navigate = useNavigate();
+  console.log("test movies is aaaaaaaaaaaa", movies);
 
   return (
     <>

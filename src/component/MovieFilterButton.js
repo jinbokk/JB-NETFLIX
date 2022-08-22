@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 let genreStore = [];
 
-export default function MovieSearchButton({ genres, text }) {
+export default function MovieFilterButton({ genres, text }) {
   const dispatch = useDispatch();
 
   const [formats, setFormats] = useState(() => ["on", "off"]);
@@ -20,7 +20,7 @@ export default function MovieSearchButton({ genres, text }) {
       return (
         genreStore.push(event.target.value),
         dispatch({
-          type: "STORE_MOVIES_SEARCH_PARAMS_SUCCESS",
+          type: "STORE_FILTERED_MOVIES_PARAMS_SUCCESS",
           payload: genreStore,
         }),
         console.log("after pushing", genreStore)
@@ -31,7 +31,7 @@ export default function MovieSearchButton({ genres, text }) {
         (genreStore.length = 0),
         genreStore.push.apply(genreStore, tempArray),
         dispatch({
-          type: "STORE_MOVIES_SEARCH_PARAMS_SUCCESS",
+          type: "STORE_FILTERED_MOVIES_PARAMS_SUCCESS",
           payload: genreStore,
         }),
         console.log("after filtering", genreStore)

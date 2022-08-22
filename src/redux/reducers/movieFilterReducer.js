@@ -1,5 +1,5 @@
 let initialState = {
-  SearchedMoviesData: {},
+  FilteredMoviesData: {},
   keyword: {},
   loading: true,
   sortBy: {},
@@ -11,36 +11,25 @@ let initialState = {
   voteAverageLte: {},
 };
 
-function movieSearchReducer(state = initialState, action) {
+function movieFilterReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case "STORE_MOVIES_SEARCH_PARAMS_SUCCESS": {
       return { ...state, withGenres: payload };
-      // return { ...state, withGenres: [...state.withGenres, payload.value] };
-
-      //   const index = state.withGenres.findIndex(
-      //     (genres) => genres.index !== payload.index
-      //   ); //finding index of the item
-      //   const newArray = [...state.withGenres]; //making a new array
-      //   // newArray[index].toggle = false; //changing value in the new array
-      //   return {
-      //     ...state, //copying the orignal state
-      //     withGenres: newArray,
-      //   }; //reassingning withGenres to new array
     }
 
-    case "GET_MOVIES_SEARCH_REQUEST":
+    case "GET_FILTERED_MOVIES_REQUEST":
       return { ...state };
 
-    case "GET_MOVIES_SEARCH_SUCCESS":
+    case "GET_FILTERED_MOVIES_SUCCESS":
       return {
         ...state,
-        SearchedMoviesData: payload.SearchedMoviesJson.data,
+        FilteredMoviesData: payload.FilteredMoviesJson.data,
         loading: false,
       };
 
-    case "GET_MOVIES_SEARCH_FAILURE":
+    case "GET_FILTERED_MOVIES_FAILURE":
       return alert(
         `Sorry, "${payload.error.message}"\nPlease enter the movie name`
       );
@@ -79,7 +68,7 @@ function movieSearchReducer(state = initialState, action) {
     case "RESET_MOVIES_SEARCH_SUCCESS":
       return {
         ...state,
-        SearchedMoviesData: {},
+        FilteredMoviesData: {},
         keyword: {},
         loading: true,
       };
@@ -89,4 +78,4 @@ function movieSearchReducer(state = initialState, action) {
   }
 }
 
-export default movieSearchReducer;
+export default movieFilterReducer;

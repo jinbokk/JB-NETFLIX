@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
-import MovieSearchSlider from "../component/MovieSearchSlider";
-import MovieSearchButton from "../component/MovieSearchButton";
-import MovieSearchInput from "../component/MovieSearchInput";
+import MovieFilterSlider from "../component/MovieFilterSlider";
+import MovieFilterButton from "../component/MovieFilterButton";
+import MovieFilterInput from "../component/MovieFilterInput";
 import FilteredMovieList from "../component/FilteredMovieList";
 
 const Movies = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: "RESET_MOVIES_SEARCH_SUCCESS" });
+    dispatch({ type: "RESET_FILTERED_MOVIES_SUCCESS" });
     dispatch(movieActions.getMovies(1));
   }, []);
 
@@ -20,9 +20,11 @@ const Movies = () => {
     (state) => state.movie
   );
 
-  const { SearchedMoviesData, keyword } = useSelector(
-    (state) => state.movieSearch
-  );
+  const { FilteredMoviesData } = useSelector((state) => state.movieFilter);
+
+  useEffect(() => {
+    console.log("aaaaaaaaaaaa is", FilteredMoviesData);
+  }, [FilteredMoviesData]);
 
   const [show, setShow] = useState(true);
 
@@ -35,20 +37,20 @@ const Movies = () => {
       <div>
         <div className="MoviesHandler">
           <div className="MoviesHandler_container">
-            <MovieSearchInput show={setShow} />
-            <MovieSearchSlider
+            <MovieFilterInput show={setShow} />
+            <MovieFilterSlider
               min={1990}
               max={2020}
               text={"YEAR FILTER"}
               id={"year"}
             />
-            <MovieSearchSlider
+            <MovieFilterSlider
               min={1}
               max={10}
               text={"IBM SCORE FILTER"}
               id={"score"}
             />
-            <MovieSearchButton genres={genreListData.genres} text={"GENRES"} />
+            <MovieFilterButton genres={genreListData.genres} text={"GENRES"} />
           </div>
         </div>
       </div>
@@ -56,8 +58,8 @@ const Movies = () => {
         {show ? (
           <MovieList movies={NowPlayingMoviesData.results} />
         ) : (
-          SearchedMoviesData.results && (
-            <FilteredMovieList movies={SearchedMoviesData.results} />
+          FilteredMoviesData.results && (
+            <FilteredMovieList movies={FilteredMoviesData.results} />
           )
         )}
 
@@ -67,7 +69,7 @@ const Movies = () => {
         {/* {keyword === {} ? (
           <MovieList movies={NowPlayingMoviesData.results} />
         ) : (
-          <MovieList movies={SearchedMoviesData.results} />
+          <MovieList movies={FilteredMoviesData.results} />
         )} */}
       </div>
     </div>
