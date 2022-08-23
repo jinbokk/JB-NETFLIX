@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import api from "../api";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -29,49 +28,52 @@ function getFilteredMovies(
 
       console.log("keyword is", keyword);
 
-      let FilteredMovies;
+      const FilteredMovies = await api.get(
+        `/discover/movie?api_key=${API_KEY}&language=en-US&page=1${
+          keyword ? `&with_text_query=${keyword}` : ""
+        }${sortBy ? `&sort_by=${sortBy}` : ""}${
+          includeVideo ? `&include_video=${includeVideo}` : ""
+        }${
+          primaryReleaseDateGte
+            ? `&primary_release_date.gte=${primaryReleaseDateGte}`
+            : ""
+        }${
+          primaryReleaseDateLte
+            ? `&primary_release_date.lte=${primaryReleaseDateLte}`
+            : ""
+        }${voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""}${
+          voteAverageLte ? `&vote_averag.lte=${voteAverageLte}` : ""
+        }`
+      );
 
-      if (
-        keyword &&
-        sortBy &&
-        withGenres &&
-        includeVideo &&
-        primaryReleaseDateGte &&
-        primaryReleaseDateLte &&
-        voteAverageGte &&
-        voteAverageLte
-      ) {
-        return (FilteredMovies = await api.get(
-          `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&include_video=${includeVideo}&primary_release_date.gte=${primaryReleaseDateGte}&primary_release_date.lte=${primaryReleaseDateLte}&vote_average.gte=${voteAverageGte}&vote_average.lte=${voteAverageGte}`
-        ));
-      } else if (
-        keyword &&
-        sortBy &&
-        withGenres &&
-        includeVideo &&
-        primaryReleaseDateGte &&
-        primaryReleaseDateLte
-      ) {
-        return (FilteredMovies = await api.get(
-          `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}&primary_release_date.gte=${primaryReleaseDateGte}&primary_release_date.lte=${primaryReleaseDateLte}`
-        ));
-      } else if (keyword && sortBy && withGenres && includeVideo) {
-        return (FilteredMovies = await api.get(
-          `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}`
-        ));
-      } else if (keyword && sortBy && withGenres) {
-        return (FilteredMovies = await api.get(
-          `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}`
-        ));
-      } else if (keyword && sortBy) {
-        return (FilteredMovies = await api.get(
-          `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}`
-        ));
-      } else if (keyword) {
-        return (FilteredMovies = await api.get(
-          `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}`
-        ));
-      }
+      // else if (
+      //   keyword &&
+      //   sortBy &&
+      //   withGenres &&
+      //   includeVideo &&
+      //   primaryReleaseDateGte &&
+      //   primaryReleaseDateLte
+      // ) {
+      //   return (FilteredMovies = await api.get(
+      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}&primary_release_date.gte=${primaryReleaseDateGte}&primary_release_date.lte=${primaryReleaseDateLte}`
+      //   ));
+      // } else if (keyword && sortBy && withGenres && includeVideo) {
+      //   return (FilteredMovies = await api.get(
+      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}`
+      //   ));
+      // } else if (keyword && sortBy && withGenres) {
+      //   return (FilteredMovies = await api.get(
+      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}`
+      //   ));
+      // } else if (keyword && sortBy) {
+      //   return (FilteredMovies = await api.get(
+      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}`
+      //   ));
+      // } else if (keyword) {
+      //   return (FilteredMovies = await api.get(
+      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}`
+      //   ));
+      // }
 
       // keyword만 있으면, 위 코드 실행
       // 이외의 arguments 있을시, discover api 실행

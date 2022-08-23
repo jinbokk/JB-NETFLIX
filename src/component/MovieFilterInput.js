@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
@@ -6,6 +7,35 @@ import { movieFilterActions } from "../redux/actions/movieFilterActions";
 import MuiToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { styled } from "@mui/material/styles";
+// import MovieFilterCombine from "./MovieFilterCombine";
+
+// const MovieFilterCombine = () => {
+//   const dispatch = useDispatch();
+
+//   const {
+//     keyword,
+//     sortBy,
+//     withGenres,
+//     includeVideo,
+//     primaryReleaseDateGte,
+//     primaryReleaseDateLte,
+//     voteAverageGte,
+//     voteAverageLte,
+//   } = useSelector((state) => state.movieFilterReducer);
+
+//   return dispatch(
+//     movieFilterActions.getFilteredMovies(
+//       keyword,
+//       sortBy,
+//       withGenres,
+//       includeVideo,
+//       primaryReleaseDateGte,
+//       primaryReleaseDateLte,
+//       voteAverageGte,
+//       voteAverageLte
+//     )
+//   );
+// };
 
 const MovieFilterInput = ({ show }) => {
   const dispatch = useDispatch();
@@ -87,14 +117,14 @@ const MovieFilterInput = ({ show }) => {
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
-        
+
         <TextField
           id="search_input"
           variant="filled"
           label="Movie Title"
           color="primary"
           sx={{ width: "310px" }}
-          onKeyPress={function storeKeyword(e) {
+          onKeyPress={(e) => {
             if (e.key === "Enter") {
               show(false);
               dispatch({
@@ -102,8 +132,7 @@ const MovieFilterInput = ({ show }) => {
                 payload: { keyword: e.target.value },
               });
               dispatch(movieFilterActions.getFilteredMovies(e.target.value));
-              
-              
+
               // dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
 
               // if (e.target.value === !undefined) {
