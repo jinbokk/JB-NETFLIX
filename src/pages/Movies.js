@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
-import MovieList from "../component/MovieList";
+import MovieList from "./MovieList";
 import MovieFilterSlider from "../component/MovieFilterSlider";
 import MovieFilterButton from "../component/MovieFilterButton";
 import MovieFilterInput from "../component/MovieFilterInput";
-import FilteredMovieList from "../component/FilteredMovieList";
+import FilteredMovieList from "./FilteredMovieList";
 
 const Movies = () => {
   const dispatch = useDispatch();
@@ -22,9 +22,15 @@ const Movies = () => {
 
   const { FilteredMoviesData } = useSelector((state) => state.movieFilter);
 
-  useEffect(() => {
-    console.log("aaaaaaaaaaaa is", FilteredMoviesData);
-  }, [FilteredMoviesData]);
+  // const {
+  //   keyword,
+  //   withGenres,
+  //   includeVideo,
+  //   primaryReleaseDateGte,
+  //   primaryReleaseDateLte,
+  //   voteAverageGte,
+  //   voteAverageLte,
+  // } = useSelector((state) => state.movieFilter);
 
   const [show, setShow] = useState(true);
 
@@ -34,26 +40,25 @@ const Movies = () => {
     </div>
   ) : (
     <div className="MoviesPage">
-      <div>
-        <div className="MoviesHandler">
-          <div className="MoviesHandler_container">
-            <MovieFilterInput show={setShow} />
-            <MovieFilterSlider
-              min={1990}
-              max={2020}
-              text={"YEAR FILTER"}
-              id={"year"}
-            />
-            <MovieFilterSlider
-              min={1}
-              max={10}
-              text={"IBM SCORE FILTER"}
-              id={"score"}
-            />
-            <MovieFilterButton genres={genreListData.genres} text={"GENRES"} />
-          </div>
+      <div className="MoviesHandler">
+        <div className="MoviesHandler_container">
+          <MovieFilterInput show={setShow} />
+          <MovieFilterSlider
+            min={1990}
+            max={2020}
+            text={"YEAR FILTER"}
+            id={"year"}
+          />
+          <MovieFilterSlider
+            min={1}
+            max={10}
+            text={"IBM SCORE FILTER"}
+            id={"score"}
+          />
+          <MovieFilterButton genres={genreListData.genres} text={"GENRES"} />
         </div>
       </div>
+
       <div className="MovieListWrapper" id="MovieList_wrapper">
         {show ? (
           <MovieList movies={NowPlayingMoviesData.results} />
