@@ -10,8 +10,8 @@ import { movieFilterActions } from "../redux/actions/movieFilterActions";
 //     sortBy,
 //     withGenres,
 //     includeVideo,
-//     primaryReleaseDateGte,
-//     primaryReleaseDateLte,
+//     releaseDateGte,
+//     releaseDateLte,
 //     voteAverageGte,
 //     voteAverageLte,
 //   } = useSelector((state) => state.movieFilterReducer);
@@ -22,8 +22,8 @@ import { movieFilterActions } from "../redux/actions/movieFilterActions";
 //       sortBy,
 //       withGenres,
 //       includeVideo,
-//       primaryReleaseDateGte,
-//       primaryReleaseDateLte,
+//       releaseDateGte,
+//       releaseDateLte,
 //       voteAverageGte,
 //       voteAverageLte
 //     )
@@ -40,8 +40,8 @@ export default function MovieFilterCombine() {
     sortBy,
     withGenres,
     includeVideo,
-    primaryReleaseDateGte,
-    primaryReleaseDateLte,
+    releaseDateGte,
+    releaseDateLte,
     voteAverageGte,
     voteAverageLte,
   } = useSelector((state) => state.movieFilterReducer);
@@ -52,8 +52,8 @@ export default function MovieFilterCombine() {
       sortBy,
       withGenres,
       includeVideo,
-      primaryReleaseDateGte,
-      primaryReleaseDateLte,
+      releaseDateGte,
+      releaseDateLte,
       voteAverageGte,
       voteAverageLte
     )

@@ -17,8 +17,8 @@ import { styled } from "@mui/material/styles";
 //     sortBy,
 //     withGenres,
 //     includeVideo,
-//     primaryReleaseDateGte,
-//     primaryReleaseDateLte,
+//     releaseDateGte,
+//     releaseDateLte,
 //     voteAverageGte,
 //     voteAverageLte,
 //   } = useSelector((state) => state.movieFilterReducer);
@@ -29,8 +29,8 @@ import { styled } from "@mui/material/styles";
 //       sortBy,
 //       withGenres,
 //       includeVideo,
-//       primaryReleaseDateGte,
-//       primaryReleaseDateLte,
+//       releaseDateGte,
+//       releaseDateLte,
 //       voteAverageGte,
 //       voteAverageLte
 //     )

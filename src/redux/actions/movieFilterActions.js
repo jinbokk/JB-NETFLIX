@@ -17,8 +17,8 @@ function getFilteredMovies(
   sortBy,
   withGenres,
   includeVideo,
-  primaryReleaseDateGte,
-  primaryReleaseDateLte,
+  releaseDateGte,
+  releaseDateLte,
   voteAverageGte,
   voteAverageLte
 ) {
@@ -34,12 +34,12 @@ function getFilteredMovies(
         }${sortBy ? `&sort_by=${sortBy}` : ""}${
           includeVideo ? `&include_video=${includeVideo}` : ""
         }${
-          primaryReleaseDateGte
-            ? `&primary_release_date.gte=${primaryReleaseDateGte}`
+          releaseDateGte
+            ? `&release_date.gte=${releaseDateGte}`
             : ""
         }${
-          primaryReleaseDateLte
-            ? `&primary_release_date.lte=${primaryReleaseDateLte}`
+          releaseDateLte
+            ? `&release_date.lte=${releaseDateLte}`
             : ""
         }${voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""}${
           voteAverageLte ? `&vote_averag.lte=${voteAverageLte}` : ""
@@ -51,11 +51,11 @@ function getFilteredMovies(
       //   sortBy &&
       //   withGenres &&
       //   includeVideo &&
-      //   primaryReleaseDateGte &&
-      //   primaryReleaseDateLte
+      //   releaseDateGte &&
+      //   releaseDateLte
       // ) {
       //   return (FilteredMovies = await api.get(
-      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}&primary_release_date.gte=${primaryReleaseDateGte}&primary_release_date.lte=${primaryReleaseDateLte}`
+      //     `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&with_text_query=${keyword}&sort_by=${sortBy}&with_genres=${withGenres}&include_video=${includeVideo}&release_date.gte=${releaseDateGte}&release_date.lte=${releaseDateLte}`
       //   ));
       // } else if (keyword && sortBy && withGenres && includeVideo) {
       //   return (FilteredMovies = await api.get(

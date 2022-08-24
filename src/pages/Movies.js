@@ -26,8 +26,8 @@ const Movies = () => {
   //   keyword,
   //   withGenres,
   //   includeVideo,
-  //   primaryReleaseDateGte,
-  //   primaryReleaseDateLte,
+  //   releaseDateGte,
+  //   releaseDateLte,
   //   voteAverageGte,
   //   voteAverageLte,
   // } = useSelector((state) => state.movieFilter);
@@ -82,3 +82,19 @@ const Movies = () => {
 };
 
 export default Movies;
+
+
+// 1.movieFilterActions에 api get 요청,
+// 2. 데이터를 다 받으면 loading=false 재할당, movieFilterReducer의 store에 저장
+// XXXXX 3. 해당 데이터를 Movies 페이지에 전달 XXXXX
+// 3. movies 페이지가 해당 데이터를 useSelector로 가져온다.
+
+
+// 1번 과정 이전에, 먼제 api에 들어가는 parameter들을 가져와야 한다
+// 해당 parameter들은 MovieFilterInput,MovieFilterSlider,MovieFilterButton 에서
+// 각자 movieFilterReducer에 저장하고 있다. (!!! 여기가 뭔가 포인트 인듯. 같은 리듀서를 공유하고 있다?)
+
+// 음.. movieFilterReducer가 아니라 다른 WrapperReducer를 하나 새로 만들고, 이곳의 store를
+// useSelector로 가져오는 방식으로 해볼까?
+
+// 결과  >>> 화면에 렌더링 해준다

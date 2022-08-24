@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
+import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
 // const minMaxYear = [];
 
@@ -48,12 +49,36 @@ export default function MovieFilterSlider({ min, max, text, id }) {
         type: "RELEASE_DATE_FILTER_STORE_SUCCESS",
         payload: { date_gte: value[0], date_lte: value[1] },
       });
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          0,
+          0,
+          0,
+          0,
+          value[0],
+          value[1],
+          0,
+          0
+        )
+      );
     } else if (id === "score") {
       console.log("score change committed");
       dispatch({
         type: "SCORE_FILTER_STORE_SUCCESS",
         payload: { vote_gte: value[0], vote_lte: value[1] },
       });
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          value[0],
+          value[1]
+        )
+      );
     }
   };
 

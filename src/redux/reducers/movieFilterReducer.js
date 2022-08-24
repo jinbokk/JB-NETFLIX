@@ -5,8 +5,8 @@ let initialState = {
   sortBy: {},
   withGenres: {},
   includeVideo: {},
-  primaryReleaseDateGte: {},
-  primaryReleaseDateLte: {},
+  releaseDateGte: {},
+  releaseDateLte: {},
   voteAverageGte: {},
   voteAverageLte: {},
 };
@@ -48,15 +48,15 @@ function movieFilterReducer(state = initialState, action) {
     case "RELEASE_DATE_FILTER_STORE_SUCCESS":
       return {
         ...state,
-        primaryReleaseDateGte: payload.date_gte,
-        primaryReleaseDateLte: payload.date_lte,
+        releaseDateGte: payload.date_gte,
+        releaseDateLte: payload.date_lte,
       };
 
     case "SCORE_FILTER_STORE_SUCCESS":
       return {
         ...state,
-        primaryReleaseDateGte: payload.vote_gte,
-        primaryReleaseDateLte: payload.vote_lte,
+        releaseDateGte: payload.vote_gte,
+        releaseDateLte: payload.vote_lte,
       };
 
     case "INCLUDE_MOVIE_VIDEO_TOGGLE_SUCCESS":
