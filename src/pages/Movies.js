@@ -22,16 +22,6 @@ const Movies = () => {
 
   const { FilteredMoviesData } = useSelector((state) => state.movieFilter);
 
-  // const {
-  //   keyword,
-  //   withGenres,
-  //   includeVideo,
-  //   releaseDateGte,
-  //   releaseDateLte,
-  //   voteAverageGte,
-  //   voteAverageLte,
-  // } = useSelector((state) => state.movieFilter);
-
   const [show, setShow] = useState(true);
 
   return loading ? (
@@ -48,20 +38,35 @@ const Movies = () => {
             max={2020}
             text={"YEAR FILTER"}
             id={"year"}
+            show={setShow}
           />
           <MovieFilterSlider
             min={1}
             max={10}
             text={"IBM SCORE FILTER"}
             id={"score"}
+            show={setShow}
           />
-          <MovieFilterButton genres={genreListData.genres} text={"GENRES"} />
+          <MovieFilterButton
+            genres={genreListData.genres}
+            text={"GENRES"}
+            show={setShow}
+          />
         </div>
       </div>
 
       <div className="MovieListWrapper" id="MovieList_wrapper">
         {show ? (
           <MovieList movies={NowPlayingMoviesData.results} />
+        ) : loading ? (
+          <div className="loadingSpinner">
+            <FadeLoader
+              color="red"
+              loading={loading}
+              size={15}
+              speedMultiplier={3}
+            />
+          </div>
         ) : (
           FilteredMoviesData.results && (
             <FilteredMovieList movies={FilteredMoviesData.results} />
@@ -83,12 +88,10 @@ const Movies = () => {
 
 export default Movies;
 
-
 // 1.movieFilterActions에 api get 요청,
 // 2. 데이터를 다 받으면 loading=false 재할당, movieFilterReducer의 store에 저장
 // XXXXX 3. 해당 데이터를 Movies 페이지에 전달 XXXXX
 // 3. movies 페이지가 해당 데이터를 useSelector로 가져온다.
-
 
 // 1번 과정 이전에, 먼제 api에 들어가는 parameter들을 가져와야 한다
 // 해당 parameter들은 MovieFilterInput,MovieFilterSlider,MovieFilterButton 에서

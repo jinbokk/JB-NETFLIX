@@ -1,41 +1,7 @@
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
-// const MovieFilterCombine = () => {
-//   const dispatch = useDispatch();
-
-//   const {
-//     keyword,
-//     sortBy,
-//     withGenres,
-//     includeVideo,
-//     releaseDateGte,
-//     releaseDateLte,
-//     voteAverageGte,
-//     voteAverageLte,
-//   } = useSelector((state) => state.movieFilterReducer);
-
-//   return dispatch(
-//     movieFilterActions.getFilteredMovies(
-//       keyword,
-//       sortBy,
-//       withGenres,
-//       includeVideo,
-//       releaseDateGte,
-//       releaseDateLte,
-//       voteAverageGte,
-//       voteAverageLte
-//     )
-//   );
-// };
-
-// export default MovieFilterCombine;
-
-export default function MovieFilterCombine() {
-  const dispatch = useDispatch();
-
-  const {
+const MovieFilterCombine = () => {
+  const [
     keyword,
     sortBy,
     withGenres,
@@ -44,18 +10,29 @@ export default function MovieFilterCombine() {
     releaseDateLte,
     voteAverageGte,
     voteAverageLte,
-  } = useSelector((state) => state.movieFilterReducer);
+  ] = useSelector((state) => [
+    state.movieFilter.keyword,
+    state.movieFilter.sortBy,
+    state.movieFilter.withGenres,
+    state.movieFilter.includeVideo,
+    state.movieFilter.releaseDateGte,
+    state.movieFilter.releaseDateLte,
+    state.movieFilter.voteAverageGte,
+    state.movieFilter.voteAverageLte,
+  ]);
 
-  return dispatch(
-    movieFilterActions.getFilteredMovies(
-      keyword,
-      sortBy,
-      withGenres,
-      includeVideo,
-      releaseDateGte,
-      releaseDateLte,
-      voteAverageGte,
-      voteAverageLte
-    )
-  );
-}
+  console.log(keyword);
+
+  return [
+    keyword,
+    sortBy,
+    withGenres,
+    includeVideo,
+    releaseDateGte,
+    releaseDateLte,
+    voteAverageGte,
+    voteAverageLte,
+  ];
+};
+
+export { MovieFilterCombine };

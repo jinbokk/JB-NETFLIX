@@ -4,11 +4,32 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MuiToggleButton from "@mui/material/ToggleButton";
 import { styled } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
 let genreStore = [];
 
-export default function MovieFilterButton({ genres, text }) {
+export default function MovieFilterButton({ genres, text, show }) {
+  const [
+    keyword,
+    sortBy,
+    withGenres,
+    includeVideo,
+    releaseDateGte,
+    releaseDateLte,
+    voteAverageGte,
+    voteAverageLte,
+  ] = useSelector((state) => [
+    state.movieFilter.keyword,
+    state.movieFilter.sortBy,
+    state.movieFilter.withGenres,
+    state.movieFilter.includeVideo,
+    state.movieFilter.releaseDateGte,
+    state.movieFilter.releaseDateLte,
+    state.movieFilter.voteAverageGte,
+    state.movieFilter.voteAverageLte,
+  ]);
+
   const dispatch = useDispatch();
 
   const [formats, setFormats] = useState(() => ["on", "off"]);
@@ -18,12 +39,25 @@ export default function MovieFilterButton({ genres, text }) {
 
     if (genreStore.includes(event.target.value) === false) {
       return (
+        show(false),
         genreStore.push(event.target.value),
         dispatch({
-          type: "STORE_FILTERED_MOVIES_PARAMS_SUCCESS",
+          type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore,
         }),
-        console.log("after pushing", genreStore)
+        console.log("after pushing", genreStore),
+        dispatch(
+          movieFilterActions.getFilteredMovies(
+            keyword,
+            sortBy,
+            withGenres,
+            includeVideo,
+            releaseDateGte,
+            releaseDateLte,
+            voteAverageGte,
+            voteAverageLte
+          )
+        )
       );
     } else {
       let tempArray = genreStore.filter((item) => item !== event.target.value);
@@ -31,10 +65,22 @@ export default function MovieFilterButton({ genres, text }) {
         (genreStore.length = 0),
         genreStore.push.apply(genreStore, tempArray),
         dispatch({
-          type: "STORE_FILTERED_MOVIES_PARAMS_SUCCESS",
+          type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore,
         }),
-        console.log("after filtering", genreStore)
+        console.log("after filtering", genreStore),
+        dispatch(
+          movieFilterActions.getFilteredMovies(
+            keyword,
+            sortBy,
+            withGenres,
+            includeVideo,
+            releaseDateGte,
+            releaseDateLte,
+            voteAverageGte,
+            voteAverageLte
+          )
+        )
       );
     }
   };

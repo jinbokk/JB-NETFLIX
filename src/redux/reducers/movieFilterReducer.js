@@ -1,22 +1,22 @@
 let initialState = {
   FilteredMoviesData: {},
-  keyword: {},
+  keyword: "",
   loading: true,
   sortBy: {},
   withGenres: {},
-  includeVideo: {},
-  releaseDateGte: {},
-  releaseDateLte: {},
-  voteAverageGte: {},
-  voteAverageLte: {},
+  includeVideo: "",
+  releaseDateGte: "",
+  releaseDateLte: "",
+  voteAverageGte: "",
+  voteAverageLte: "",
 };
 
 function movieFilterReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case "STORE_MOVIES_SEARCH_PARAMS_SUCCESS": {
-      return { ...state, withGenres: payload };
+    case "STORE_MOVIE_GENRES_SUCCESS": {
+      return { ...state, withGenres: [payload] };
     }
 
     case "GET_FILTERED_MOVIES_REQUEST":
@@ -42,7 +42,7 @@ function movieFilterReducer(state = initialState, action) {
     case "SEARCH_KEYWORD_STORE_SUCCESS":
       return {
         ...state,
-        keyword: payload.keyword,
+        keyword: payload,
       };
 
     case "RELEASE_DATE_FILTER_STORE_SUCCESS":
