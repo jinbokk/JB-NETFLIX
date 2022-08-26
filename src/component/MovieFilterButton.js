@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MuiToggleButton from "@mui/material/ToggleButton";
@@ -10,6 +10,10 @@ import { movieFilterActions } from "../redux/actions/movieFilterActions";
 let genreStore = [];
 
 export default function MovieFilterButton({ genres, text, show }) {
+  useEffect(() => {
+    dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
+  }, []);
+
   const [
     keyword,
     sortBy,

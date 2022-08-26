@@ -53,12 +53,12 @@ const MovieReview = ({ avatar_path, item }) => {
         </div>
       </div>
       <p>{item.content}</p>
-      <div>
+      {/* <div>
         <Button variant="primary" onClick={() => setModalShow(true)}>
           Launch vertically centered modal
         </Button>
         <ModalCentered show={modalShow} onHide={() => setModalShow(false)} />
-      </div>
+      </div> */}
     </div>
   );
 };

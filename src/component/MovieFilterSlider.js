@@ -9,6 +9,10 @@ import { movieFilterActions } from "../redux/actions/movieFilterActions";
 // const minMaxYear = [];
 
 export default function MovieFilterSlider({ min, max, text, id, show }) {
+  useEffect(() => {
+    dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
+  }, []);
+
   const [
     keyword,
     sortBy,
@@ -84,7 +88,7 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
           voteAverageGte,
           voteAverageLte
         )
-      )
+      );
     } else if (id === "score") {
       show(false);
       console.log("score change committed");
@@ -104,7 +108,7 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
           voteAverageGte,
           voteAverageLte
         )
-      )
+      );
     }
   };
 

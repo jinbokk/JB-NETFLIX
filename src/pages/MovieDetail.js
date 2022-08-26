@@ -18,7 +18,7 @@ const MovieDetail = () => {
   const movie_id = useParams().id;
 
   useEffect(() => {
-    dispatch(movieDetailActions.getMovieDetail(movie_id, 3));
+    dispatch(movieDetailActions.getMovieDetail(movie_id, 1));
     return () => {
       dispatch({ type: "RESET_MOVIE_DETAIL_STORE_SUCCESS" });
     };
@@ -86,7 +86,9 @@ const MovieDetail = () => {
               ")",
           }}
         >
-          <div className="video_container">{/* <MovieVideo /> */}</div>
+          
+            <MovieVideo />
+          
         </div>
 
         <TextAnimation props={MovieDetailData} />
@@ -98,41 +100,42 @@ const MovieDetail = () => {
           REVIEWS
         </h1>
         <Row>
-          {MovieReviews.data.results}?
-          {MovieReviews.data.results.map((item) => {
-            if (
-              item.author_details.avatar_path !== null &&
-              item.author_details.avatar_path.includes("https") === true
-            ) {
-              let avatar_path = item.author_details.avatar_path.slice(32);
-              return (
-                <Col lg={4}>
-                  <MovieReview avatar_path={avatar_path} item={item} />
-                </Col>
-              );
-            } else if (item.author_details.avatar_path == null) {
-              let avatar_path = "";
-              return (
-                <Col lg={4}>
-                  <MovieReview avatar_path={avatar_path} item={item} />
-                </Col>
-              );
-            } else {
-              let avatar_path = item.author_details.avatar_path;
-              console.log("avatar_path is", avatar_path);
-              return (
-                <Col lg={4}>
-                  <MovieReview avatar_path={avatar_path} item={item} />
-                </Col>
-              );
-            }
-          })}
-          :
-          <h3
-            style={{ textAlign: "center", fontSize: "30px", padding: "30px" }}
-          >
-            No Reviews
-          </h3>
+          {MovieReviews.data.results ? (
+            MovieReviews.data.results.map((item) => {
+              if (
+                item.author_details.avatar_path !== null &&
+                item.author_details.avatar_path.includes("https") === true
+              ) {
+                let avatar_path = item.author_details.avatar_path.slice(32);
+                return (
+                  <Col lg={4}>
+                    <MovieReview avatar_path={avatar_path} item={item} />
+                  </Col>
+                );
+              } else if (item.author_details.avatar_path == null) {
+                let avatar_path = "";
+                return (
+                  <Col lg={4}>
+                    <MovieReview avatar_path={avatar_path} item={item} />
+                  </Col>
+                );
+              } else {
+                let avatar_path = item.author_details.avatar_path;
+                console.log("avatar_path is", avatar_path);
+                return (
+                  <Col lg={4}>
+                    <MovieReview avatar_path={avatar_path} item={item} />
+                  </Col>
+                );
+              }
+            })
+          ) : (
+            <h3
+              style={{ textAlign: "center", fontSize: "30px", padding: "30px" }}
+            >
+              No Reviews
+            </h3>
+          )}
         </Row>
 
         <div>

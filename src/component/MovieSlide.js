@@ -1,16 +1,13 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import MovieCard from "./MovieCard";
-
+import { MovieCard } from "./MovieCard";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 export default function MovieSlide({ movies }) {
-
-
   return (
     <Swiper
       slidesPerView={8}
@@ -18,7 +15,6 @@ export default function MovieSlide({ movies }) {
       slidesPerGroup={4}
       speed={1000}
       loop={true}
-      d
       loopFillGroupWithBlank={false}
       pagination={{
         clickable: true,
@@ -43,12 +39,8 @@ export default function MovieSlide({ movies }) {
     >
       {movies &&
         movies.map((item) => (
-          <SwiperSlide>
-            <MovieCard
-              movie={item}
-              key={item.id}
-              
-            />
+          <SwiperSlide key={item.id}>
+            <MovieCard movie={item} />
           </SwiperSlide>
         ))}
     </Swiper>

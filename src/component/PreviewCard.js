@@ -58,7 +58,7 @@ const PreviewCard = ({ movie }) => {
         <div className="preview_modal_genre">
           {movie.genre_ids.map((id, index) => (
             <span className="preview_modal_genre_tag" key={index}>
-              {genreList.find((item) => item.id === id).name}
+              {genreList && genreList.find((item) => item.id === id).name}
             </span>
           ))}
         </div>

@@ -73,6 +73,12 @@ function movieFilterReducer(state = initialState, action) {
         loading: true,
       };
 
+      case "RESET_FILTERED_MOVIES_STORE_SUCCESS":
+      return {
+        ...state,
+        FilteredMoviesData: {}
+      };
+
     default:
       return { ...state };
   }

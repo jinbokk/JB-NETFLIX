@@ -11,8 +11,8 @@ const TextAnimation = ({ props }) => {
         <Wrapper>
           <MoveUp>
             <p>{props.overview}</p>
-            {props.genres.map((item) => (
-              <span>{item.name}</span>
+            {props.genres.map((item, index) => (
+              <span key={index}>{item.name}</span>
             ))}
           </MoveUp>
         </Wrapper>
