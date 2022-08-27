@@ -36,7 +36,6 @@ const MovieCard = ({ movie }) => {
   const handleMouseEnter = () => {
     console.log("Mounted");
     getMovieKey();
-
     setDelayHandler(
       setTimeout(() => {
         setHover(true);
