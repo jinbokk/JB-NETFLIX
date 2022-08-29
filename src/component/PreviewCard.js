@@ -43,23 +43,29 @@ const PreviewCard = ({ movie }) => {
         <MovieVideo />
       </div>
       <div className="preview_modal_info">
-        <span className="preview_modal_title">{movie.title}</span>
+        <div className="preview_modal_title">{movie.title}</div>
+
         <div className="preview_modal_release_date">{movie.release_date}</div>
-        <span className="preview_modal_vote_average">
-          <span>SCORE</span>
-          <span>{movie.vote_average}</span>
-          <span>RATED</span>
+
+        <div className="preview_modal_vote">
+          <div className="preview_modal_vote_text">SCORE</div>
+          <div className="preview_modal_vote_value">{movie.vote_average}</div>
+        </div>
+
+        <div className="preview_modal_rated">
+          <div className="preview_modal_rated_text">RATED</div>
           {movie.adult === false ? (
-            <span className="G_rated">G</span>
+            <div className="G_rated">G</div>
           ) : (
-            <span className="adult_rated">18+</span>
+            <div className="adult_rated">18+</div>
           )}
-        </span>
+        </div>
+
         <div className="preview_modal_genre">
           {movie.genre_ids.map((id, index) => (
-            <span className="preview_modal_genre_tag" key={index}>
+            <div className="preview_modal_genre_tag" key={index}>
               {genreList && genreList.find((item) => item.id === id).name}
-            </span>
+            </div>
           ))}
         </div>
       </div>

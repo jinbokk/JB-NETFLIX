@@ -71,28 +71,33 @@ const MovieCard = ({ movie }) => {
           // 영화 정보가 받아와진 후 영화 동영상 자동 재생
           <>
             <div className="preview_modal">
-              <MovieVideo />
+              <div className="previewVideo_container">
+                <MovieVideo />
+              </div>
+
               <div className="preview_modal_info">
-                <span className="preview_modal_title">{movie.title}</span>
-                <div className="preview_modal_release_date">
-                  {movie.release_date}
+                <div className="preview_modal_info_title">{movie.title}</div>
+
+                <div>{movie.release_date}</div>
+
+                <div>
+                  <div>
+                    <span>SCORE</span>
+                    <span>{movie.vote_average}</span>
+                  </div>
+
+                  <div>
+                    <span>RATED</span>
+                    {movie.adult === false ? <span>G</span> : <span>18+</span>}
+                  </div>
                 </div>
-                <span className="preview_modal_vote_average">
-                  <span>SCORE</span>
-                  <span>{movie.vote_average}</span>
-                  <span>RATED</span>
-                  {movie.adult === false ? (
-                    <span className="G_rated">G</span>
-                  ) : (
-                    <span className="adult_rated">18+</span>
-                  )}
-                </span>
-                <div className="preview_modal_genre">
+
+                <div>
                   {movie.genre_ids.map((id, index) => (
-                    <span className="preview_modal_genre_tag" key={index}>
+                    <div key={index}>
                       {genreList &&
                         genreList.find((item) => item.id === id).name}
-                    </span>
+                    </div>
                   ))}
                 </div>
               </div>
