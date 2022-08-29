@@ -27,26 +27,27 @@ const MovieCard = ({ movie }) => {
   const genreList = useSelector((state) => state.movie.genreListData.genres);
 
   const movieCardImg = movie.poster_path;
+  const movieBackdrop = movie.backdrop_path;
 
   const [hover, setHover] = useState(false);
-  const [delayHandler, setDelayHandler] = useState(false);
+  const [loadMovie, setloadMovie] = useState(false);
 
   const navigate = useNavigate();
 
   const handleMouseEnter = () => {
-    console.log("Mounted");
-    getMovieKey();
-    setDelayHandler(
+    setTimeout(() => {
+      getMovieKey();
+      setHover(true);
       setTimeout(() => {
-        setHover(true);
-      }, 2000)
-    );
+        setloadMovie(true);
+      }, 1000);
+    }, 1000);
   };
 
   const handleMouseLeave = () => {
-    clearTimeout(delayHandler);
+    clearTimeout(handleMouseEnter);
     setHover(false);
-    console.log("Unmounted");
+    setloadMovie(false);
   };
 
   return (
@@ -71,9 +72,21 @@ const MovieCard = ({ movie }) => {
           // 영화 정보가 받아와진 후 영화 동영상 자동 재생
           <>
             <div className="preview_modal">
-              <div className="previewVideo_container">
-                <MovieVideo />
-              </div>
+              {loadMovie ? (
+                <div className="previewVideo_container">
+                  <MovieVideo />
+                </div>
+              ) : (
+                <div
+                  className="movieCard_preview"
+                  style={{
+                    backgroundImage:
+                      "url(" +
+                      `	https://www.themoviedb.org/t/p/w500_and_h282_face${movieBackdrop}` +
+                      ")",
+                  }}
+                ></div>
+              )}
 
               <div className="preview_modal_info">
                 <div className="preview_modal_info_title">{movie.title}</div>
