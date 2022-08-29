@@ -24,8 +24,8 @@ export default function MovieSlide({ movies }) {
       breakpoints={{
         // when window width is >= X px
         0: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
+          slidesPerView: 4,
+          slidesPerGroup: 4,
         },
         768: {
           slidesPerView: 4,

@@ -181,7 +181,6 @@
   border-radius: 10px;
   position: relative;
   text-align: left;
-  font-size: 18px;
   background: rgb(25, 25, 25);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -208,8 +207,8 @@
 .movieCard {
   z-index: 1;
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 200px;
+  height: 300px;
   background-size: cover;
   background-position: 50%;
   cursor: pointer;
@@ -259,6 +258,23 @@
 
 .previewVideo_container {
   position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.previewVideo_container iframe {
+  position: absolute;
+  z-index: 10;
+  height: 200%;
+  transform: translateY(-25%);
+}
+
+.ytp-watermark,
+.yt-uix-sessionlink,
+.ytp-watermark-small {
+  display: none !important;
 }
 
 .preview_modal_info {
@@ -276,7 +292,7 @@
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: fade(100px, 100%);
+  text-overflow: fade(0px, 100%);
 }
 
 .preview_modal_title {
