@@ -32,7 +32,7 @@ const slideUp = keyframes`
     transform-origin:left;
   }
   100% {
-    transform:translateY(80px);
+    transform:translateY(20px);
     transform-origin:left;
   }
 `;

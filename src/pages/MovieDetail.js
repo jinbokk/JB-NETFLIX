@@ -47,7 +47,14 @@ const MovieDetail = () => {
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
-    const movieKey = selectedMovieJson.data.results[0].key;
+
+    const movieKey = selectedMovieJson.data.results.find(
+      (item) => item.name === "Official Trailer" || item.name === "Trailer"
+    )
+      ? selectedMovieJson.data.results.find(
+          (item) => item.name === "Official Trailer" || item.name === "Trailer"
+        ).key
+      : selectedMovieJson.data.results[0].key || null;
 
     dispatch({
       type: "STORE_MOVIE_KEY_SUCCESS",
@@ -61,10 +68,7 @@ const MovieDetail = () => {
     getMovieKey();
     return () => {
       dispatch({
-        type: "STORE_MOVIE_KEY_SUCCESS",
-        payload: {
-          movieKey: {},
-        },
+        type: "RESET_MOVIE_KEY_SUCCESS",
       });
     };
   }, []);
@@ -76,6 +80,7 @@ const MovieDetail = () => {
   ) : (
     <>
       <div className="MovieDetail_container">
+        <TextAnimation props={MovieDetailData} />
         <div
           className="MovieDetail_Img"
           style={{
@@ -85,9 +90,8 @@ const MovieDetail = () => {
               ")",
           }}
         >
-          <MovieVideo />
+          {MovieVideos.data.results === [] ? null : <MovieVideo />}
         </div>
-        <TextAnimation props={MovieDetailData} />
       </div>
 
       <div className="MovieDetail_section">

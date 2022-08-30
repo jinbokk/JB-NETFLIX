@@ -272,6 +272,14 @@
   transform: translateY(-25%);
 }
 
+.previewVideo_container_detailPage {
+  position: relative;
+  width: 80%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
 .ytp-watermark,
 .yt-uix-sessionlink,
 .ytp-watermark-small {
@@ -466,7 +474,7 @@
   position: relative;
   right: 0;
   top: 0;
-  height: 80vh;
+  height: 100vh;
   max-height: 80vh;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
 }
@@ -482,6 +490,15 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.MovieDetail_Img iframe {
+  position: absolute;
+  z-index: 10;
+  height: 200%;
+  transform: translateY(-25%);
 }
 
 .MovieDetail_Img::before {
@@ -508,7 +525,7 @@
   padding-bottom: 30px;
 }
 
-.MovieDetail_section::before {
+/* .MovieDetail_section::before {
   position: absolute;
   content: "";
   height: 100%;
@@ -516,12 +533,13 @@
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent),
     linear-gradient(to bottom, black, transparent 200px);
   pointer-events: none;
-}
+} */
 
 .MovieDetail_Info {
   position: absolute;
-  top: 10vw;
-  width: 40vw;
+  z-index: 5;
+  top: 9vh;
+  width: 50vw;
   color: white;
   padding-left: 40px;
   pointer-events: none;
@@ -554,14 +572,16 @@
 
 /* ------------------------MovieReview------------------------ */
 .review_card {
+  position: relative;
   height: 200px;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 20px;
   padding-top: 10px;
   margin-bottom: 40px;
+  text-overflow: ellipsis;
 }
 
-.review_card::before {
+/* .review_card::before {
   position: absolute;
   content: "";
   left: 0;
@@ -570,7 +590,7 @@
   height: 200px;
   width: 100%;
   background: linear-gradient(to top, #141414, transparent 50px);
-}
+} */
 
 .review_container {
   display: flex;
@@ -584,6 +604,25 @@
   justify-content: space-between;
   align-items: center;
   vertical-align: middle;
+  height: 90px;
+}
+
+.review_content_section {
+  height: 100px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review_content {
+  text-overflow: ellipsis;
+}
+
+.review_content_button {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 200px;
 }
 
 /* .review_info {

@@ -41,7 +41,14 @@ const MovieReview = ({ avatar_path, item }) => {
             {item.author_details.rating ? (
               <p>{item.author_details.rating} / 10</p>
             ) : (
-              <p style={{ color: "gray", fontSize: 8 }}>NOT SCORED</p>
+              <p
+                style={{
+                  color: "gray",
+                  fontSize: 8,
+                }}
+              >
+                NOT SCORED
+              </p>
             )}
           </div>
         </div>
@@ -52,13 +59,18 @@ const MovieReview = ({ avatar_path, item }) => {
           {item.updated_at.slice(0, 10)}
         </div>
       </div>
-      <p>{item.content}</p>
-      {/* <div>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button>
-        <ModalCentered show={modalShow} onHide={() => setModalShow(false)} />
-      </div> */}
+      <div className="review_content_section">
+        <p className="review_content">{item.content}</p>
+        {/* <div>
+          <Button variant="primary" onClick={() => setModalShow(true)}>
+            Launch vertically centered modal
+          </Button>
+          <ModalCentered show={modalShow} onHide={() => setModalShow(false)} />
+        </div> */}
+        <div>
+          <button className="review_content_button">Read more</button>
+        </div>
+      </div>
     </div>
   );
 };
