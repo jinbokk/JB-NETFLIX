@@ -14,7 +14,20 @@ const MovieCard = ({ movie }) => {
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
-    const movieKey = selectedMovieJson.data.results[0].key;
+
+    console.log("json is", selectedMovieJson);
+
+    const movieKey = selectedMovieJson.data.results.find(
+      (item) =>
+        item.name === "Official Trailer" || item.name === "Trailer"
+    )
+      ? selectedMovieJson.data.results.find(
+          (item) =>
+            item.name === "Official Trailer" || item.name === "Trailer"
+        ).key
+      : selectedMovieJson.data.results[0].key;
+
+    console.log("find key is", movieKey);
 
     dispatch({
       type: "STORE_MOVIE_KEY_SUCCESS",
@@ -76,7 +89,7 @@ const MovieCard = ({ movie }) => {
             <div className="preview_modal">
               {loadMovie ? (
                 <div className="previewVideo_container">
-                  <MovieVideo />
+                  <MovieVideo/>
                 </div>
               ) : (
                 <div
@@ -99,14 +112,14 @@ const MovieCard = ({ movie }) => {
 
                 <div>
                   <span>
-                    <span>SCORE</span>
+                    <span className="preview_modal_score_text">SCORE</span>
                     <span className="preview_modal_score">
                       {movie.vote_average}
                     </span>
                   </span>
 
                   <span style={{ marginLeft: "5px" }}>
-                    <span>RATED</span>
+                    <span className="preview_modal_rate_text">RATED</span>
                     {movie.adult === false ? (
                       <span className="preview_modal_G_rate">G</span>
                     ) : (
@@ -117,10 +130,21 @@ const MovieCard = ({ movie }) => {
 
                 <div className="preview_modal_genre">
                   {movie.genre_ids.map((id, index) => (
-                    <div key={index} className="preview_modal_genre_tag">
-                      {genreList &&
-                        genreList.find((item) => item.id === id).name}
-                    </div>
+                    <>
+                      <div key={index} className="preview_modal_genre_tag">
+                        <span
+                          style={{
+                            fontSize: "20px",
+                            color: "red",
+                            marginRight: "5px",
+                          }}
+                        >
+                          &#8226;
+                        </span>
+                        {genreList &&
+                          genreList.find((item) => item.id === id).name}
+                      </div>
+                    </>
                   ))}
                 </div>
               </div>

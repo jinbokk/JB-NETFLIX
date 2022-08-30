@@ -10,7 +10,6 @@ import MovieVideo from "../component/MovieVideo";
 import TextAnimation from "../component/TextAnimation";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import { padding } from "@mui/system";
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
@@ -86,11 +85,8 @@ const MovieDetail = () => {
               ")",
           }}
         >
-          
-            <MovieVideo />
-          
+          <MovieVideo />
         </div>
-
         <TextAnimation props={MovieDetailData} />
       </div>
 
