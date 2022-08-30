@@ -34,18 +34,25 @@ const MovieCard = ({ movie }) => {
 
   const navigate = useNavigate();
 
+  let isHover;
+  let isLoadMovie;
+
   const handleMouseEnter = () => {
-    setTimeout(() => {
-      getMovieKey();
+    console.log("mouseEnterEvent Fired");
+    isHover = setTimeout(() => {
+      console.log("hover fired");
       setHover(true);
-      setTimeout(() => {
-        setloadMovie(true);
-      }, 1000);
+      getMovieKey();
     }, 1000);
+    isLoadMovie = setTimeout(() => {
+      console.log("loadMovie fired");
+      setloadMovie(true);
+    }, 2000);
   };
 
   const handleMouseLeave = () => {
-    clearTimeout(handleMouseEnter);
+    clearTimeout(isHover);
+    clearTimeout(isLoadMovie);
     setHover(false);
     setloadMovie(false);
   };
@@ -61,15 +68,10 @@ const MovieCard = ({ movie }) => {
             ")",
         }}
         onClick={() => navigate(`/movies/${movie.id}`)}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => handleMouseEnter()}
+        onMouseLeave={() => handleMouseLeave()}
       >
         {hover ? (
-          // hover시, card 위에 있는 before를 수정하도록 하면 되겠다.
-          // card::before, 초기 opacity가 0이며, 영화 포스터의 이미지를 background로 한다
-          // hover시, opacity가 1이 되며 scale 확장되고 (origin은 해당 카드의 센터,하단)
-          // 영화 정보가 받아와지기 전까지 포스터 image, 및 영화 정보
-          // 영화 정보가 받아와진 후 영화 동영상 자동 재생
           <>
             <div className="preview_modal">
               {loadMovie ? (
@@ -89,25 +91,33 @@ const MovieCard = ({ movie }) => {
               )}
 
               <div className="preview_modal_info">
-                <div className="preview_modal_info_title">{movie.title}</div>
+                <div className="preview_modal_title">{movie.title}</div>
 
-                <div>{movie.release_date}</div>
-
-                <div>
-                  <div>
-                    <span>SCORE</span>
-                    <span>{movie.vote_average}</span>
-                  </div>
-
-                  <div>
-                    <span>RATED</span>
-                    {movie.adult === false ? <span>G</span> : <span>18+</span>}
-                  </div>
+                <div className="preview_modal_release_date">
+                  {movie.release_date}
                 </div>
 
                 <div>
+                  <span>
+                    <span>SCORE</span>
+                    <span className="preview_modal_score">
+                      {movie.vote_average}
+                    </span>
+                  </span>
+
+                  <span style={{ marginLeft: "5px" }}>
+                    <span>RATED</span>
+                    {movie.adult === false ? (
+                      <span className="preview_modal_G_rate">G</span>
+                    ) : (
+                      <span className="preview_modal_adult_rate">18+</span>
+                    )}
+                  </span>
+                </div>
+
+                <div className="preview_modal_genre">
                   {movie.genre_ids.map((id, index) => (
-                    <div key={index}>
+                    <div key={index} className="preview_modal_genre_tag">
                       {genreList &&
                         genreList.find((item) => item.id === id).name}
                     </div>

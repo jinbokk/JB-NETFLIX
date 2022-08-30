@@ -13,7 +13,6 @@ function MovieVideo() {
       controls: 0,
       fs: 0,
       rel: 0,
-      loop: 1,
     },
   };
 

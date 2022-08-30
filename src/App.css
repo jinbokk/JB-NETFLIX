@@ -144,8 +144,7 @@
 /* ------------------------swiper------------------------ */
 
 .swiper {
-  width: 100vw;
-  /* padding-bottom: 56.25%; */
+  width: 100%;
   height: 300px;
   aspect-ratio: 3 / 2;
   overflow: visible !important;
@@ -215,15 +214,6 @@
   border-radius: 10px;
   transform-origin: bottom;
   transition: 0.3s;
-  font-size: small;
-}
-
-.movieCard_preview {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  background-size: cover;
 }
 
 .movieCard:hover {
@@ -234,9 +224,12 @@
   transition-delay: 1s;
 }
 
-.movieCard .player {
-  height: 39.5%;
-  background-color: #141414;
+.movieCard_preview {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  background-size: cover;
 }
 
 /* ------------------------preview_modal------------------------ */
@@ -286,52 +279,36 @@
 }
 
 .preview_modal_info {
+  width: 100%;
   padding-top: 5px;
   padding-left: 10px;
+  padding-right: 10px;
   word-break: keep-all;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.preview_modal_info_title {
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
-  white-space: nowrap;
+  flex-wrap: wrap;
   overflow: hidden;
-  /* text-overflow: fade(0px, 100%); */
 }
 
 .preview_modal_title {
   font-size: 20px;
-  width: 100%;
   font-weight: bold;
-  transform-origin: top left;
-  transform: scale(0.8);
+  width: 100%;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  /* text-overflow: fade(0px, 100%); */
 }
 
 .preview_modal_release_date {
   color: #777777;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   transform-origin: top left;
   transform: scale(0.8);
 }
 
-.preview_modal_vote_rate_container {
-  display: flex;
-  transform-origin: top left;
-  transform: scale(0.8);
-}
-
-.preview_modal_vote_text {
-  color: #c2c2c2;
-  font-weight: bold;
-  margin-right: 7px;
-}
-
-.preview_modal_vote_value {
+.preview_modal_score {
   padding: 2.5px;
   padding-left: 5px;
   padding-right: 5px;
@@ -340,16 +317,13 @@
   background-color: rgb(231, 150, 0);
   color: rgb(30, 30, 30);
   font-weight: bold;
+  font-size: 10px;
+  margin-left: 5px;
+  transform: scale(0.8);
+  display: inline-block;
 }
 
-.preview_modal_rated_text {
-  color: #c2c2c2;
-  font-weight: bold;
-  margin-right: 7px;
-  margin-left: 10px;
-}
-
-.G_rated {
+.preview_modal_G_rate {
   color: rgb(30, 30, 30);
   font-weight: bold;
   padding: 2.5px;
@@ -358,9 +332,12 @@
   border-radius: 5px;
   background-color: rgb(0, 146, 0);
   text-align: center;
+  margin-left: 5px;
+  transform: scale(0.8);
+  display: inline-block;
 }
 
-.adult_rated {
+.preview_modal_adult_rate {
   color: rgb(30, 30, 30);
   font-weight: bold;
   padding: 2.5px;
@@ -370,22 +347,30 @@
   border-radius: 5px;
   background-color: rgb(162, 0, 0);
   text-align: center;
+  margin-left: 5px;
 }
 
 .preview_modal_genre {
   display: flex;
-  margin-top: 15px;
-  transform: scale(0.7);
+  width: 135%;
+  /* margin-top: 10px; */
   transform-origin: top left;
+  flex-wrap: wrap;
+  font-size: 10px;
+  transform: scale(0.7);
+  transform-origin: left;
+  overflow: hidden;
 }
 
 .preview_modal_genre_tag {
   white-space: nowrap;
   font-weight: bold;
-  padding: 5px;
-  margin: 5px;
+  padding: 4px 9px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
   background-color: red;
+  color: rgb(30, 30, 30);
 }
 
 /* ------------------------Movies------------------------ */
