@@ -3,7 +3,7 @@ let initialState = {
   keyword: "",
   loading: true,
   sortBy: {},
-  withGenres: {},
+  withGenres: "",
   includeVideo: "",
   releaseDateGte: "",
   releaseDateLte: "",
@@ -16,7 +16,7 @@ function movieFilterReducer(state = initialState, action) {
 
   switch (type) {
     case "STORE_MOVIE_GENRES_SUCCESS": {
-      return { ...state, withGenres: [payload] };
+      return { ...state, withGenres: payload };
     }
 
     case "GET_FILTERED_MOVIES_REQUEST":
@@ -55,8 +55,8 @@ function movieFilterReducer(state = initialState, action) {
     case "SCORE_FILTER_STORE_SUCCESS":
       return {
         ...state,
-        releaseDateGte: payload.vote_gte,
-        releaseDateLte: payload.vote_lte,
+        voteAverageGte: payload.vote_gte,
+        voteAverageLte: payload.vote_lte,
       };
 
     case "INCLUDE_MOVIE_VIDEO_TOGGLE_SUCCESS":
@@ -73,11 +73,11 @@ function movieFilterReducer(state = initialState, action) {
         loading: true,
       };
 
-      case "RESET_FILTERED_MOVIES_STORE_SUCCESS":
-      return {
-        ...state,
-        FilteredMoviesData: {}
-      };
+    // case "RESET_FILTERED_MOVIES_STORE_SUCCESS":
+    // return {
+    //   ...state,
+    //   FilteredMoviesData: {}
+    // };
 
     default:
       return { ...state };

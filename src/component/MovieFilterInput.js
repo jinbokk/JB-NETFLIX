@@ -7,9 +7,9 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
 const MovieFilterInput = ({ show }) => {
-  useEffect(() => {
-    dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
+  // }, []);
 
   const [
     keyword,
@@ -31,7 +31,37 @@ const MovieFilterInput = ({ show }) => {
     state.movieFilter.voteAverageLte,
   ]);
 
+  // const {
+  //   keyword,
+  //   sortBy,
+  //   withGenres,
+  //   includeVideo,
+  //   releaseDateGte,
+  //   releaseDateLte,
+  //   voteAverageGte,
+  //   voteAverageLte,
+  // } = useSelector((state) => state.movieFilter);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      movieFilterActions.getFilteredMovies(
+        keyword,
+        sortBy,
+        withGenres,
+        includeVideo,
+        releaseDateGte,
+        releaseDateLte,
+        voteAverageGte,
+        voteAverageLte
+      )
+    );
+  }, [keyword]);
 
   const theme = createTheme({
     palette: {
@@ -73,13 +103,28 @@ const MovieFilterInput = ({ show }) => {
     setSelect(newSelect);
   };
 
-  const test = (toggle) => {
-    console.log("button clicked");
-    dispatch({
-      type: "INCLUDE_MOVIE_VIDEO_TOGGLE_SUCCESS",
-      payload: toggle,
-    });
-  };
+  // const test = (toggle) => {
+  //   console.log("button clicked");
+  //   dispatch({
+  //     type: "INCLUDE_MOVIE_VIDEO_TOGGLE_SUCCESS",
+  //     payload: toggle,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   dispatch(
+  //     movieFilterActions.getFilteredMovies(
+  //       keyword,
+  //       sortBy,
+  //       withGenres,
+  //       includeVideo,
+  //       releaseDateGte,
+  //       releaseDateLte,
+  //       voteAverageGte,
+  //       voteAverageLte
+  //     )
+  //   );
+  // }, [show]);
 
   return (
     <>
@@ -97,14 +142,14 @@ const MovieFilterInput = ({ show }) => {
             <ToggleButton
               value="ALL"
               aria-label="ALL"
-              onClick={() => test(false)}
+              // onClick={() => test(false)}
             >
               ALL
             </ToggleButton>
             <ToggleButton
               value="Include Movie Video"
               aria-label="Include Movie Video"
-              onClick={() => test(true)}
+              // onClick={() => test(true)}
             >
               Include Movie Video
             </ToggleButton>
@@ -124,18 +169,18 @@ const MovieFilterInput = ({ show }) => {
                 payload: e.target.value,
               });
 
-              dispatch(
-                movieFilterActions.getFilteredMovies(
-                  keyword,
-                  sortBy,
-                  withGenres,
-                  includeVideo,
-                  releaseDateGte,
-                  releaseDateLte,
-                  voteAverageGte,
-                  voteAverageLte
-                )
-              );
+              // dispatch(
+              //   movieFilterActions.getFilteredMovies(
+              //     keyword,
+              //     sortBy,
+              //     withGenres,
+              //     includeVideo,
+              //     releaseDateGte,
+              //     releaseDateLte,
+              //     voteAverageGte,
+              //     voteAverageLte
+              //   )
+              // );
             }
           }}
         />

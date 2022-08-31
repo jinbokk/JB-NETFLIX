@@ -7,6 +7,7 @@ import api from "../redux/api";
 import MovieReview from "../component/MovieReview";
 import MovieSlide from "../component/MovieSlide";
 import MovieVideo from "../component/MovieVideo";
+import MovieVideoForBanner from "../component/MovieVideoForBanner";
 import TextAnimation from "../component/TextAnimation";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
@@ -25,7 +26,6 @@ const MovieDetail = () => {
 
   const {
     MovieDetailData,
-    MovieVideos,
     MovieReviews,
     RecommendMovies,
     SimilarMovies,
@@ -42,13 +42,13 @@ const MovieDetail = () => {
   //   animateTrigger();
   // }, 1000);
 
-  const getMovieKey = async () => {
+  const getMovieKeyForBanner = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
 
-    const movieKey = selectedMovieJson.data.results.find(
+    const movieKeyForBanner = selectedMovieJson.data.results.find(
       (item) => item.name === "Official Trailer" || item.name === "Trailer"
     )
       ? selectedMovieJson.data.results.find(
@@ -57,21 +57,24 @@ const MovieDetail = () => {
       : selectedMovieJson.data.results[0].key || null;
 
     dispatch({
-      type: "STORE_MOVIE_KEY_SUCCESS",
+      type: "STORE_MOVIE_KEY_FOR_BANNER_SUCCESS",
       payload: {
-        movieKey: movieKey,
+        movieKeyForBanner: movieKeyForBanner,
       },
     });
   };
 
   useEffect(() => {
-    getMovieKey();
+    getMovieKeyForBanner();
     return () => {
       dispatch({
         type: "RESET_MOVIE_KEY_SUCCESS",
       });
+      dispatch({
+        type: "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS",
+      });
     };
-  }, []);
+  }, [movie_id]);
 
   return loading ? (
     <div className="loadingSpinner">
@@ -90,7 +93,7 @@ const MovieDetail = () => {
               ")",
           }}
         >
-          {MovieVideos.data.results === [] ? null : <MovieVideo />}
+          <MovieVideoForBanner />
         </div>
       </div>
 

@@ -18,12 +18,10 @@ const MovieCard = ({ movie }) => {
     console.log("json is", selectedMovieJson);
 
     const movieKey = selectedMovieJson.data.results.find(
-      (item) =>
-        item.name === "Official Trailer" || item.name === "Trailer"
+      (item) => item.name === "Official Trailer" || item.name === "Trailer"
     )
       ? selectedMovieJson.data.results.find(
-          (item) =>
-            item.name === "Official Trailer" || item.name === "Trailer"
+          (item) => item.name === "Official Trailer" || item.name === "Trailer"
         ).key
       : selectedMovieJson.data.results[0].key;
 
@@ -70,6 +68,10 @@ const MovieCard = ({ movie }) => {
     setloadMovie(false);
   };
 
+  useEffect(() => {
+    dispatch({ type: "RESET_MOVIE_VIDEOS_SUCCESS" });
+  }, [loadMovie]);
+
   return (
     <>
       <div
@@ -89,7 +91,7 @@ const MovieCard = ({ movie }) => {
             <div className="preview_modal">
               {loadMovie ? (
                 <div className="previewVideo_container">
-                  <MovieVideo/>
+                  <MovieVideo />
                 </div>
               ) : (
                 <div
@@ -102,7 +104,8 @@ const MovieCard = ({ movie }) => {
                   }}
                 ></div>
               )}
-
+              {console.log("TESTDATA~~~", movie)}
+              {console.log("TESTDATA~~~genre", genreList)}
               <div className="preview_modal_info">
                 <div className="preview_modal_title">{movie.title}</div>
 
@@ -120,7 +123,7 @@ const MovieCard = ({ movie }) => {
 
                   <span style={{ marginLeft: "5px" }}>
                     <span className="preview_modal_rate_text">RATED</span>
-                    {movie.adult === false ? (
+                    {!movie.adult ? (
                       <span className="preview_modal_G_rate">G</span>
                     ) : (
                       <span className="preview_modal_adult_rate">18+</span>

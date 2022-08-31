@@ -5,16 +5,18 @@ import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 
 const FilteredMovieList = ({ movies }) => {
+  let moviesData = movies.filter((item) => item.poster_path !== null);
+  
   const navigate = useNavigate();
   console.log("FilteredMovieList is", movies);
 
 
   return (
     <>
-      {movies && (
+      {moviesData && (
         <Container>
           <Row>
-            {movies.map((item) => (
+            {moviesData.map((item) => (
               <Col
                 key={item.id}
                 sm={4}

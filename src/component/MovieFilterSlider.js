@@ -9,9 +9,9 @@ import { movieFilterActions } from "../redux/actions/movieFilterActions";
 // const minMaxYear = [];
 
 export default function MovieFilterSlider({ min, max, text, id, show }) {
-  useEffect(() => {
-    dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
+  // }, []);
 
   const [
     keyword,
@@ -33,6 +33,23 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
     state.movieFilter.voteAverageLte,
   ]);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      movieFilterActions.getFilteredMovies(
+        keyword,
+        sortBy,
+        withGenres,
+        includeVideo,
+        releaseDateGte,
+        releaseDateLte,
+        voteAverageGte,
+        voteAverageLte
+      )
+    );
+  }, [releaseDateGte, releaseDateLte, voteAverageGte, voteAverageLte]);
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -47,8 +64,6 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
   function valuetext(value) {
     return `${value}`;
   }
-
-  const dispatch = useDispatch();
 
   const [value, setValue] = useState([min, max]);
 
@@ -77,38 +92,40 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
         payload: { date_gte: value[0], date_lte: value[1] },
       });
 
-      dispatch(
-        movieFilterActions.getFilteredMovies(
-          keyword,
-          sortBy,
-          withGenres,
-          includeVideo,
-          releaseDateGte,
-          releaseDateLte,
-          voteAverageGte,
-          voteAverageLte
-        )
-      );
+      // dispatch(
+      //   movieFilterActions.getFilteredMovies(
+      //     keyword,
+      //     sortBy,
+      //     withGenres,
+      //     includeVideo,
+      //     releaseDateGte,
+      //     releaseDateLte,
+      //     voteAverageGte,
+      //     voteAverageLte
+      //   )
+      // );
     } else if (id === "score") {
       show(false);
+
       console.log("score change committed");
+
       dispatch({
         type: "SCORE_FILTER_STORE_SUCCESS",
         payload: { vote_gte: value[0], vote_lte: value[1] },
       });
 
-      dispatch(
-        movieFilterActions.getFilteredMovies(
-          keyword,
-          sortBy,
-          withGenres,
-          includeVideo,
-          releaseDateGte,
-          releaseDateLte,
-          voteAverageGte,
-          voteAverageLte
-        )
-      );
+      // dispatch(
+      //   movieFilterActions.getFilteredMovies(
+      //     keyword,
+      //     sortBy,
+      //     withGenres,
+      //     includeVideo,
+      //     releaseDateGte,
+      //     releaseDateLte,
+      //     voteAverageGte,
+      //     voteAverageLte
+      //   )
+      // );
     }
   };
 

@@ -5,6 +5,7 @@ let initialState = {
   loading: true,
   movieId: {},
   movieKey: {},
+  movieKeyForBanner: {},
   genreListData: {},
   NowPlayingMoviesData: {},
 };
@@ -32,11 +33,23 @@ function movieReducer(state = initialState, action) {
         ...state,
         movieKey: payload.movieKey,
       };
+ 
+      case "STORE_MOVIE_KEY_FOR_BANNER_SUCCESS":
+      return {
+        ...state,
+        movieKeyForBanner: payload.movieKeyForBanner,
+      };
 
     case "RESET_MOVIE_KEY_SUCCESS":
       return {
         ...state,
         movieKey: {},
+      };
+
+      case "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS":
+      return {
+        ...state,
+        movieKeyForBanner: {},
       };
 
     case "RESET_MOVIE_STORE_SUCCESS":

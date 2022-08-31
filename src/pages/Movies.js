@@ -11,18 +11,21 @@ import FilteredMovieList from "./FilteredMovieList";
 const Movies = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: "RESET_FILTERED_MOVIES_SUCCESS" });
-    dispatch(movieActions.getMovies(1));
-  }, []);
-
   const { NowPlayingMoviesData, genreListData, loading } = useSelector(
     (state) => state.movie
   );
 
+  const loading_2 = useSelector((state) => state.movieFilter.loading);
+  console.log("로딩테스트중", loading_2);
+
   const { FilteredMoviesData } = useSelector((state) => state.movieFilter);
 
   const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    dispatch({ type: "RESET_FILTERED_MOVIES_SUCCESS" });
+    dispatch(movieActions.getMovies(1));
+  }, []);
 
   return loading ? (
     <div className="loadingSpinner">
@@ -58,7 +61,7 @@ const Movies = () => {
       <div className="MovieListWrapper" id="MovieList_wrapper">
         {show ? (
           <MovieList movies={NowPlayingMoviesData.results} />
-        ) : loading ? (
+        ) : loading_2 ? (
           <div className="loadingSpinner">
             <FadeLoader
               color="red"
@@ -68,9 +71,7 @@ const Movies = () => {
             />
           </div>
         ) : (
-          FilteredMoviesData.results && (
-            <FilteredMovieList movies={FilteredMoviesData.results} />
-          )
+          <FilteredMovieList movies={FilteredMoviesData.results} />
         )}
 
         {/* if search한 데이터가 있다면, 그걸 보여준다? */}

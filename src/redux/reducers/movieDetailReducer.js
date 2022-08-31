@@ -1,6 +1,7 @@
 let initialState = {
   MovieDetailData: {},
   MovieVideos: {},
+  MovieVideosForBanner: {},
   MovieReviews: {},
   RecommendMovies: {},
   SimilarMovies: {},
@@ -19,6 +20,7 @@ function movieDetailReducer(state = initialState, action) {
         ...state,
         MovieDetailData: payload.MovieDetailJson.data,
         MovieVideos: payload.MovieVideos,
+        MovieVideosForBanner: payload.MovieVideosForBanner,
         MovieReviews: payload.MovieReviews,
         RecommendMovies: payload.RecommendMovies,
         SimilarMovies: payload.SimilarMovies,
@@ -35,6 +37,12 @@ function movieDetailReducer(state = initialState, action) {
         SimilarMovies: {},
         loading: true,
       };
+
+      case "RESET_MOVIE_VIDEOS_SUCCESS":
+      return {
+        ...state,
+        MovieVideos: {},
+      }
 
     case "GET_MOVIE_DETAIL_FAILURE":
       return alert(`Sorry,\n"${payload.error.message}"`);
