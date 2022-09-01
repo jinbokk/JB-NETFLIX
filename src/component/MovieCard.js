@@ -109,16 +109,16 @@ const MovieCard = ({ movie }) => {
                   {movie.release_date}
                 </div>
 
-                <div>
-                  <span>
-                    <span className="preview_modal_score_text">SCORE</span>
+                <div className="preview_modal_score_rate">
+                  <span style={{ marginRight: "5px"}}>
+                    <span>SCORE</span>
                     <span className="preview_modal_score">
                       {movie.vote_average}
                     </span>
                   </span>
 
-                  <span style={{ marginLeft: "5px" }}>
-                    <span className="preview_modal_rate_text">RATED</span>
+                  <span>
+                    <span>RATED</span>
                     {!movie.adult ? (
                       <span className="preview_modal_G_rate">G</span>
                     ) : (
@@ -133,7 +133,7 @@ const MovieCard = ({ movie }) => {
                       <div key={index} className="preview_modal_genre_tag">
                         <span
                           style={{
-                            fontSize: "20px",
+                            fontSize: "15px",
                             color: "red",
                             marginRight: "5px",
                           }}
