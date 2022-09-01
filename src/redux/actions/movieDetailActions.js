@@ -7,23 +7,23 @@ function getMovieDetail(movie_id, pageNum) {
       dispatch({ type: "GET_MOVIE_DETAIL_REQUEST" });
 
       const getMovieDetailJson = api.get(
-        `/movie/${movie_id}?api_key=${API_KEY}&language=en-US`
+        `/movie/${movie_id}?api_key=${API_KEY}&language=en-US&region=US`
       );
 
       const getMovieVideos = api.get(
-        `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
+        `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US&region=US`
       );
 
       const getMovieReviews = api.get(
-        `/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const getRecommendMovies = api.get(
-        `/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const getSimilarMovies = api.get(
-        `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const [

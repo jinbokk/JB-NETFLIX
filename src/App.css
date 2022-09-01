@@ -398,16 +398,21 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   background-color: #141414;
   width: 400px;
-  height: 100vh;
+  height: 100%;
+  margin-top: 80px;
+}
+.MoviesHandler_container {
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.MoviesHandler_container {
-  padding-left: 40px;
-}
+/* .MoviesHandler_container {
+  padding: 10px 100px;
+} */
 
 .css-1iqhxdk-MuiButtonBase-root-MuiButton-root {
   margin-right: 10px !important;
@@ -426,6 +431,14 @@
   padding-left: 20px;
   position: relative;
   z-index: 2;
+}
+
+.genreButton_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-overflow: ellipsis;
 }
 
 /* ------------------------MovieList------------------------ */
@@ -635,14 +648,13 @@
 
 #search_input {
   transition: 0.5s;
-  /* border-radius: 15px; */
+  /* border-radius: 5px; */
   background-color: #4f0000;
   color: #fff;
 }
 
 #search_input:focus {
   transition: 0.5s;
-  /* border-radius: 15px; */
   background-color: #820000;
   color: #fff;
 }
@@ -655,16 +667,26 @@
   display: flex;
   justify-content: left;
   align-items: center;
+  width: 100%;
 }
 
 .searchBar h2 {
-  margin-right: 25px;
+  margin-right: 90px;
 }
 
 .searchBar button {
   padding: 10px;
   height: 30px;
 }
+
+#sort-label {
+  color: white;
+}
+
+/* #sort-label:focus {
+  color: white;
+  background-color: red;
+} */
 
 .noResultMessage {
   height: 100%;

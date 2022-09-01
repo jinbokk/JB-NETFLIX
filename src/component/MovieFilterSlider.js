@@ -135,7 +135,7 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
       <h2>
         {value[0]} ~ {value[1]}
       </h2>
-      <Box sx={{ width: "300px" }}>
+      <Box sx={{ width: "100%" }}>
         <Slider
           id={id}
           getAriaLabel={() => "Minimum distance"}

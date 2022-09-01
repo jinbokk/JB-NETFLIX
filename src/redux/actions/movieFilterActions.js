@@ -17,15 +17,15 @@ const getFilteredMovies = (
       dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
 
       const FilteredMovies = await api.get(
-        `/discover/movie?api_key=${API_KEY}&language=en-US&page=1${
+        `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
           keyword ? `&with_text_query=${keyword}` : ""
         }${includeVideo ? `&include_video=${includeVideo}` : ""}${
           releaseDateGte ? `&release_date.gte=${releaseDateGte}` : ""
         }${releaseDateLte ? `&release_date.lte=${releaseDateLte}` : ""}${
           voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""
         }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
-          withGenres !== [] ? `&with_genres=${withGenres}` : ""
-        }`
+          withGenres ? `&with_genres=${withGenres}` : ""
+        }${sortBy ? `&sort_by=${sortBy}` : ""}`
       );
 
       dispatch({

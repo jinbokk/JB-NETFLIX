@@ -124,12 +124,15 @@ export default function MovieFilterButton({ genres, text, show }) {
     },
   });
 
-  const ToggleButton = styled(MuiToggleButton)({
+  const MyToggleButton = styled(MuiToggleButton)({
     "&.MuiToggleButton-root": {
       fontWeight: "bold",
       color: "white",
       backgroundColor: theme.palette.secondary.dark,
       transition: ".3s",
+      width: "80px",
+      height: "40px",
+      margin: "2px",
     },
     "&.MuiToggleButton-root:hover": {
       backgroundColor: theme.palette.primary.dark,
@@ -144,16 +147,26 @@ export default function MovieFilterButton({ genres, text, show }) {
   return (
     <ThemeProvider theme={theme}>
       <h2>{text}</h2>
-      {genres.map((item, index) => (
-        <ToggleButtonGroup
-          value={formats}
-          onChange={handleFormat}
-          color="primary"
-          key={index}
-        >
-          <ToggleButton value={item.id}>{item.name}</ToggleButton>
-        </ToggleButtonGroup>
-      ))}
+      <div className="genreButton_container">
+        {genres.map((item, index) => (
+          <ToggleButtonGroup
+            value={formats}
+            onChange={handleFormat}
+            color="primary"
+            key={index}
+          >
+            {item.name === "Documentary" ? (
+              <MyToggleButton value={item.id}>DOCU</MyToggleButton>
+            ) : item.name === "Science Fiction" ? (
+              <MyToggleButton value={item.id}>SF</MyToggleButton>
+            ) : item.name === "TV Movie" ? (
+              <MyToggleButton value={item.id}>TV</MyToggleButton>
+            ) : (
+              <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
+            )}
+          </ToggleButtonGroup>
+        ))}
+      </div>
     </ThemeProvider>
   );
 }

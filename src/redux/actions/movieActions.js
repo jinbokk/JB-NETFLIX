@@ -7,23 +7,23 @@ function getMovies(pageNum) {
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const getPopularMovies = api.get(
-        `/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const getTopRatedMovies = api.get(
-        `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const getUpcomingMovies = api.get(
-        `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const getGenres = api.get(
-        `/genre/movie/list?api_key=${API_KEY}&language=en-US`
+        `/genre/movie/list?api_key=${API_KEY}&language=en-US&region=US`
       );
 
       const getNowPlayingMovies = api.get(
-        `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+        `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
       const [

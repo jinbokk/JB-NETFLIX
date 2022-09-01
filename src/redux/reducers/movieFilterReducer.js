@@ -2,7 +2,7 @@ let initialState = {
   FilteredMoviesData: {},
   keyword: "",
   loading: true,
-  sortBy: {},
+  sortBy: "",
   withGenres: "",
   includeVideo: "",
   releaseDateGte: "",
@@ -17,6 +17,10 @@ function movieFilterReducer(state = initialState, action) {
   switch (type) {
     case "STORE_MOVIE_GENRES_SUCCESS": {
       return { ...state, withGenres: payload };
+    }
+
+    case "STORE_MOVIE_SORT_SUCCESS": {
+      return { ...state, sortBy: payload };
     }
 
     case "GET_FILTERED_MOVIES_REQUEST":
