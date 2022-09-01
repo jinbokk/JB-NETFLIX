@@ -1,17 +1,14 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
-// const minMaxYear = [];
-
 export default function MovieFilterSlider({ min, max, text, id, show }) {
-  // useEffect(() => {
-  //   dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
-  // }, []);
+
+  const isMounted = useRef(false);
 
   const [
     keyword,
@@ -36,18 +33,22 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      movieFilterActions.getFilteredMovies(
-        keyword,
-        sortBy,
-        withGenres,
-        includeVideo,
-        releaseDateGte,
-        releaseDateLte,
-        voteAverageGte,
-        voteAverageLte
-      )
-    );
+    if (isMounted.current) {
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          keyword,
+          sortBy,
+          withGenres,
+          includeVideo,
+          releaseDateGte,
+          releaseDateLte,
+          voteAverageGte,
+          voteAverageLte
+        )
+      );
+    } else {
+      isMounted.current = true;
+    }
   }, [releaseDateGte, releaseDateLte, voteAverageGte, voteAverageLte]);
 
   const theme = createTheme({
@@ -92,6 +93,7 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
         payload: { date_gte: value[0], date_lte: value[1] },
       });
 
+      dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
       // dispatch(
       //   movieFilterActions.getFilteredMovies(
       //     keyword,

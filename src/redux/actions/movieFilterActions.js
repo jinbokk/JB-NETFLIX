@@ -14,8 +14,6 @@ const getFilteredMovies = (
 
   return async (dispatch) => {
     try {
-      dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
-
       const FilteredMovies = await api.get(
         `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
           keyword ? `&with_text_query=${keyword}` : ""

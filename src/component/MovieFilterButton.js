@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MuiToggleButton from "@mui/material/ToggleButton";
@@ -13,6 +13,8 @@ export default function MovieFilterButton({ genres, text, show }) {
   // useEffect(() => {
   //   dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
   // }, []);
+
+  const isMounted = useRef(false);
 
   console.log("받아온 장르는", genres);
 
@@ -39,18 +41,22 @@ export default function MovieFilterButton({ genres, text, show }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      movieFilterActions.getFilteredMovies(
-        keyword,
-        sortBy,
-        withGenres,
-        includeVideo,
-        releaseDateGte,
-        releaseDateLte,
-        voteAverageGte,
-        voteAverageLte
-      )
-    );
+    if (isMounted.current) {
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          keyword,
+          sortBy,
+          withGenres,
+          includeVideo,
+          releaseDateGte,
+          releaseDateLte,
+          voteAverageGte,
+          voteAverageLte
+        )
+      );
+    } else {
+      isMounted.current = true;
+    }
   }, [withGenres]);
 
   const [formats, setFormats] = useState(() => ["on", "off"]);
@@ -66,7 +72,8 @@ export default function MovieFilterButton({ genres, text, show }) {
           type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore.join(" || "),
         }),
-        console.log("after pushing", genreStore)
+        console.log("after pushing", genreStore),
+        dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
         // dispatch(
         //   movieFilterActions.getFilteredMovies(
         //     keyword,
@@ -89,7 +96,8 @@ export default function MovieFilterButton({ genres, text, show }) {
           type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore.join(" || "),
         }),
-        console.log("after filtering", genreStore)
+        console.log("after filtering", genreStore),
+        dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
 
         // dispatch(
         //   movieFilterActions.getFilteredMovies(

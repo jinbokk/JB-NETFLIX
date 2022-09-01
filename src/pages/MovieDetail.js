@@ -98,12 +98,19 @@ const MovieDetail = () => {
       </div>
 
       <div className="MovieDetail_section">
-        <h1 style={{ marginTop: "0" }}>
+        <h1
+          style={{
+            paddingLeft: "10px",
+            position: "relative",
+            zIndex: "1",
+            fontSize: "25px",
+          }}
+        >
           <span className="subTitle">&#10095;</span>
           REVIEWS
         </h1>
         <Row>
-          {MovieReviews.data.results ? (
+          {MovieReviews.data.total_results !== 0 ? (
             MovieReviews.data.results.map((item) => {
               if (
                 item.author_details.avatar_path !== null &&
@@ -134,7 +141,12 @@ const MovieDetail = () => {
             })
           ) : (
             <h3
-              style={{ textAlign: "center", fontSize: "30px", padding: "30px" }}
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "30px",
+                width: "100%",
+              }}
             >
               No Reviews
             </h3>
@@ -142,23 +154,46 @@ const MovieDetail = () => {
         </Row>
 
         <div>
-          <h1>
-            <span>
-              <span className="subTitle">&#10095;</span>
-            </span>
+          <h1
+            style={{
+              paddingLeft: "10px",
+              position: "relative",
+              zIndex: "1",
+              fontSize: "25px",
+            }}
+          >
+            <span className="subTitle">&#10095;</span>
             SIMILAR MOVIES
           </h1>
           <MovieSlide movies={SimilarMovies.data.results} />
         </div>
 
         <div>
-          <h1>
-            <span>
-              <span className="subTitle">&#10095;</span>
-            </span>
+          <h1
+            style={{
+              paddingLeft: "10px",
+              position: "relative",
+              zIndex: "1",
+              fontSize: "25px",
+            }}
+          >
+            <span className="subTitle">&#10095;</span>
             RECOMMEND MOVIES
           </h1>
-          <MovieSlide movies={RecommendMovies.data.results} />
+          {RecommendMovies.data.total_results !== 0 ? (
+            <MovieSlide movies={RecommendMovies.data.results} />
+          ) : (
+            <h3
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "30px",
+                width: "100%",
+              }}
+            >
+              No Recommend Movies
+            </h3>
+          )}
         </div>
       </div>
     </>

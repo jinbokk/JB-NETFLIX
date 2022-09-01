@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
@@ -15,6 +15,8 @@ const MovieFilterInput = ({ show }) => {
   // useEffect(() => {
   //   dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
   // }, []);
+
+  const isMounted = useRef(false);
 
   const [
     keyword,
@@ -39,37 +41,41 @@ const MovieFilterInput = ({ show }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
-  }, []);
-
-  useEffect(() => {
-    dispatch(
-      movieFilterActions.getFilteredMovies(
-        keyword,
-        sortBy,
-        withGenres,
-        includeVideo,
-        releaseDateGte,
-        releaseDateLte,
-        voteAverageGte,
-        voteAverageLte
-      )
-    );
+    if (isMounted.current) {
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          keyword,
+          sortBy,
+          withGenres,
+          includeVideo,
+          releaseDateGte,
+          releaseDateLte,
+          voteAverageGte,
+          voteAverageLte
+        )
+      );
+    } else {
+      isMounted.current = true;
+    }
   }, [keyword]);
 
   useEffect(() => {
-    dispatch(
-      movieFilterActions.getFilteredMovies(
-        keyword,
-        sortBy,
-        withGenres,
-        includeVideo,
-        releaseDateGte,
-        releaseDateLte,
-        voteAverageGte,
-        voteAverageLte
-      )
-    );
+    if (isMounted.current) {
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          keyword,
+          sortBy,
+          withGenres,
+          includeVideo,
+          releaseDateGte,
+          releaseDateLte,
+          voteAverageGte,
+          voteAverageLte
+        )
+      );
+    } else {
+      isMounted.current = true;
+    }
   }, [sortBy]);
 
   const theme = createTheme({
@@ -113,6 +119,7 @@ const MovieFilterInput = ({ show }) => {
     show(false);
     setSort(event.target.value);
     dispatch({ type: "STORE_MOVIE_SORT_SUCCESS", payload: event.target.value });
+    dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
   };
 
   return (

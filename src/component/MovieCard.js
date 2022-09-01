@@ -68,10 +68,6 @@ const MovieCard = ({ movie }) => {
     setloadMovie(false);
   };
 
-  useEffect(() => {
-    dispatch({ type: "RESET_MOVIE_VIDEOS_SUCCESS" });
-  }, [loadMovie]);
-
   return (
     <>
       <div

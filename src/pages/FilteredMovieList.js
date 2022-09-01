@@ -31,7 +31,6 @@ const FilteredMovieList = ({ movies }) => {
                 }}
                 onClick={() => navigate(`/movies/${item.id}`)}
               >
-                {/* {console.log(item.release_date.substr(0, 4) > 2000)} */}
               </Col>
             ))}
           </Row>

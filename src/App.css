@@ -143,11 +143,18 @@
 
 /* ------------------------swiper------------------------ */
 
-.swiper {
+.swiper_container {
+  position: relative;
   width: 100%;
+  height: 100%;
+}
+
+.swiper {
+  width: 100vw;
   height: 300px;
   aspect-ratio: 3 / 2;
   overflow: visible !important;
+  /* overflow-y: hidden !important; */
   position: relative;
   z-index: 1;
 }
@@ -681,6 +688,11 @@
 
 #sort-label {
   color: white;
+}
+
+.MuiSlider-root {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 }
 
 /* #sort-label:focus {
