@@ -11,6 +11,7 @@ import MovieVideoForBanner from "../component/MovieVideoForBanner";
 import TextAnimation from "../component/TextAnimation";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import Footer from "../component/Footer";
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ const MovieDetail = () => {
   ) : (
     <>
       <div className="MovieDetail_container">
-        <TextAnimation props={MovieDetailData} />
+        <TextAnimation movie={MovieDetailData} />
         <div
           className="MovieDetail_Img"
           style={{
@@ -196,6 +197,7 @@ const MovieDetail = () => {
           )}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

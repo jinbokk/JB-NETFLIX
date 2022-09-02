@@ -1,20 +1,20 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-const TextAnimation = ({ props }) => {
+const TextAnimation = ({ movie }) => {
   return (
     <>
-      <div className="MovieDetail_Info">
-        <MoveDown>
-          <h1>{props.original_title}</h1>
-        </MoveDown>
+      <div className="MovieDetail_info">
+        <MoveUp_2>
+          <h1>{movie.title}</h1>
+        </MoveUp_2>
         <Wrapper>
-          <MoveUp>
-            <p>{props.overview}</p>
-            {props.genres.map((item, index) => (
+          <MoveUp_1>
+            <p>{movie.overview}</p>
+            {movie.genres?.map((item, index) => (
               <span key={index}>{item.name}</span>
             ))}
-          </MoveUp>
+          </MoveUp_1>
         </Wrapper>
       </div>
     </>
@@ -26,7 +26,7 @@ const fadeIn = keyframes`
   100% { opacity: 0 }
 `;
 
-const slideUp = keyframes`
+const slideDown_1 = keyframes`
   0% {
     transform:translateY(0px);
     transform-origin:left;
@@ -37,13 +37,13 @@ const slideUp = keyframes`
   }
 `;
 
-const slideDown = keyframes`
+const slideDown_2 = keyframes`
   0% {
     transform:translateY(0px);
     transform-origin:left;
   }
   100% {
-    transform:translateY(50px) scale(0.7);
+    transform:translateY(70px) scale(0.5);
     transform-origin:left;
   }
 `;
@@ -56,17 +56,17 @@ const Wrapper = styled.div`
   animation-fill-mode: forwards;
 `;
 
-const MoveUp = styled.div`
+const MoveUp_1 = styled.div`
   opacity: 1;
-  animation-name: ${slideUp};
-  animation-duration: 1s;
+  animation-name: ${slideDown_1};
+  animation-duration: 0.7s;
   animation-delay: 5s;
   animation-fill-mode: forwards;
 `;
 
-const MoveDown = styled.div`
+const MoveUp_2 = styled.div`
   opacity: 1;
-  animation-name: ${slideDown};
+  animation-name: ${slideDown_2};
   animation-duration: 1s;
   animation-delay: 5s;
   animation-fill-mode: forwards;
