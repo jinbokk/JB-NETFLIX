@@ -83,6 +83,7 @@
   right: 0;
   top: 0;
   height: 56.25vw;
+  min-height: 500px;
   max-height: 90vh;
   margin-bottom: -15vh;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
@@ -92,6 +93,7 @@
   position: absolute;
   z-index: 100;
   content: "";
+  min-height: 600px;
   height: 71.25vw;
   width: 100%;
   background: linear-gradient(to right, black, transparent 400px),
@@ -404,6 +406,7 @@
 
 .MoviesHandler {
   position: fixed;
+  z-index: 15;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -412,8 +415,55 @@
   background-color: #141414;
   width: 400px;
   height: 100%;
-  margin-top: 80px;
+  padding-top: 80px;
+  transition: 1s;
 }
+
+.MoviesHandler_toggleButton {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: -200px;
+  transform: translate(0, -50%);
+  width: 60px;
+  height: 100%;
+  background-color: transparent;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.MoviesHandler_toggleButton_text {
+  font-size: 13px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.MoviesHandler_toggleButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .MoviesHandler {
+    left: -400px;
+    transition: 1s;
+  }
+
+  .MovieListWrapper {
+    left: 60px !important;
+    width: calc(100vw - 50px) !important;
+    transition: 1s;
+  }
+
+  .MoviesHandler_toggleButton {
+    left: 0;
+    transition: 1s;
+  }
+}
+
 .MoviesHandler_container {
   padding-left: 30px;
   padding-right: 30px;
@@ -447,7 +497,6 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
-  text-overflow: ellipsis;
 }
 
 /* ------------------------MovieList------------------------ */
@@ -457,6 +506,7 @@
   left: 430px;
   width: calc(100% - 430px);
   height: 100vh;
+  transition: 1s;
 }
 
 .MovieListWrapper .container {
@@ -490,14 +540,13 @@
 /* ------------------------MovieDetail------------------------ */
 
 .MovieDetail_container {
-  bottom: 0;
+  top: 0;
   left: 0;
   position: relative;
-  right: 0;
-  top: 0;
   height: 100vh;
   max-height: 80vh;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+  overflow: hidden;
 }
 
 .MovieDetail_container::before {
@@ -509,6 +558,32 @@
   width: 100%;
   background: linear-gradient(to right, black, transparent 400px);
   pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .MovieDetail_container {
+    top: 0;
+    left: 0;
+    position: relative;
+    height: 100vh;
+    max-height: 50vh;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+  }
+
+  .MovieDetail_container::before {
+    position: absolute;
+    z-index: 100;
+    content: "";
+    height: 100vh;
+    max-height: 50vh;
+    width: 100%;
+    background: linear-gradient(to right, black, transparent 400px);
+    pointer-events: none;
+  }
+
+  /* .MovieDetail_container div:first-child {
+    top: 80px;
+  } */
 }
 
 .MovieDetail_Img {
@@ -571,7 +646,7 @@
   position: absolute;
   z-index: 1000;
   top: 9vh;
-  width: 50vw;
+  width: 70vw;
   color: rgba(255, 255, 255, 0.9);
   padding-left: 40px;
   pointer-events: none;
@@ -585,21 +660,37 @@
   white-space: nowrap;
 }
 
+@media screen and (max-width: 768px) {
+  .MovieDetail_info {
+    top: 5vh;
+  }
+
+  .MovieDetail_info h1 {
+    font-size: 6vw;
+    white-space: normal;
+  }
+}
+
 .MovieDetail_info p {
   font-size: 1.1vw;
   line-height: 30px;
 }
 
-.MovieDetail_info span {
-  display: inline;
-  white-space: nowrap;
-  line-height: 40px;
+.movieDetail_genres {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.movieDetail_genres_item {
+  /* line-height: 40px; */
   font-size: 1.1vw;
+  word-break: keep-all;
+  white-space: nowrap;
   font-weight: bold;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-top: 20px;
   border-radius: 5px;
   background-color: red;
 }
@@ -725,6 +816,13 @@
 
 .searchBar h2 {
   margin-right: 90px;
+}
+
+@media screen and (max-width: 768px) {
+  .searchBar h2 {
+    margin-right: 30px;
+    transition: 1s;
+  }
 }
 
 .searchBar button {

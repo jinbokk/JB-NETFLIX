@@ -5,16 +5,18 @@ const TextAnimation = ({ movie }) => {
   return (
     <>
       <div className="MovieDetail_info">
-        <MoveUp_2>
+        <MoveUpTitle>
           <h1>{movie.title}</h1>
-        </MoveUp_2>
+        </MoveUpTitle>
         <Wrapper>
-          <MoveUp_1>
+          <MoveUpPreview>
             <p>{movie.overview}</p>
-            {movie.genres?.map((item, index) => (
-              <span key={index}>{item.name}</span>
-            ))}
-          </MoveUp_1>
+            <div className="movieDetail_genres">
+              {movie.genres?.map((item, index) => (
+                <div className="movieDetail_genres_item" key={index}>{item.name}</div>
+              ))}
+            </div>
+          </MoveUpPreview>
         </Wrapper>
       </div>
     </>
@@ -26,7 +28,7 @@ const fadeIn = keyframes`
   100% { opacity: 0 }
 `;
 
-const slideDown_1 = keyframes`
+const slideDown_Preview = keyframes`
   0% {
     transform:translateY(0px);
     transform-origin:left;
@@ -37,13 +39,35 @@ const slideDown_1 = keyframes`
   }
 `;
 
-const slideDown_2 = keyframes`
+const slideDown_Preview_mobile = keyframes`
   0% {
     transform:translateY(0px);
     transform-origin:left;
   }
   100% {
-    transform:translateY(70px) scale(0.5);
+    transform:translateY(20px);
+    transform-origin:left;
+  }
+`;
+
+const slideDown_Title = keyframes`
+  0% {
+    transform:translateY(0px);
+    transform-origin:left;
+  }
+  100% {
+    transform:translateY(40px) scale(0.6);
+    transform-origin:left;
+  }
+`;
+
+const slideDown_Title_mobile = keyframes`
+  0% {
+    transform:translateY(0px);
+    transform-origin:left;
+  }
+  100% {
+    transform:translateY(-50px) scale(0.8);
     transform-origin:left;
   }
 `;
@@ -56,20 +80,35 @@ const Wrapper = styled.div`
   animation-fill-mode: forwards;
 `;
 
-const MoveUp_1 = styled.div`
+const MoveUpPreview = styled.div`
   opacity: 1;
-  animation-name: ${slideDown_1};
+  animation-name: ${slideDown_Preview};
   animation-duration: 0.7s;
   animation-delay: 5s;
   animation-fill-mode: forwards;
+
+  @media (max-width:768px) {
+    opacity: 1;
+    animation-name: ${slideDown_Preview_mobile};
+    animation-duration: 0.7s;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
 `;
 
-const MoveUp_2 = styled.div`
+const MoveUpTitle = styled.div`
   opacity: 1;
-  animation-name: ${slideDown_2};
+  animation-name: ${slideDown_Title};
   animation-duration: 1s;
   animation-delay: 5s;
   animation-fill-mode: forwards;
+
+  @media (max-width: 768px) {
+    opacity: 1;
+    animation-name: ${slideDown_Title_mobile};
+    animation-duration: 0.7s;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
+  }
 `;
 
 export default TextAnimation;

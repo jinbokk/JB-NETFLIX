@@ -8,6 +8,13 @@ import MovieFilterButton from "../component/MovieFilterButton";
 import MovieFilterInput from "../component/MovieFilterInput";
 import FilteredMovieList from "./FilteredMovieList";
 
+const toggleHandler = () => {
+  document.getElementById("MoviesHandler").style.left = 0;
+  document.getElementById("MoviesHandler").style.width = "calc(100% - 60px)";
+  document.getElementById("MoviesHandler").style.height = "100vh";
+  // document.getElementById("MoviesHandler_toggleButton").style.right = "0";
+};
+
 const Movies = () => {
   const dispatch = useDispatch();
 
@@ -33,7 +40,16 @@ const Movies = () => {
     </div>
   ) : (
     <div className="MoviesPage">
-      <div className="MoviesHandler">
+      <button
+        className="MoviesHandler_toggleButton"
+        id="MoviesHandler_toggleButton"
+        onClick={() => {
+          toggleHandler();
+        }}
+      >
+        <p className="MoviesHandler_toggleButton_text">FILTER</p>
+      </button>
+      <div className="MoviesHandler" id="MoviesHandler">
         <div className="MoviesHandler_container">
           <MovieFilterInput show={setShow} />
           <MovieFilterSlider

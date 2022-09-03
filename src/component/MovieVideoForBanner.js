@@ -12,9 +12,13 @@ function MovieVideoForBanner() {
     width: "100%",
     playerVars: {
       autoplay: 1,
+      disablekb: 1,
+      iv_load_policy: 3,
       controls: 0,
       fs: 0,
       rel: 0,
+      loop: 1,
+      // iv_load_policy: 3,
     },
   };
 

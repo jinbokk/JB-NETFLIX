@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Banner from "../component/Banner";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
@@ -12,14 +12,14 @@ import TextAnimation from "../component/TextAnimation";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const isMounted = useRef(false);
 
   const { popularMoviesData, topRatedMoviesData, upcomingMoviesData, loading } =
     useSelector((state) => state.movie);
-
   const getMovieKeyForBanner = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
-    const movie_id = popularMoviesData.results[0].id;
-    console.log("아이디받는거체크중", movie_id);
+    const movie_id =
+      popularMoviesData.results && popularMoviesData.results[0].id;
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
@@ -48,8 +48,12 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    getMovieKeyForBanner();
-  }, [popularMoviesData]);
+    if (isMounted.current) {
+      getMovieKeyForBanner();
+    } else {
+      isMounted.current = true;
+    }
+  }, [popularMoviesData.results]);
 
   // 1. 배너 체인지 트리거를 만든다 (setTimeout 메서드로)
   // 2. 배너 체인지 관련 state를 만든다. (bannerChange,setBannerChange)

@@ -16,7 +16,7 @@ const MovieList = ({ movies }) => {
             {moviesData.map((item) => (
               <Col
                 key={item.id}
-                sm={4}
+                xs={4}
                 md={3}
                 lg={2}
                 className="movieListCard"
