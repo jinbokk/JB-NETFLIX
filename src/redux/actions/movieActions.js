@@ -1,21 +1,21 @@
 import api from "../api";
 
-function getMovies(pageNum) {
+function getMovies() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   return async (dispatch) => {
     try {
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const getPopularMovies = api.get(
-        `/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
+        `/movie/popular?api_key=${API_KEY}&language=en-US&page=1&region=US`
       );
 
       const getTopRatedMovies = api.get(
-        `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
+        `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1&region=US`
       );
 
       const getUpcomingMovies = api.get(
-        `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
+        `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1&region=US`
       );
 
       const getGenres = api.get(
@@ -23,7 +23,7 @@ function getMovies(pageNum) {
       );
 
       const getNowPlayingMovies = api.get(
-        `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
+        `/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1&region=US`
       );
 
       const [

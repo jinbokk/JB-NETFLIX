@@ -11,14 +11,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
-const MovieFilterInput = ({ show }) => {
-  // useEffect(() => {
-  //   dispatch({ type: "RESET_FILTERED_MOVIES_STORE_SUCCESS" });
-  // }, []);
+const MovieFilterInput = () => {
+  const dispatch = useDispatch();
 
   const isMounted = useRef(false);
 
-  const [
+  const {
     keyword,
     sortBy,
     withGenres,
@@ -27,18 +25,7 @@ const MovieFilterInput = ({ show }) => {
     releaseDateLte,
     voteAverageGte,
     voteAverageLte,
-  ] = useSelector((state) => [
-    state.movieFilter.keyword,
-    state.movieFilter.sortBy,
-    state.movieFilter.withGenres,
-    state.movieFilter.includeVideo,
-    state.movieFilter.releaseDateGte,
-    state.movieFilter.releaseDateLte,
-    state.movieFilter.voteAverageGte,
-    state.movieFilter.voteAverageLte,
-  ]);
-
-  const dispatch = useDispatch();
+  } = useSelector((state) => state.movieFilter);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -116,7 +103,6 @@ const MovieFilterInput = ({ show }) => {
   const [sort, setSort] = React.useState("");
 
   const handleChange = (event) => {
-    show(false);
     setSort(event.target.value);
     dispatch({ type: "STORE_MOVIE_SORT_SUCCESS", payload: event.target.value });
     dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
@@ -171,7 +157,6 @@ const MovieFilterInput = ({ show }) => {
           sx={{ width: "100%" }}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              show(false);
               dispatch({
                 type: "SEARCH_KEYWORD_STORE_SUCCESS",
                 payload: e.target.value,

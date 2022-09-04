@@ -8,13 +8,14 @@ const getFilteredMovies = (
   releaseDateGte,
   releaseDateLte,
   voteAverageGte,
-  voteAverageLte
+  voteAverageLte,
+  pageNum
 ) => {
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   return async (dispatch) => {
     try {
-      const FilteredMovies = await api.get(
+      const FilteredMovies = api.get(
         `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
           keyword ? `&with_text_query=${keyword}` : ""
         }${includeVideo ? `&include_video=${includeVideo}` : ""}${
@@ -23,13 +24,25 @@ const getFilteredMovies = (
           voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""
         }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
           withGenres ? `&with_genres=${withGenres}` : ""
-        }${sortBy ? `&sort_by=${sortBy}` : ""}`
+        }${
+          sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"
+        }&page=${pageNum}`
       );
+
+      const getGenres = api.get(
+        `/genre/movie/list?api_key=${API_KEY}&language=en-US&region=US`
+      );
+
+      const [FilteredMoviesJson, GenresJson] = await Promise.all([
+        FilteredMovies,
+        getGenres,
+      ]);
 
       dispatch({
         type: "GET_FILTERED_MOVIES_SUCCESS",
         payload: {
-          FilteredMoviesJson: FilteredMovies,
+          FilteredMoviesJson: FilteredMoviesJson,
+          movieGenresJson: GenresJson,
         },
       });
     } catch (error) {

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
-import MovieList from "./MovieList";
+import MovieList from "../component/MovieList";
+import FilteredMovieList from "./FilteredMovieList";
 import MovieFilterSlider from "../component/MovieFilterSlider";
 import MovieFilterButton from "../component/MovieFilterButton";
 import MovieFilterInput from "../component/MovieFilterInput";
-import FilteredMovieList from "./FilteredMovieList";
+import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
 const toggleHandler = () => {
   document.getElementById("MoviesHandler").style.left = 0;
@@ -16,22 +17,85 @@ const toggleHandler = () => {
 };
 
 const Movies = () => {
+  // const { genreListData } = useSelector((state) => state.movie);
+
+  // console.log("genreListData는", genreListData);
+
   const dispatch = useDispatch();
 
-  const { NowPlayingMoviesData, genreListData, loading } = useSelector(
-    (state) => state.movie
-  );
+  const isMounted = useRef(false);
 
-  const loading_2 = useSelector((state) => state.movieFilter.loading);
-  console.log("로딩테스트중", loading_2);
+  const [
+    keyword,
+    sortBy,
+    withGenres,
+    includeVideo,
+    releaseDateGte,
+    releaseDateLte,
+    voteAverageGte,
+    voteAverageLte,
+  ] = useSelector((state) => [
+    state.movieFilter.keyword,
+    state.movieFilter.sortBy,
+    state.movieFilter.withGenres,
+    state.movieFilter.includeVideo,
+    state.movieFilter.releaseDateGte,
+    state.movieFilter.releaseDateLte,
+    state.movieFilter.voteAverageGte,
+    state.movieFilter.voteAverageLte,
+  ]);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      dispatch(
+        movieFilterActions.getFilteredMovies(
+          keyword,
+          sortBy,
+          withGenres,
+          includeVideo,
+          releaseDateGte,
+          releaseDateLte,
+          voteAverageGte,
+          voteAverageLte
+        )
+      );
+    } else {
+      isMounted.current = true;
+    }
+  }, []);
+
+  const listInnerRef = useRef();
+  const [isBottom, setIsBottom] = useState(false);
+  const [pageNum, setPageNum] = useState(1);
+
+  const getMoreMovies = async () => {
+    // dispatch(movieActions.getMovies(pageNum));
+    setIsBottom(false);
+  };
+
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      console.log("scrollTop is", scrollTop);
+      console.log("scrollHeight is", scrollHeight);
+      console.log("clientHeight is", clientHeight);
+      if (scrollHeight - clientHeight === Math.ceil(scrollTop)) {
+        console.log("reached bottom");
+        setIsBottom(true);
+        setPageNum(pageNum + 1);
+        getMoreMovies();
+      }
+    }
+  };
+
+  const loading = useSelector((state) => state.movieFilter.loading);
 
   const { FilteredMoviesData } = useSelector((state) => state.movieFilter);
 
-  const [show, setShow] = useState(true);
+  // const [show, setShow] = useState(true);
 
   useEffect(() => {
-    dispatch({ type: "RESET_FILTERED_MOVIES_SUCCESS" });
-    dispatch(movieActions.getMovies(1));
+    dispatch(movieFilterActions.getFilteredMovies(1));
   }, []);
 
   return loading ? (
@@ -39,65 +103,54 @@ const Movies = () => {
       <FadeLoader color="red" loading={loading} size={15} speedMultiplier={3} />
     </div>
   ) : (
-    <div className="MoviesPage">
-      <button
-        className="MoviesHandler_toggleButton"
-        id="MoviesHandler_toggleButton"
-        onClick={() => {
-          toggleHandler();
-        }}
-      >
-        <p className="MoviesHandler_toggleButton_text">FILTER</p>
-      </button>
-      <div className="MoviesHandler" id="MoviesHandler">
-        <div className="MoviesHandler_container">
-          <MovieFilterInput show={setShow} />
-          <MovieFilterSlider
-            min={1990}
-            max={2020}
-            text={"YEAR FILTER"}
-            id={"year"}
-            show={setShow}
-          />
-          <MovieFilterSlider
-            min={1}
-            max={10}
-            text={"IBM SCORE FILTER"}
-            id={"score"}
-            show={setShow}
-          />
-          <MovieFilterButton
-            genres={genreListData.genres}
-            text={"GENRES"}
-            show={setShow}
-          />
-        </div>
-      </div>
-
-      <div className="MovieListWrapper" id="MovieList_wrapper">
-        {show ? (
-          <MovieList movies={NowPlayingMoviesData.results} />
-        ) : loading_2 ? (
-          <div className="loadingSpinner">
-            <FadeLoader
-              color="red"
-              loading={loading}
-              size={15}
-              speedMultiplier={3}
+    <div
+      onScroll={onScroll}
+      ref={listInnerRef}
+      style={{ height: "100%", overflowY: "auto" }}
+    >
+      <div className="MoviesPage">
+        <button
+          className="MoviesHandler_toggleButton"
+          id="MoviesHandler_toggleButton"
+          onClick={() => {
+            toggleHandler();
+          }}
+        >
+          <p className="MoviesHandler_toggleButton_text">FILTER</p>
+        </button>
+        <div className="MoviesHandler" id="MoviesHandler">
+          <div className="MoviesHandler_container">
+            <MovieFilterInput />
+            <MovieFilterSlider
+              min={1990}
+              max={2020}
+              text={"YEAR FILTER"}
+              id={"year"}
             />
+            <MovieFilterSlider
+              min={1}
+              max={10}
+              text={"IBM SCORE FILTER"}
+              id={"score"}
+            />
+            <MovieFilterButton text={"GENRES"} />
           </div>
-        ) : (
-          <FilteredMovieList movies={FilteredMoviesData.results} />
-        )}
+        </div>
 
-        {/* if search한 데이터가 있다면, 그걸 보여준다? */}
-        {/* if 스크롤이 끝까지 가면, getMovies(page2)한다음, MovieList 추가*/}
-
-        {/* {keyword === {} ? (
-          <MovieList movies={NowPlayingMoviesData.results} />
-        ) : (
-          <MovieList movies={FilteredMoviesData.results} />
-        )} */}
+        <div className="MovieListWrapper">
+          {loading ? (
+            <div className="loadingSpinner">
+              <FadeLoader
+                color="red"
+                loading={loading}
+                size={15}
+                speedMultiplier={3}
+              />
+            </div>
+          ) : (
+            <FilteredMovieList movies={FilteredMoviesData.results} />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -105,16 +158,5 @@ const Movies = () => {
 
 export default Movies;
 
-// 1.movieFilterActions에 api get 요청,
-// 2. 데이터를 다 받으면 loading=false 재할당, movieFilterReducer의 store에 저장
-// XXXXX 3. 해당 데이터를 Movies 페이지에 전달 XXXXX
-// 3. movies 페이지가 해당 데이터를 useSelector로 가져온다.
-
-// 1번 과정 이전에, 먼제 api에 들어가는 parameter들을 가져와야 한다
-// 해당 parameter들은 MovieFilterInput,MovieFilterSlider,MovieFilterButton 에서
-// 각자 movieFilterReducer에 저장하고 있다. (!!! 여기가 뭔가 포인트 인듯. 같은 리듀서를 공유하고 있다?)
-
-// 음.. movieFilterReducer가 아니라 다른 WrapperReducer를 하나 새로 만들고, 이곳의 store를
-// useSelector로 가져오는 방식으로 해볼까?
-
-// 결과  >>> 화면에 렌더링 해준다
+// show 는 맨처음 무비리스트 보여주고 안보여주고 용도
+// isBottom이 true면 (===스크롤이 최하단까지 갔으면) div태그로 붙여줘야 한다.

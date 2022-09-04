@@ -1,5 +1,6 @@
 let initialState = {
   FilteredMoviesData: {},
+  genreListData: {},
   keyword: "",
   loading: true,
   sortBy: "",
@@ -30,6 +31,7 @@ function movieFilterReducer(state = initialState, action) {
       return {
         ...state,
         FilteredMoviesData: payload.FilteredMoviesJson.data,
+        genreListData: payload.movieGenresJson.data,
         loading: false,
       };
 
@@ -37,11 +39,6 @@ function movieFilterReducer(state = initialState, action) {
       return alert(
         `Sorry, "${payload.error.message}"\nPlease enter the movie name`
       );
-    // return alert(`Sorry,\n"${payload.error.message}"`);
-
-    // return (document.getElementById(
-    //   'MovieList_wrapper'
-    // ).innerHTML = `<h2 class="noResultMessage">Please enter the movie name</h2>`);
 
     case "SEARCH_KEYWORD_STORE_SUCCESS":
       return {
@@ -77,11 +74,7 @@ function movieFilterReducer(state = initialState, action) {
         loading: true,
       };
 
-    // case "RESET_FILTERED_MOVIES_STORE_SUCCESS":
-    // return {
-    //   ...state,
-    //   FilteredMoviesData: {}
-    // };
+
 
     default:
       return { ...state };

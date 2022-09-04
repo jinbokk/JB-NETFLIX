@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(movieActions.getMovies(1));
+    dispatch(movieActions.getMovies());
     return () => {
       dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
     };

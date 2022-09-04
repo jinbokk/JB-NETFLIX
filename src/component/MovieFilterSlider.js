@@ -6,11 +6,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
 
-export default function MovieFilterSlider({ min, max, text, id, show }) {
-
+export default function MovieFilterSlider({ min, max, text, id }) {
   const isMounted = useRef(false);
 
-  const [
+  const {
     keyword,
     sortBy,
     withGenres,
@@ -19,16 +18,7 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
     releaseDateLte,
     voteAverageGte,
     voteAverageLte,
-  ] = useSelector((state) => [
-    state.movieFilter.keyword,
-    state.movieFilter.sortBy,
-    state.movieFilter.withGenres,
-    state.movieFilter.includeVideo,
-    state.movieFilter.releaseDateGte,
-    state.movieFilter.releaseDateLte,
-    state.movieFilter.voteAverageGte,
-    state.movieFilter.voteAverageLte,
-  ]);
+  } = useSelector((state) => state.movieFilter);
 
   const dispatch = useDispatch();
 
@@ -84,8 +74,6 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
 
   const handleDispatch = () => {
     if (id === "year") {
-      show(false);
-
       console.log("year change committed");
 
       dispatch({
@@ -94,40 +82,13 @@ export default function MovieFilterSlider({ min, max, text, id, show }) {
       });
 
       dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
-      // dispatch(
-      //   movieFilterActions.getFilteredMovies(
-      //     keyword,
-      //     sortBy,
-      //     withGenres,
-      //     includeVideo,
-      //     releaseDateGte,
-      //     releaseDateLte,
-      //     voteAverageGte,
-      //     voteAverageLte
-      //   )
-      // );
     } else if (id === "score") {
-      show(false);
-
       console.log("score change committed");
 
       dispatch({
         type: "SCORE_FILTER_STORE_SUCCESS",
         payload: { vote_gte: value[0], vote_lte: value[1] },
       });
-
-      // dispatch(
-      //   movieFilterActions.getFilteredMovies(
-      //     keyword,
-      //     sortBy,
-      //     withGenres,
-      //     includeVideo,
-      //     releaseDateGte,
-      //     releaseDateLte,
-      //     voteAverageGte,
-      //     voteAverageLte
-      //   )
-      // );
     }
   };
 
