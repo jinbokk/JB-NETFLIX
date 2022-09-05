@@ -15,6 +15,8 @@ const getFilteredMovies = (
 
   return async (dispatch) => {
     try {
+      dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
+
       const FilteredMovies = api.get(
         `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
           keyword ? `&with_text_query=${keyword}` : ""
@@ -24,9 +26,9 @@ const getFilteredMovies = (
           voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""
         }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
           withGenres ? `&with_genres=${withGenres}` : ""
-        }${
-          sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"
-        }&page=${pageNum}`
+        }${sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"}${
+          pageNum ? `&page=${pageNum}` : ""
+        }`
       );
 
       const getGenres = api.get(

@@ -44,26 +44,7 @@ const MovieFilterInput = () => {
     } else {
       isMounted.current = true;
     }
-  }, [keyword]);
-
-  useEffect(() => {
-    if (isMounted.current) {
-      dispatch(
-        movieFilterActions.getFilteredMovies(
-          keyword,
-          sortBy,
-          withGenres,
-          includeVideo,
-          releaseDateGte,
-          releaseDateLte,
-          voteAverageGte,
-          voteAverageLte
-        )
-      );
-    } else {
-      isMounted.current = true;
-    }
-  }, [sortBy]);
+  }, [keyword, sortBy]);
 
   const theme = createTheme({
     palette: {

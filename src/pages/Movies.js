@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
@@ -8,6 +8,7 @@ import MovieFilterSlider from "../component/MovieFilterSlider";
 import MovieFilterButton from "../component/MovieFilterButton";
 import MovieFilterInput from "../component/MovieFilterInput";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
+import api from "../redux/api";
 
 const toggleHandler = () => {
   document.getElementById("MoviesHandler").style.left = 0;
@@ -17,15 +18,13 @@ const toggleHandler = () => {
 };
 
 const Movies = () => {
-  // const { genreListData } = useSelector((state) => state.movie);
-
-  // console.log("genreListData는", genreListData);
-
   const dispatch = useDispatch();
 
-  const isMounted = useRef(false);
-
-  const [
+  const {
+    loading,
+    moreMoviesData,
+    moreMoviesDataLoading,
+    filteredMoviesData,
     keyword,
     sortBy,
     withGenres,
@@ -34,68 +33,104 @@ const Movies = () => {
     releaseDateLte,
     voteAverageGte,
     voteAverageLte,
-  ] = useSelector((state) => [
-    state.movieFilter.keyword,
-    state.movieFilter.sortBy,
-    state.movieFilter.withGenres,
-    state.movieFilter.includeVideo,
-    state.movieFilter.releaseDateGte,
-    state.movieFilter.releaseDateLte,
-    state.movieFilter.voteAverageGte,
-    state.movieFilter.voteAverageLte,
-  ]);
+  } = useSelector((state) => state.movieFilter);
+
+  const observer = useRef();
+  const lastMovieElementRef = useCallback(
+    (node) => {
+      if (moreMoviesDataLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          console.log("Visible TEST 중입니다");
+        }
+      });
+      if (node) observer.current.observe(node);
+      console.log("node 테스트중입니다", node);
+    },
+    [moreMoviesDataLoading]
+  );
 
   useEffect(() => {
-    if (isMounted.current) {
-      dispatch(
-        movieFilterActions.getFilteredMovies(
-          keyword,
-          sortBy,
-          withGenres,
-          includeVideo,
-          releaseDateGte,
-          releaseDateLte,
-          voteAverageGte,
-          voteAverageLte
-        )
-      );
-    } else {
-      isMounted.current = true;
-    }
-  }, []);
+    setPageNum(1);
+  }, [
+    keyword,
+    sortBy,
+    withGenres,
+    includeVideo,
+    releaseDateGte,
+    releaseDateLte,
+    voteAverageGte,
+    voteAverageLte,
+  ]);
 
   const listInnerRef = useRef();
-  const [isBottom, setIsBottom] = useState(false);
+  const [mergeData, setMergeData] = useState([]);
   const [pageNum, setPageNum] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-  const getMoreMovies = async () => {
-    // dispatch(movieActions.getMovies(pageNum));
-    setIsBottom(false);
+  const getMoreMovies = async (pageNum) => {
+    dispatch({ type: "GET_MORE_MOVIES_REQUEST" });
+
+    console.log("pageNum 테스트중입니다", pageNum);
+
+    const API_KEY = process.env.REACT_APP_API_KEY;
+
+    const loadMoreMovies = await api.get(
+      `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
+        keyword ? `&with_text_query=${keyword}` : ""
+      }${includeVideo ? `&include_video=${includeVideo}` : ""}${
+        releaseDateGte ? `&release_date.gte=${releaseDateGte}` : ""
+      }${releaseDateLte ? `&release_date.lte=${releaseDateLte}` : ""}${
+        voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""
+      }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
+        withGenres ? `&with_genres=${withGenres}` : ""
+      }${sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"}${
+        pageNum ? `&page=${pageNum}` : ""
+      }`
+    );
+
+    dispatch({
+      type: "GET_MORE_MOVIES_SUCCESS",
+      payload: loadMoreMovies.data,
+    });
+
+    const newData = [];
+    newData.push(loadMoreMovies.data);
+    setMergeData((prevData) => [...prevData, ...newData]);
+    console.log("mergeData는", mergeData);
   };
 
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-      console.log("scrollTop is", scrollTop);
-      console.log("scrollHeight is", scrollHeight);
-      console.log("clientHeight is", clientHeight);
-      if (scrollHeight - clientHeight === Math.ceil(scrollTop)) {
+      // console.log("scrollTop is", scrollTop);
+      // console.log("scrollHeight is", scrollHeight);
+      // console.log("clientHeight is", clientHeight);
+      if (Math.ceil(scrollTop) + clientHeight >= scrollHeight) {
         console.log("reached bottom");
-        setIsBottom(true);
-        setPageNum(pageNum + 1);
-        getMoreMovies();
+        setPageNum((prevPageNum) => prevPageNum + 1);
+        getMoreMovies(pageNum);
       }
     }
   };
 
-  const loading = useSelector((state) => state.movieFilter.loading);
-
-  const { FilteredMoviesData } = useSelector((state) => state.movieFilter);
-
   // const [show, setShow] = useState(true);
 
   useEffect(() => {
-    dispatch(movieFilterActions.getFilteredMovies(1));
+    dispatch(
+      movieFilterActions.getFilteredMovies(
+        keyword,
+        sortBy,
+        withGenres,
+        includeVideo,
+        releaseDateGte,
+        releaseDateLte,
+        voteAverageGte,
+        voteAverageLte,
+        pageNum
+      )
+    );
   }, []);
 
   return loading ? (
@@ -138,7 +173,12 @@ const Movies = () => {
         </div>
 
         <div className="MovieListWrapper">
-          {loading ? (
+          <FilteredMovieList
+            movies={filteredMoviesData.results}
+            innerRef={lastMovieElementRef}
+          />
+
+          {/* {moreMoviesDataLoading ? (
             <div className="loadingSpinner">
               <FadeLoader
                 color="red"
@@ -148,8 +188,11 @@ const Movies = () => {
               />
             </div>
           ) : (
-            <FilteredMovieList movies={FilteredMoviesData.results} />
-          )}
+            <FilteredMovieList
+            movies={filteredMoviesData.results}
+            innerRef={lastMovieElementRef}
+          />
+          )} */}
         </div>
       </div>
     </div>

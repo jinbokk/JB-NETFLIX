@@ -1,6 +1,10 @@
 let initialState = {
-  FilteredMoviesData: {},
-  genreListData: {},
+  moreMoviesData: {},
+  moreMoviesDataLoading: false,
+  filteredMoviesData: {},
+  // 현재 단일 데이터가 받아와지는 중.
+  // 이것을 array로 변환하여 계속 이어붙이기 하도록 해야할 듯.
+  // 1. filteredMoviesData를 MOREMoviesData에 concat 한다.
   keyword: "",
   loading: true,
   sortBy: "",
@@ -30,9 +34,22 @@ function movieFilterReducer(state = initialState, action) {
     case "GET_FILTERED_MOVIES_SUCCESS":
       return {
         ...state,
-        FilteredMoviesData: payload.FilteredMoviesJson.data,
+        filteredMoviesData: payload.FilteredMoviesJson.data,
         genreListData: payload.movieGenresJson.data,
         loading: false,
+      };
+
+    case "GET_MORE_MOVIES_REQUEST":
+      return {
+        ...state,
+        moreMoviesDataLoading: true,
+      };
+
+    case "GET_MORE_MOVIES_SUCCESS":
+      return {
+        ...state,
+        moreMoviesData: payload,
+        moreMoviesDataLoading: false,
       };
 
     case "GET_FILTERED_MOVIES_FAILURE":
@@ -69,12 +86,10 @@ function movieFilterReducer(state = initialState, action) {
     case "RESET_MOVIES_SEARCH_SUCCESS":
       return {
         ...state,
-        FilteredMoviesData: {},
+        filteredMoviesData: {},
         keyword: {},
         loading: true,
       };
-
-
 
     default:
       return { ...state };
