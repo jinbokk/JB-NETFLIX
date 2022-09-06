@@ -50,6 +50,7 @@ function movieFilterReducer(state = initialState, action) {
         ...state,
         moreMoviesData: payload,
         moreMoviesDataLoading: false,
+        loading: false,
       };
 
     case "GET_FILTERED_MOVIES_FAILURE":

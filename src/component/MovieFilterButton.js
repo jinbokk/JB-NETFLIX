@@ -6,15 +6,27 @@ import MuiToggleButton from "@mui/material/ToggleButton";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
+import api from "../redux/api";
 
 let genreStore = [];
 
 export default function MovieFilterButton({ text }) {
   const isMounted = useRef(false);
 
-  const { genreListData } = useSelector((state) => state.movieFilter);
+  // const getGenres = async () => {
+  //   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  console.log("genreListData는", genreListData);
+  //   try {
+  //     const getGenres = await api.get(
+  //       `/genre/movie/list?api_key=${API_KEY}&language=en-US&region=US`
+  //     );
+  //     return getGenres;
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // };
+
+  const genresList = useSelector((state) => state.movie.genreListData);
 
   const {
     keyword,
@@ -120,24 +132,25 @@ export default function MovieFilterButton({ text }) {
       <h2>{text}</h2>
       <div style={{ maxHeight: "250px", overflow: "scroll" }}>
         <div className="genreButton_container">
-          {genreListData.genres.map((item, index) => (
-            <ToggleButtonGroup
-              value={formats}
-              onChange={handleFormat}
-              color="primary"
-              key={index}
-            >
-              {item.name === "Documentary" ? (
-                <MyToggleButton value={item.id}>DOCU</MyToggleButton>
-              ) : item.name === "Science Fiction" ? (
-                <MyToggleButton value={item.id}>SF</MyToggleButton>
-              ) : item.name === "TV Movie" ? (
-                <MyToggleButton value={item.id}>TV</MyToggleButton>
-              ) : (
-                <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
-              )}
-            </ToggleButtonGroup>
-          ))}
+          {genresList.genres &&
+            genresList.genres.map((item, index) => (
+              <ToggleButtonGroup
+                value={formats}
+                onChange={handleFormat}
+                color="primary"
+                key={index}
+              >
+                {item.name === "Documentary" ? (
+                  <MyToggleButton value={item.id}>DOCU</MyToggleButton>
+                ) : item.name === "Science Fiction" ? (
+                  <MyToggleButton value={item.id}>SF</MyToggleButton>
+                ) : item.name === "TV Movie" ? (
+                  <MyToggleButton value={item.id}>TV</MyToggleButton>
+                ) : (
+                  <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
+                )}
+              </ToggleButtonGroup>
+            ))}
         </div>
       </div>
     </ThemeProvider>

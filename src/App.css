@@ -529,6 +529,7 @@
 .movieListCard:hover {
   transform: scale(1.03);
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .movieListCard a {

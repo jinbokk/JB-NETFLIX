@@ -19,7 +19,6 @@ const toggleHandler = () => {
 
 const Movies = () => {
   const dispatch = useDispatch();
-
   const {
     loading,
     moreMoviesData,
@@ -35,25 +34,19 @@ const Movies = () => {
     voteAverageLte,
   } = useSelector((state) => state.movieFilter);
 
-  const observer = useRef();
-  const lastMovieElementRef = useCallback(
-    (node) => {
-      if (moreMoviesDataLoading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          console.log("Visible TEST 중입니다");
-        }
-      });
-      if (node) observer.current.observe(node);
-      console.log("node 테스트중입니다", node);
-    },
-    [moreMoviesDataLoading]
-  );
+  // const genreList = async () => {
+  //   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  useEffect(() => {
-    setPageNum(1);
-  }, [
+  //   const getGenres = await api.get(
+  //     `/genre/movie/list?api_key=${API_KEY}&language=en-US&region=US`
+  //   );
+
+  //   // const genresJson = await getGenres.json();
+
+  //   return getGenres;
+  // };
+
+  const getMoreMovies = async (
     keyword,
     sortBy,
     withGenres,
@@ -62,14 +55,8 @@ const Movies = () => {
     releaseDateLte,
     voteAverageGte,
     voteAverageLte,
-  ]);
-
-  const listInnerRef = useRef();
-  const [mergeData, setMergeData] = useState([]);
-  const [pageNum, setPageNum] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
-  const getMoreMovies = async (pageNum) => {
+    pageNum
+  ) => {
     dispatch({ type: "GET_MORE_MOVIES_REQUEST" });
 
     console.log("pageNum 테스트중입니다", pageNum);
@@ -86,52 +73,105 @@ const Movies = () => {
       }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
         withGenres ? `&with_genres=${withGenres}` : ""
       }${sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"}${
-        pageNum ? `&page=${pageNum}` : ""
+        pageNum ? `&page=${pageNum}` : "&page=1"
       }`
     );
+
+    // setHasMore(true);
 
     dispatch({
       type: "GET_MORE_MOVIES_SUCCESS",
       payload: loadMoreMovies.data,
     });
 
-    const newData = [];
-    newData.push(loadMoreMovies.data);
-    setMergeData((prevData) => [...prevData, ...newData]);
+    console.log("loadMoreMovies.data is", loadMoreMovies.data);
+
+    setMergeData((prevData) => [
+      ...new Set([...prevData, ...loadMoreMovies.data.results]),
+    ]);
     console.log("mergeData는", mergeData);
   };
 
-  const onScroll = () => {
-    if (listInnerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-      // console.log("scrollTop is", scrollTop);
-      // console.log("scrollHeight is", scrollHeight);
-      // console.log("clientHeight is", clientHeight);
-      if (Math.ceil(scrollTop) + clientHeight >= scrollHeight) {
-        console.log("reached bottom");
-        setPageNum((prevPageNum) => prevPageNum + 1);
-        getMoreMovies(pageNum);
-      }
-    }
-  };
+  const observer = useRef();
+  const lastMovieElementRef = useCallback(
+    (node) => {
+      if (moreMoviesDataLoading) return; // 무한 api요청 방지
+      if (observer.current) observer.current.disconnect(); // 이전의 마지막 영화요소에 대해 disconnect 하고, 아래 함수를 통해 새로운 마지막 영화요소를 찾기위함이다
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          //&& hasMore 또한 추가하여 영화가 더 없는데 계속 요청하지 않도록 방지해야함
+          console.log("Visible TEST 중입니다");
+          setPageNum((prevPageNum) => prevPageNum + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+      console.log("node 테스트중입니다", node);
+    },
+    [moreMoviesDataLoading]
+  );
+
+  useEffect(() => {
+    getMoreMovies(
+      keyword,
+      sortBy,
+      withGenres,
+      includeVideo,
+      releaseDateGte,
+      releaseDateLte,
+      voteAverageGte,
+      voteAverageLte,
+      pageNum
+    );
+    setPageNum(1);
+    setMergeData([]);
+  }, []);
+
+  // const listInnerRef = useRef();
+  const [mergeData, setMergeData] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  // const onScroll = () => {
+  //   if (listInnerRef.current) {
+  //     const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+  //     // console.log("scrollTop is", scrollTop);
+  //     // console.log("scrollHeight is", scrollHeight);
+  //     // console.log("clientHeight is", clientHeight);
+  //     if (scrollTop + clientHeight >= scrollHeight - 5) {
+  //       console.log("reached bottom");
+  //       // setPageNum((prevPageNum) => prevPageNum + 1);
+  //       getMoreMovies(
+  //         keyword,
+  //         sortBy,
+  //         withGenres,
+  //         includeVideo,
+  //         releaseDateGte,
+  //         releaseDateLte,
+  //         voteAverageGte,
+  //         voteAverageLte,
+  //         pageNum
+  //       );
+  //     }
+  //   }
+  // };
 
   // const [show, setShow] = useState(true);
 
-  useEffect(() => {
-    dispatch(
-      movieFilterActions.getFilteredMovies(
-        keyword,
-        sortBy,
-        withGenres,
-        includeVideo,
-        releaseDateGte,
-        releaseDateLte,
-        voteAverageGte,
-        voteAverageLte,
-        pageNum
-      )
-    );
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     movieFilterActions.getFilteredMovies(
+  //       keyword,
+  //       sortBy,
+  //       withGenres,
+  //       includeVideo,
+  //       releaseDateGte,
+  //       releaseDateLte,
+  //       voteAverageGte,
+  //       voteAverageLte,
+  //       pageNum
+  //     )
+  //   );
+  // }, []);
 
   return loading ? (
     <div className="loadingSpinner">
@@ -139,9 +179,9 @@ const Movies = () => {
     </div>
   ) : (
     <div
-      onScroll={onScroll}
-      ref={listInnerRef}
-      style={{ height: "100%", overflowY: "auto" }}
+    // onScroll={onScroll}
+    // ref={listInnerRef}
+    // style={{ height: "100%", overflowY: "auto" }}
     >
       <div className="MoviesPage">
         <button
@@ -169,14 +209,35 @@ const Movies = () => {
               id={"score"}
             />
             <MovieFilterButton text={"GENRES"} />
+            {/* <MovieFilterButton text={"GENRES"} genreList={genreList()} /> */}
           </div>
         </div>
 
         <div className="MovieListWrapper">
-          <FilteredMovieList
+          {/* <FilteredMovieList
             movies={filteredMoviesData.results}
             innerRef={lastMovieElementRef}
-          />
+          /> */}
+
+          {moreMoviesDataLoading ? (
+            <div className="loadingSpinner">
+              <FadeLoader
+                color="red"
+                loading={loading}
+                size={15}
+                speedMultiplier={3}
+              />
+            </div>
+          ) : (
+            <FilteredMovieList
+              movies={moreMoviesData.results}
+              innerRef={lastMovieElementRef}
+            />
+          )}
+
+          {/* {mergeData.map((item) => {
+            return <div>{item}</div>;
+          })} */}
 
           {/* {moreMoviesDataLoading ? (
             <div className="loadingSpinner">
