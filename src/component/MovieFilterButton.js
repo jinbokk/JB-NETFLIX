@@ -10,23 +10,8 @@ import api from "../redux/api";
 
 let genreStore = [];
 
-export default function MovieFilterButton({ text }) {
+export default function MovieFilterButton({ text, genreListData }) {
   const isMounted = useRef(false);
-
-  // const getGenres = async () => {
-  //   const API_KEY = process.env.REACT_APP_API_KEY;
-
-  //   try {
-  //     const getGenres = await api.get(
-  //       `/genre/movie/list?api_key=${API_KEY}&language=en-US&region=US`
-  //     );
-  //     return getGenres;
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // };
-
-  const genresList = useSelector((state) => state.movie.genreListData);
 
   const {
     keyword,
@@ -72,8 +57,8 @@ export default function MovieFilterButton({ text }) {
           type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore.join(" || "),
         }),
-        console.log("after pushing", genreStore),
-        dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
+        console.log("after pushing", genreStore)
+        // dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
       );
     } else {
       let tempArray = genreStore.filter((item) => item !== event.target.value);
@@ -84,8 +69,8 @@ export default function MovieFilterButton({ text }) {
           type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore.join(" || "),
         }),
-        console.log("after filtering", genreStore),
-        dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
+        console.log("after filtering", genreStore)
+        // dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
       );
     }
   };
@@ -132,25 +117,24 @@ export default function MovieFilterButton({ text }) {
       <h2>{text}</h2>
       <div style={{ maxHeight: "250px", overflow: "scroll" }}>
         <div className="genreButton_container">
-          {genresList.genres &&
-            genresList.genres.map((item, index) => (
-              <ToggleButtonGroup
-                value={formats}
-                onChange={handleFormat}
-                color="primary"
-                key={index}
-              >
-                {item.name === "Documentary" ? (
-                  <MyToggleButton value={item.id}>DOCU</MyToggleButton>
-                ) : item.name === "Science Fiction" ? (
-                  <MyToggleButton value={item.id}>SF</MyToggleButton>
-                ) : item.name === "TV Movie" ? (
-                  <MyToggleButton value={item.id}>TV</MyToggleButton>
-                ) : (
-                  <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
-                )}
-              </ToggleButtonGroup>
-            ))}
+          {genreListData.genres.map((item, index) => (
+            <ToggleButtonGroup
+              value={formats}
+              onChange={handleFormat}
+              color="primary"
+              key={index}
+            >
+              {item.name === "Documentary" ? (
+                <MyToggleButton value={item.id}>DOCU</MyToggleButton>
+              ) : item.name === "Science Fiction" ? (
+                <MyToggleButton value={item.id}>SF</MyToggleButton>
+              ) : item.name === "TV Movie" ? (
+                <MyToggleButton value={item.id}>TV</MyToggleButton>
+              ) : (
+                <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
+              )}
+            </ToggleButtonGroup>
+          ))}
         </div>
       </div>
     </ThemeProvider>

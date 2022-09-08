@@ -27,7 +27,7 @@ const getFilteredMovies = (
         }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
           withGenres ? `&with_genres=${withGenres}` : ""
         }${sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"}${
-          pageNum ? `&page=${pageNum}` : ""
+          pageNum ? `&page=${pageNum}` : "&page=1"
         }`
       );
 

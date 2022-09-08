@@ -3,12 +3,14 @@ import MovieVideo from "./MovieVideo";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import api from "../redux/api";
 import { useNavigate } from "react-router-dom";
+import { movieActions } from "../redux/actions/movieActions";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const getMovieKey = async () => {
-    const API_KEY = process.env.REACT_APP_API_KEY;
     const movie_id = movie.id;
 
     const selectedMovieJson = await api.get(
@@ -35,7 +37,9 @@ const MovieCard = ({ movie }) => {
     });
   };
 
+
   const genreList = useSelector((state) => state.movie.genreListData.genres);
+
 
   const movieCardImg = movie.poster_path;
   const movieBackdrop = movie.backdrop_path;
@@ -100,8 +104,6 @@ const MovieCard = ({ movie }) => {
                   }}
                 ></div>
               )}
-              {console.log("TESTDATA~~~", movie)}
-              {console.log("TESTDATA~~~genre", genreList)}
               <div className="preview_modal_info">
                 <div className="preview_modal_title">{movie.title}</div>
 
@@ -110,7 +112,7 @@ const MovieCard = ({ movie }) => {
                 </div>
 
                 <div className="preview_modal_score_rate">
-                  <span style={{ marginRight: "5px"}}>
+                  <span style={{ marginRight: "5px" }}>
                     <span>SCORE</span>
                     <span className="preview_modal_score">
                       {movie.vote_average}

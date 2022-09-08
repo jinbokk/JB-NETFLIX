@@ -143,16 +143,18 @@ const MovieDetail = () => {
               }
             })
           ) : (
-            <h3
+            <h2
               style={{
-                textAlign: "center",
-                fontSize: "30px",
-                padding: "30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 width: "100%",
+                color: "#777777",
+                minHeight: "100px",
               }}
             >
               No Reviews
-            </h3>
+            </h2>
           )}
         </Row>
 
@@ -186,16 +188,18 @@ const MovieDetail = () => {
           {RecommendMovies.data.total_results !== 0 ? (
             <MovieSlide movies={RecommendMovies.data.results} />
           ) : (
-            <h3
+            <h2
               style={{
-                textAlign: "center",
-                fontSize: "30px",
-                padding: "30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 width: "100%",
+                color: "#777777",
+                minHeight: "150px",
               }}
             >
-              No Recommend Movies
-            </h3>
+              Sorry, No movie recommendations
+            </h2>
           )}
         </div>
       </div>

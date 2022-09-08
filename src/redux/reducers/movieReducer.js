@@ -33,6 +33,12 @@ function movieReducer(state = initialState, action) {
         ...state,
         movieKey: payload.movieKey,
       };
+
+      case "STORE_GENRE_LIST_DATA_SUCCESS":
+      return {
+        ...state,
+        genreListData: payload,
+      };
  
       case "STORE_MOVIE_KEY_FOR_BANNER_SUCCESS":
       return {

@@ -8,7 +8,6 @@ const FilteredMovieList = ({ movies, innerRef }) => {
   let moviesData = movies.filter((item) => item.poster_path !== null);
 
   const navigate = useNavigate();
-  console.log("FilteredMovieList is", movies);
 
   return (
     <>

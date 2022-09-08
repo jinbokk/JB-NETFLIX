@@ -73,6 +73,12 @@
   align-items: center;
 }
 
+.loadingSpinner_scrolling {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 /* ------------------------banner------------------------ */
 
 .banner_container {

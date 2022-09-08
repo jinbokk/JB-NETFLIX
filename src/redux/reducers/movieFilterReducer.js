@@ -2,9 +2,7 @@ let initialState = {
   moreMoviesData: {},
   moreMoviesDataLoading: false,
   filteredMoviesData: {},
-  // 현재 단일 데이터가 받아와지는 중.
-  // 이것을 array로 변환하여 계속 이어붙이기 하도록 해야할 듯.
-  // 1. filteredMoviesData를 MOREMoviesData에 concat 한다.
+  genreListData: {},
   keyword: "",
   loading: true,
   sortBy: "",
