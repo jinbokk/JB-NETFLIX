@@ -98,7 +98,7 @@ export default function MovieFilterButton({ text, genreListData }) {
       color: "white",
       backgroundColor: theme.palette.secondary.dark,
       transition: ".3s",
-      width: "80px",
+      width: "100px",
       height: "40px",
       margin: "2px",
     },
@@ -115,7 +115,7 @@ export default function MovieFilterButton({ text, genreListData }) {
   return (
     <ThemeProvider theme={theme}>
       <h2>{text}</h2>
-      <div style={{ maxHeight: "250px", overflow: "scroll" }}>
+      <div className="genreButton_container_top">
         <div className="genreButton_container">
           {genreListData.genres.map((item, index) => (
             <ToggleButtonGroup

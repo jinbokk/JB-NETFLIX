@@ -34,13 +34,7 @@ function movieReducer(state = initialState, action) {
         movieKey: payload.movieKey,
       };
 
-      case "STORE_GENRE_LIST_DATA_SUCCESS":
-      return {
-        ...state,
-        genreListData: payload,
-      };
- 
-      case "STORE_MOVIE_KEY_FOR_BANNER_SUCCESS":
+    case "STORE_MOVIE_KEY_FOR_BANNER_SUCCESS":
       return {
         ...state,
         movieKeyForBanner: payload.movieKeyForBanner,
@@ -52,7 +46,7 @@ function movieReducer(state = initialState, action) {
         movieKey: {},
       };
 
-      case "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS":
+    case "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS":
       return {
         ...state,
         movieKeyForBanner: {},

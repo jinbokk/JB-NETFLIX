@@ -84,7 +84,7 @@ const MovieDetail = () => {
   ) : (
     <>
       <div className="MovieDetail_container">
-        <div style={{ position: "relative", top: "60px" }}>
+        <div style={{ position: "relative", top: "90px" }}>
           <TextAnimation movie={MovieDetailData} />
         </div>
         <div

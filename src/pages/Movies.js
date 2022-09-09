@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
 import MovieList from "../component/MovieList";
-import FilteredMovieList from "./FilteredMovieList";
+import FilteredMovieList from "../component/FilteredMovieList";
 import MovieFilterSlider from "../component/MovieFilterSlider";
 import MovieFilterButton from "../component/MovieFilterButton";
 import MovieFilterInput from "../component/MovieFilterInput";
@@ -148,13 +148,6 @@ const Movies = () => {
     voteAverageLte,
   ]);
 
-  const toggleHandler = () => {
-    document.getElementById("MoviesHandler").style.left = 0;
-    document.getElementById("MoviesHandler").style.width = "calc(100% - 60px)";
-    document.getElementById("MoviesHandler").style.height = "100vh";
-    // document.getElementById("MoviesHandler_toggleButton").style.right = "0";
-  };
-
   return loading ? (
     <div className="loadingSpinner">
       <FadeLoader color="red" loading={loading} size={15} speedMultiplier={3} />
@@ -162,16 +155,12 @@ const Movies = () => {
   ) : (
     <div>
       <div className="MoviesPage">
-        <button
-          className="MoviesHandler_toggleButton"
-          id="MoviesHandler_toggleButton"
-          onClick={() => {
-            toggleHandler();
-          }}
-        >
-          <p className="MoviesHandler_toggleButton_text">FILTER</p>
-        </button>
-        <div className="MoviesHandler" id="MoviesHandler">
+        <input
+          type={"checkbox"}
+          id="MoviesHandler_container_checkbox"
+          style={{ display: "none" }}
+        />
+        <div className="MoviesHandler">
           <div className="MoviesHandler_container">
             <MovieFilterInput />
             <MovieFilterSlider
@@ -188,6 +177,13 @@ const Movies = () => {
             />
             <MovieFilterButton text={"GENRES"} genreListData={genreListData} />
           </div>
+
+          <label
+            for="MoviesHandler_container_checkbox"
+            className="MoviesHandler_toggleButton"
+          >
+            <p className="MoviesHandler_toggleButton_text">FILTER</p>
+          </label>
         </div>
 
         <div className="MovieListWrapper">

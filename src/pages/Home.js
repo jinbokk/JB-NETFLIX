@@ -42,9 +42,9 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(movieActions.getMovies());
-    // return () => {
-    //   dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
-    // };
+    return () => {
+      dispatch({ type: "RESET_MOVIE_STORE_SUCCESS" });
+    };
   }, []);
 
   useEffect(() => {

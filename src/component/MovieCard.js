@@ -37,9 +37,7 @@ const MovieCard = ({ movie }) => {
     });
   };
 
-
   const genreList = useSelector((state) => state.movie.genreListData.genres);
-
 
   const movieCardImg = movie.poster_path;
   const movieBackdrop = movie.backdrop_path;
@@ -105,10 +103,11 @@ const MovieCard = ({ movie }) => {
                 ></div>
               )}
               <div className="preview_modal_info">
-                <div className="preview_modal_title">{movie.title}</div>
-
-                <div className="preview_modal_release_date">
-                  {movie.release_date}
+                <div>
+                  <div className="preview_modal_title">{movie.title}</div>
+                  <div className="preview_modal_release_date">
+                    {movie.release_date}
+                  </div>
                 </div>
 
                 <div className="preview_modal_score_rate">
@@ -130,7 +129,7 @@ const MovieCard = ({ movie }) => {
                 </div>
 
                 <div className="preview_modal_genre">
-                  {movie.genre_ids.map((id, index) => (
+                  {movie.genre_ids.slice(0,3).map((id, index) => (
                     <>
                       <div key={index} className="preview_modal_genre_tag">
                         <span
@@ -140,7 +139,7 @@ const MovieCard = ({ movie }) => {
                             marginRight: "5px",
                           }}
                         >
-                          &#8226;
+                          #
                         </span>
                         {genreList &&
                           genreList.find((item) => item.id === id).name}
