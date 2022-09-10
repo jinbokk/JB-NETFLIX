@@ -12,7 +12,7 @@ const MovieList = ({ movies }) => {
     <>
       {moviesData && (
         <Container>
-          <Row className="justify-content-md-center">
+          <Row>
             {moviesData.map((item) => (
               <Col
                 key={item.id}
