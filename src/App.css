@@ -2,7 +2,7 @@
 
 .nav {
   position: fixed;
-  z-index: 1000;
+  z-index: 10000;
   width: 100%;
   height: 60px;
 }
@@ -28,7 +28,6 @@
   position: relative;
   width: 100px;
   object-fit: contain;
-  z-index: 1;
   /* margin-right: 20px; */
   /* padding-left: 40px; */
   cursor: pointer;
@@ -37,7 +36,7 @@
 .nav a {
   font-weight: bold;
   text-decoration: none;
-  color: rgb(220, 220, 220);
+  color: rgb(180, 180, 180);
   margin-left: 40px;
   position: relative;
   z-index: 1;
@@ -48,6 +47,11 @@
 .nav a:hover {
   color: gray;
   transition: 0.3s;
+}
+
+.nav a:focus {
+  color: rgb(220, 220, 220);
+  font-weight: bolder;
 }
 
 /* ------------------------home------------------------ */
@@ -66,7 +70,9 @@
 
 @media screen and (max-width: 768px) {
   .home h1 {
-    margin-top: 30px;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 25px;
   }
 }
 
@@ -84,6 +90,31 @@
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hasNoMore {
+  width: 100%;
+  line-height: 70px;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  background-color: #252525;
+  animation: flickerAnimation 1s;
 }
 
 /* ------------------------banner------------------------ */
@@ -112,6 +143,25 @@
   background: linear-gradient(to right, black, transparent 400px),
     linear-gradient(to top, black, transparent);
   pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .banner_container::before {
+    background: linear-gradient(to right, black, transparent 200px),
+      linear-gradient(to top, black, transparent);
+  }
+}
+
+.banner_container_text {
+  position: relative;
+  top: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .banner_container_text {
+    position: relative;
+    top: -10px;
+  }
 }
 
 .bannerVideo_container iframe {
@@ -549,17 +599,7 @@
   }
 }
 
-.css-1iqhxdk-MuiButtonBase-root-MuiButton-root {
-  margin-right: 10px !important;
-  margin-bottom: 10px !important;
-}
-
-.css-itasnx-MuiButtonBase-root-MuiButton-root {
-  margin-right: 10px !important;
-  margin-bottom: 10px !important;
-}
-
-.subTitle_arrow {
+.subTitle {
   color: red;
   font-size: 22px;
   margin-right: 10px;
@@ -569,7 +609,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .subTitle_arrow {
+  .subTitle {
     padding-left: 5px;
   }
 }
@@ -699,14 +739,6 @@
   background-color: #141414;
 }
 
-.MovieDetail_section h1 {
-  position: relative;
-  z-index: 3;
-  margin: 0;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
 /* .MovieDetail_section::before {
   position: absolute;
   content: "";
@@ -717,11 +749,26 @@
   pointer-events: none;
 } */
 
+.MovieDetail_section h1 {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.MovieDetail_section_overview {
+  font-size: 15px;
+  padding: 0 30px;
+  padding-bottom: 20px;
+  line-height: 25px;
+}
+
 .MovieDetail_info {
   position: absolute;
   z-index: 1000;
   top: 9vh;
-  width: 70vw;
+  width: 100vw;
   color: rgba(255, 255, 255, 0.9);
   padding-left: 40px;
   pointer-events: none;
@@ -729,26 +776,38 @@
 }
 
 .MovieDetail_info h1 {
-  font-size: 5vw;
+  font-size: 60px;
   font-weight: bold;
   padding-left: 0;
+}
+
+.MovieDetail_info h2 {
+  font-size: 25px;
+  font-weight: normal;
+  padding-left: 0;
   white-space: nowrap;
+  /* font-style: italic; */
+  color: rgba(255, 255, 255, 0.714);
 }
 
 @media screen and (max-width: 768px) {
   .MovieDetail_info {
-    top: 5vh;
+    top: 15vh;
   }
 
   .MovieDetail_info h1 {
-    font-size: 6vw;
-    white-space: normal;
+    font-size: 30px;
+  }
+
+  .MovieDetail_info h2 {
+    font-size: 20px;
   }
 }
 
 .MovieDetail_info p {
   font-size: 1.1vw;
   line-height: 30px;
+  width: 70vw;
 }
 
 .movieDetail_genres {
@@ -777,16 +836,18 @@
   color: rgb(220, 220, 220) !important;
   text-align: left;
   justify-content: flex-start !important;
+  padding: 0 30px !important;
+  padding-bottom: 40px !important;
 }
 
 .review_card {
   position: relative;
+  width: 100%;
   height: 200px;
   /* overflow: hidden; */
-  margin: 10px 10px;
-  padding: 5px;
-  margin-top: 0;
-  margin-bottom: 40px;
+  /* padding: 5px; */
+  /* margin-top: 0; */
+  /* margin-bottom: 40px; */
 }
 
 /* .review_card:hover {
@@ -820,6 +881,11 @@
   width: 100%;
 }
 
+.reviewer_info_modal {
+  width: 60% !important;
+  margin: auto;
+}
+
 .reviewer_info_profile {
   display: flex;
   justify-content: center;
@@ -836,6 +902,21 @@
   white-space: wrap;
   overflow: scroll;
   /* text-overflow: ellipsis; */
+}
+
+.review_content_section_modal:first-child {
+  padding: 0 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .reviewer_info_modal {
+    width: 100% !important;
+    margin: auto;
+  }
+
+  .review_content_section_modal:first-child {
+    padding: 0;
+  }
 }
 
 .review_content {
@@ -855,6 +936,7 @@
   left: 0;
   top: 200px;
   padding: 0;
+  opacity: 0.5;
 }
 
 /* .review_info {

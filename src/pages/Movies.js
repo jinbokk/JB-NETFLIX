@@ -30,7 +30,7 @@ const Movies = () => {
 
   const [mergedData, setMergeData] = useState([]);
   const [pageNum, setPageNum] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
 
   const getMoreMovies = async (
     keyword,
@@ -45,37 +45,35 @@ const Movies = () => {
   ) => {
     dispatch({ type: "GET_MORE_MOVIES_REQUEST" });
 
-    if (moreMoviesData.total_pages < moreMoviesData.page) {
+    const API_KEY = process.env.REACT_APP_API_KEY;
+
+    const loadMoreMovies = await api.get(
+      `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
+        keyword ? `&with_text_query=${keyword}` : ""
+      }${includeVideo ? `&include_video=${includeVideo}` : ""}${
+        releaseDateGte ? `&release_date.gte=${releaseDateGte}` : ""
+      }${releaseDateLte ? `&release_date.lte=${releaseDateLte}` : ""}${
+        voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""
+      }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
+        withGenres ? `&with_genres=${withGenres}` : ""
+      }${sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"}${
+        pageNum ? `&page=${pageNum}` : "&page=1"
+      }`
+    );
+
+    dispatch({
+      type: "GET_MORE_MOVIES_SUCCESS",
+      payload: loadMoreMovies.data,
+    });
+
+    if (moreMoviesData.results && moreMoviesData.results.length === 0) {
       console.log("더이상 페이지가 없습니다");
       setHasMore(false);
+      setMergeData((prevData) => [
+        ...new Set([...prevData, ...loadMoreMovies.data.results]),
+      ]);
     } else {
-      console.log("pageNum 테스트중입니다", pageNum);
-
-      const API_KEY = process.env.REACT_APP_API_KEY;
-
-      const loadMoreMovies = await api.get(
-        `/discover/movie?api_key=${API_KEY}&language=en-US&page=1&region=US${
-          keyword ? `&with_text_query=${keyword}` : ""
-        }${includeVideo ? `&include_video=${includeVideo}` : ""}${
-          releaseDateGte ? `&release_date.gte=${releaseDateGte}` : ""
-        }${releaseDateLte ? `&release_date.lte=${releaseDateLte}` : ""}${
-          voteAverageGte ? `&vote_average.gte=${voteAverageGte}` : ""
-        }${voteAverageLte ? `&vote_average.lte=${voteAverageLte}` : ""}${
-          withGenres ? `&with_genres=${withGenres}` : ""
-        }${sortBy ? `&sort_by=${sortBy}` : "&sort_by=popularity.desc"}${
-          pageNum ? `&page=${pageNum}` : "&page=1"
-        }`
-      );
-
       setHasMore(true);
-
-      dispatch({
-        type: "GET_MORE_MOVIES_SUCCESS",
-        payload: loadMoreMovies.data,
-      });
-
-      // console.log("loadMoreMovies.data is", loadMoreMovies.data);
-
       setMergeData((prevData) => [
         ...new Set([...prevData, ...loadMoreMovies.data.results]),
       ]);
@@ -93,7 +91,7 @@ const Movies = () => {
         observer.current.disconnect();
       } // 이전의 마지막 영화요소에 대해 disconnect 하고, 아래 함수를 통해 새로운 마지막 영화요소를 찾기위함이다
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && hasMore) {
           //&& hasMore 또한 추가하여 영화가 더 없는데 계속 요청하지 않도록 방지해야함
           console.log("Visible TEST 중입니다");
           setPageNum((prevPageNum) => prevPageNum + 1);
@@ -187,7 +185,7 @@ const Movies = () => {
         </div>
 
         <div className="MovieListWrapper">
-          <FilteredMovieList
+          {/* <FilteredMovieList
             movies={mergedData}
             innerRef={lastMovieElementRef}
           />
@@ -200,6 +198,26 @@ const Movies = () => {
                 speedMultiplier={3}
               />
             </div>
+          ) : moreMoviesDataLoading && !hasMore ? (
+            <div className="hasNoMore">NO MORE MOVIES</div>
+          ) : null} */}
+          {moreMoviesDataLoading ? (
+            <div className="loadingSpinner_scrolling">
+              <FadeLoader
+                color="red"
+                loading={loading}
+                size={100}
+                speedMultiplier={3}
+              />
+            </div>
+          ) : (
+            <FilteredMovieList
+              movies={mergedData}
+              innerRef={lastMovieElementRef}
+            />
+          )}
+          {!moreMoviesDataLoading && !hasMore ? (
+            <div className="hasNoMore">NO MORE MOVIES</div>
           ) : null}
         </div>
       </div>
@@ -208,6 +226,3 @@ const Movies = () => {
 };
 
 export default Movies;
-
-// show 는 맨처음 무비리스트 보여주고 안보여주고 용도
-// isBottom이 true면 (===스크롤이 최하단까지 갔으면) div태그로 붙여줘야 한다.

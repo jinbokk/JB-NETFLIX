@@ -41,8 +41,8 @@ export default function MovieReview({ avatar_path, item }) {
                       "url(" +
                       `https://www.gravatar.com/avatar${avatar_path}` +
                       ")",
-                    width: 50,
-                    height: 50,
+                    width: 45,
+                    height: 45,
                     borderRadius: 50,
                     marginRight: 10,
                     backgroundSize: "cover",
@@ -52,9 +52,9 @@ export default function MovieReview({ avatar_path, item }) {
 
                 <div
                   style={{
-                    fontSize: "20px",
+                    fontSize: "17px",
                     fontWeight: "bold",
-                    maxWidth: "150px",
+                    maxWidth: "120px",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",
@@ -62,12 +62,19 @@ export default function MovieReview({ avatar_path, item }) {
                 >
                   {item.author}
                 </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <div
                   style={{
                     color: "red",
-                    fontSize: "20px",
+                    fontSize: "18px",
                     fontWeight: "bold",
-                    paddingLeft: "20px",
                   }}
                 >
                   {item.author_details.rating ? (
@@ -83,15 +90,15 @@ export default function MovieReview({ avatar_path, item }) {
                     </p>
                   )}
                 </div>
-              </div>
-              <div
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "bold",
-                  paddingRight: "20px",
-                }}
-              >
-                {item.updated_at.slice(0, 10)}
+                <div
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    paddingLeft: "20px",
+                  }}
+                >
+                  {item.updated_at.slice(0, 10)}
+                </div>
               </div>
             </div>
           </div>
@@ -109,7 +116,7 @@ export default function MovieReview({ avatar_path, item }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            <div className="reviewer_info">
+            <div className="reviewer_info reviewer_info_modal">
               <div
                 style={{
                   backgroundImage:
@@ -159,6 +166,9 @@ export default function MovieReview({ avatar_path, item }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div className="review_content_section_modal">
               <p className="review_content">{item.content}</p>
+              <p style={{ opacity: "0.6", textAlign: "right" }}>
+                {item.updated_at.slice(0, 10)}
+              </p>
             </div>
           </Typography>
         </Box>

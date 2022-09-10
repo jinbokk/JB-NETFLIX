@@ -5,6 +5,7 @@ import { movieActions } from "../redux/actions/movieActions";
 import MovieSlide from "../component/MovieSlide";
 import { FadeLoader } from "react-spinners";
 import MovieVideo from "../component/MovieVideo";
+import { movieDetailActions } from "../redux/actions/movieDetailActions";
 import api from "../redux/api";
 import Footer from "../component/Footer";
 import MovieVideoForBanner from "../component/MovieVideoForBanner";
@@ -16,10 +17,14 @@ const Home = () => {
 
   const { popularMoviesData, topRatedMoviesData, upcomingMoviesData, loading } =
     useSelector((state) => state.movie);
+
+  const { MovieDetailData } = useSelector((state) => state.movieDetail);
+
   const getMovieKeyForBanner = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
     const movie_id =
       popularMoviesData.results && popularMoviesData.results[0].id;
+
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
@@ -38,6 +43,8 @@ const Home = () => {
         movieKeyForBanner: movieKeyForBanner,
       },
     });
+
+    dispatch(movieDetailActions.getMovieDetail(movie_id, 1));
   };
 
   useEffect(() => {
@@ -59,7 +66,7 @@ const Home = () => {
 
   const isTimeout = setTimeout(() => {
     setBannerChange(true);
-  }, 3000);
+  }, 4000);
 
   return loading ? (
     <div className="loadingSpinner">
@@ -68,8 +75,8 @@ const Home = () => {
   ) : (
     <div className="home">
       <div className="banner_container">
-        <div style={{ position: "relative", top: "60px" }}>
-          <TextAnimation movie={popularMoviesData.results[0]} />
+        <div className="banner_container_text">
+          <TextAnimation movie={MovieDetailData} />
         </div>
 
         {bannerChange ? (
@@ -90,17 +97,17 @@ const Home = () => {
       </div>
 
       <h1>
-        <span className="subTitle_arrow">&#10095;</span>
+        <span className="subTitle">&#10095;</span>
         POPULAR MOVIES
       </h1>
       <MovieSlide movies={popularMoviesData.results} />
       <h1>
-        <span className="subTitle_arrow">&#10095;</span>
+        <span className="subTitle">&#10095;</span>
         TOP RATED MOVIES
       </h1>
       <MovieSlide movies={topRatedMoviesData.results} />
       <h1>
-        <span className="subTitle_arrow">&#10095;</span>
+        <span className="subTitle">&#10095;</span>
         UPCOMING MOVIES
       </h1>
       <MovieSlide movies={upcomingMoviesData.results} />

@@ -33,6 +33,8 @@ const MovieDetail = () => {
     loading,
   } = useSelector((state) => state.movieDetail);
 
+  console.log("MovieDetailData 는", MovieDetailData);
+
   // const [animate, setAnimate] = useState(false);
   // const animateTrigger = () => {
   //   setAnimate(true);
@@ -84,7 +86,7 @@ const MovieDetail = () => {
   ) : (
     <>
       <div className="MovieDetail_container">
-        <div style={{ position: "relative", top: "90px" }}>
+        <div>
           <TextAnimation movie={MovieDetailData} />
         </div>
         <div
@@ -101,6 +103,20 @@ const MovieDetail = () => {
       </div>
 
       <div className="MovieDetail_section">
+        <h1
+          style={{
+            paddingLeft: "10px",
+            position: "relative",
+            zIndex: "1",
+            fontSize: "25px",
+          }}
+        >
+          <span className="subTitle">&#10095;</span>
+          OVERVIEW
+        </h1>
+
+        <div className="MovieDetail_section_overview">{MovieDetailData.overview}</div>
+
         <h1
           style={{
             paddingLeft: "10px",

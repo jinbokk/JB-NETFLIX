@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Netflix-sans";
+  src: url("./font/NetflixSans-Regular.otf");
+}
+
+* {
+  font-family:"Netflix-sans";
+}
+
 html {
   margin: 0;
   padding: 0;

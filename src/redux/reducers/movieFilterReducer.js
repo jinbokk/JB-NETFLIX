@@ -1,6 +1,6 @@
 let initialState = {
   moreMoviesData: {},
-  moreMoviesDataLoading: false,
+  moreMoviesDataLoading: true,
   filteredMoviesData: {},
   genreListData: {},
   keyword: "",
@@ -40,7 +40,6 @@ function movieFilterReducer(state = initialState, action) {
     case "GET_MORE_MOVIES_REQUEST":
       return {
         ...state,
-        moreMoviesDataLoading: true,
       };
 
     case "GET_MORE_MOVIES_SUCCESS":

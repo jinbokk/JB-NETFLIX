@@ -2,18 +2,22 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const TextAnimation = ({ movie }) => {
+  console.log("test movie is", movie);
   return (
     <>
       <div className="MovieDetail_info">
         <MoveUpTitle>
           <h1>{movie.title}</h1>
+          <h2>{movie.tagline}</h2>
         </MoveUpTitle>
         <Wrapper>
           <MoveUpPreview>
-            <p>{movie.overview}</p>
+            {/* <p>{movie.overview}</p> */}
             <div className="movieDetail_genres">
               {movie.genres?.map((item, index) => (
-                <div className="movieDetail_genres_item" key={index}>{item.name}</div>
+                <div className="movieDetail_genres_item" key={index}>
+                  {item.name}
+                </div>
               ))}
             </div>
           </MoveUpPreview>
@@ -56,7 +60,7 @@ const slideDown_Title = keyframes`
     transform-origin:left;
   }
   100% {
-    transform:translateY(40px) scale(0.6);
+    transform:translateY(30px) scale(0.6);
     transform-origin:left;
   }
 `;
@@ -67,7 +71,7 @@ const slideDown_Title_mobile = keyframes`
     transform-origin:left;
   }
   100% {
-    transform:translateY(-50px) scale(0.8);
+    transform:translateY(-25px) scale(0.7);
     transform-origin:left;
   }
 `;
