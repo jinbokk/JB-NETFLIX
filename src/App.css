@@ -25,10 +25,10 @@
 }
 
 .nav_logo {
+  content: url(./images/netflix_lg.png);
   position: relative;
   width: 100px;
   object-fit: contain;
-
   cursor: pointer;
 }
 
@@ -51,6 +51,13 @@
 .nav a:focus {
   color: rgb(220, 220, 220);
   font-weight: bolder;
+}
+
+@media screen and (max-width: 768px) {
+  .nav_logo {
+    content: url(./images/netflix_sm.png);
+    width: 20px;
+  }
 }
 
 /* ------------------------home------------------------ */
@@ -314,7 +321,7 @@
 }
 
 .movieCard:hover {
-  z-index: 3;
+  z-index: 10;
   transform: scale(1.7);
   transition: 0.5s;
   transform-origin: bottom;

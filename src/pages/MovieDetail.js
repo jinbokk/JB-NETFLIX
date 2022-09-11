@@ -19,9 +19,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     dispatch(movieDetailActions.getMovieDetail(movie_id, 1));
-    return () => {
-      dispatch({ type: "RESET_MOVIE_DETAIL_STORE_SUCCESS" });
-    };
+    dispatch({ type: "RESET_MOVIE_DETAIL_STORE_SUCCESS" });
   }, [movie_id]);
 
   const {
@@ -56,14 +54,12 @@ const MovieDetail = () => {
 
   useEffect(() => {
     getMovieKeyForBanner();
-    return () => {
-      dispatch({
-        type: "RESET_MOVIE_KEY_SUCCESS",
-      });
-      dispatch({
-        type: "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS",
-      });
-    };
+    dispatch({
+      type: "RESET_MOVIE_KEY_SUCCESS",
+    });
+    dispatch({
+      type: "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS",
+    });
   }, [movie_id]);
 
   const [bannerChange, setBannerChange] = useState(false);
