@@ -755,7 +755,7 @@
   position: absolute;
   z-index: 1000;
   top: 120px;
-  width: 100vw;
+  width: 90vw;
   color: rgba(255, 255, 255, 0.9);
   padding-left: 40px;
   pointer-events: none;
@@ -773,7 +773,6 @@
   font-weight: normal;
   padding-left: 0;
   white-space: nowrap;
-
   color: rgba(255, 255, 255, 0.714);
 }
 
@@ -783,7 +782,7 @@
   }
 
   .MovieDetail_info h1 {
-    font-size: 10px;
+    font-size: 27px;
   }
 
   .MovieDetail_info h2 {
