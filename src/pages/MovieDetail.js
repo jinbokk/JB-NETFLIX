@@ -32,7 +32,6 @@ const MovieDetail = () => {
     loading,
   } = useSelector((state) => state.movieDetail);
 
-
   const getMovieKeyForBanner = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
     const selectedMovieJson = await api.get(
@@ -97,32 +96,20 @@ const MovieDetail = () => {
       </div>
 
       <div className="MovieDetail_section">
-        <h1
-          style={{
-            paddingLeft: "10px",
-            position: "relative",
-            zIndex: "1",
-            fontSize: "25px",
-          }}
-        >
+        <h1>
           <span className="subTitle">&#10095;</span>
-          OVERVIEW
+          <span>OVERVIEW</span>
+          <span className="divide_line"></span>
         </h1>
 
         <div className="MovieDetail_section_overview">
           {MovieDetailData.overview}
         </div>
 
-        <h1
-          style={{
-            paddingLeft: "10px",
-            position: "relative",
-            zIndex: "1",
-            fontSize: "25px",
-          }}
-        >
+        <h1>
           <span className="subTitle">&#10095;</span>
-          REVIEWS
+          <span>REVIEWS</span>
+          <span className="divide_line"></span>
         </h1>
         <Row>
           {MovieReviews.data.total_results !== 0 ? (
@@ -154,7 +141,7 @@ const MovieDetail = () => {
               }
             })
           ) : (
-            <h2
+            <h3
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -165,41 +152,29 @@ const MovieDetail = () => {
               }}
             >
               No Reviews
-            </h2>
+            </h3>
           )}
         </Row>
 
         <div>
-          <h1
-            style={{
-              paddingLeft: "10px",
-              position: "relative",
-              zIndex: "1",
-              fontSize: "25px",
-            }}
-          >
+          <h1>
             <span className="subTitle">&#10095;</span>
-            SIMILAR MOVIES
+            <span>SIMILAR MOVIES</span>
+            <span className="divide_line"></span>
           </h1>
           <MovieSlide movies={SimilarMovies.data.results} />
         </div>
 
         <div>
-          <h1
-            style={{
-              paddingLeft: "10px",
-              position: "relative",
-              zIndex: "1",
-              fontSize: "25px",
-            }}
-          >
+          <h1>
             <span className="subTitle">&#10095;</span>
-            RECOMMEND MOVIES
+            <span>RECOMMEND MOVIES</span>
+            <span className="divide_line"></span>
           </h1>
           {RecommendMovies.data.total_results !== 0 ? (
             <MovieSlide movies={RecommendMovies.data.results} />
           ) : (
-            <h2
+            <h3
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -210,7 +185,7 @@ const MovieDetail = () => {
               }}
             >
               Sorry, No movie recommendations
-            </h2>
+            </h3>
           )}
         </div>
       </div>

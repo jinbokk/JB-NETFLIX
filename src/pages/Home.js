@@ -96,17 +96,20 @@ const Home = () => {
 
       <h1>
         <span className="subTitle">&#10095;</span>
-        POPULAR MOVIES
+        <span>POPULAR MOVIES</span>
+        {/* <span className="divide_line"></span> */}
       </h1>
       <MovieSlide movies={popularMoviesData.results} />
       <h1>
         <span className="subTitle">&#10095;</span>
-        TOP RATED MOVIES
+        <span>TOP RATED MOVIES</span>
+        {/* <span className="divide_line"></span> */}
       </h1>
       <MovieSlide movies={topRatedMoviesData.results} />
       <h1>
         <span className="subTitle">&#10095;</span>
-        UPCOMING MOVIES
+        <span>UPCOMING MOVIES</span>
+        {/* <span className="divide_line"></span> */}
       </h1>
       <MovieSlide movies={upcomingMoviesData.results} />
       <Footer />

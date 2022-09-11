@@ -65,6 +65,10 @@
   position: relative;
   z-index: 1;
   font-size: 25px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 768px) {
@@ -134,26 +138,25 @@
 
 .banner_container::before {
   position: absolute;
-  z-index: 100;
+  z-index: 15;
   content: "";
   min-height: 600px;
   height: 71.25vw;
   width: 100%;
-  background: linear-gradient(to right, black, transparent 400px),
-    linear-gradient(to top, black, transparent);
+  background: linear-gradient(to right, #141414, transparent 600px),
+    linear-gradient(to top, #141414, transparent 1000px);
   pointer-events: none;
 }
 
 @media screen and (max-width: 768px) {
   .banner_container::before {
-    background: linear-gradient(to right, black, transparent 200px),
-      linear-gradient(to top, black, transparent);
+    background: linear-gradient(to right, #141414, transparent 200px),
+      linear-gradient(to top, #141414, transparent 400px);
   }
 }
 
 .banner_container_text {
   position: relative;
-  top: 60px;
 }
 
 @media screen and (max-width: 768px) {
@@ -173,7 +176,6 @@
 .banner {
   background-position: 50%;
   background-size: cover;
-
   bottom: 0;
   left: 0;
   opacity: 1;
@@ -430,7 +432,6 @@
   margin-right: 10px;
   transform: scale(0.8);
   display: inline-block;
-
 }
 
 .preview_modal_G_rate {
@@ -443,7 +444,6 @@
   margin-left: 5px;
   transform: scale(0.8);
   display: inline-block;
-
 }
 
 .preview_modal_adult_rate {
@@ -455,7 +455,6 @@
   background-color: rgb(162, 0, 0);
   text-align: center;
   margin-left: 5px;
-
 }
 
 .preview_modal_genre {
@@ -467,7 +466,6 @@
 
   font-size: 10px;
   transform: scale(0.7);
-
 }
 
 .preview_modal_genre_tag {
@@ -475,7 +473,6 @@
   font-weight: bold;
   margin: 10px;
   color: rgb(225, 225, 225);
-
 }
 
 /* ------------------------Movies------------------------ */
@@ -584,6 +581,12 @@
   padding-left: 20px;
   position: relative;
   z-index: 2;
+}
+
+.divide_line {
+  border-bottom: 1px solid rgba(255, 0, 0, 0.5);
+  width: 100%;
+  margin-left: 40px;
 }
 
 @media screen and (max-width: 768px) {
@@ -727,8 +730,18 @@
   position: relative;
   z-index: 3;
   margin: 0;
+  padding-left: 10px;
   padding-top: 30px;
   padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  .MovieDetail_section h1 {
+    font-size: 20px;
+  }
 }
 
 .MovieDetail_section_overview {
@@ -770,7 +783,7 @@
   }
 
   .MovieDetail_info h1 {
-    font-size: 30px;
+    font-size: 10px;
   }
 
   .MovieDetail_info h2 {
@@ -815,9 +828,7 @@
   position: relative;
   width: 100%;
   height: 200px;
-
 }
-
 
 .review_container {
   display: flex;
@@ -855,7 +866,6 @@
   height: 280px;
   white-space: wrap;
   overflow: scroll;
-
 }
 
 .review_content_section_modal:first-child {
