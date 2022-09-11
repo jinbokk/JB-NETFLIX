@@ -548,7 +548,7 @@
   text-orientation: upright;
 }
 
-.MoviesHandler_toggleButton:hover {
+.MoviesHandler_toggleButton:active {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -675,6 +675,11 @@
   pointer-events: none;
 }
 
+.MovieDetail_container_text {
+  position: relative;
+  top: 50px;
+}
+
 @media screen and (max-width: 768px) {
   .MovieDetail_container {
     top: 0;
@@ -696,9 +701,10 @@
     pointer-events: none;
   }
 
-  /* .MovieDetail_container div:first-child {
-    top: 80px;
-  } */
+  .MovieDetail_container_text {
+    position: relative;
+    top: 0;
+  }
 }
 
 .MovieDetail_Img {
@@ -767,7 +773,7 @@
 .MovieDetail_info {
   position: absolute;
   z-index: 1000;
-  top: 9vh;
+  top: 120px;
   width: 100vw;
   color: rgba(255, 255, 255, 0.9);
   padding-left: 40px;
@@ -800,7 +806,7 @@
   }
 
   .MovieDetail_info h2 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .movieDetail_genres_item {

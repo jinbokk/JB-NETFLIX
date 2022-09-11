@@ -79,6 +79,12 @@ const MovieDetail = () => {
     };
   }, [movie_id]);
 
+  const [bannerChange, setBannerChange] = useState(false);
+
+  const isTimeout = setTimeout(() => {
+    setBannerChange(true);
+  }, 2000);
+
   return loading ? (
     <div className="loadingSpinner">
       <FadeLoader color="red" loading={loading} size={15} speedMultiplier={3} />
@@ -86,7 +92,7 @@ const MovieDetail = () => {
   ) : (
     <>
       <div className="MovieDetail_container">
-        <div>
+        <div className="MovieDetail_container_text">
           <TextAnimation movie={MovieDetailData} />
         </div>
         <div
@@ -98,7 +104,7 @@ const MovieDetail = () => {
               ")",
           }}
         >
-          <MovieVideoForBanner />
+          {bannerChange ? <MovieVideoForBanner /> : null}
         </div>
       </div>
 
@@ -115,7 +121,9 @@ const MovieDetail = () => {
           OVERVIEW
         </h1>
 
-        <div className="MovieDetail_section_overview">{MovieDetailData.overview}</div>
+        <div className="MovieDetail_section_overview">
+          {MovieDetailData.overview}
+        </div>
 
         <h1
           style={{
