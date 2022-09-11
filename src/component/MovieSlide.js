@@ -13,8 +13,6 @@ export default function MovieSlide({ movies }) {
     .filter((item) => item.poster_path !== null)
     .slice(0, 10);
 
-  console.log(moviesData);
-
   return (
     <Swiper
       slidesPerView={8}
