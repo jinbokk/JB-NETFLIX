@@ -9,21 +9,23 @@ import "swiper/css/navigation";
 import "swiper/css/lazy";
 
 export default function MovieSlide({ movies }) {
-  let moviesData = movies.filter((item) => item.poster_path !== null);
+  let moviesData = movies
+    .filter((item) => item.poster_path !== null)
+    .slice(0, 10);
+
+  console.log(moviesData);
 
   return (
     <Swiper
       slidesPerView={8}
       spaceBetween={10}
-      slidesPerGroup={4}
-      speed={1000}
+      slidesPerGroup={2}
+      speed={800}
       loop={true}
       loopFillGroupWithBlank={false}
-      pagination={{
-        clickable: true,
-      }}
       navigation={true}
       modules={[Navigation, Lazy]}
+      lazy={true}
       breakpoints={{
         0: {
           slidesPerView: 4,
