@@ -72,10 +72,14 @@
   position: relative;
   z-index: 1;
   font-size: 25px;
-  width: 100%;
+  width: 90vw;
   display: flex;
   align-items: center;
-  white-space: nowrap;
+}
+
+.home h2 {
+  width: 60vw;
+  display: flex;
 }
 
 @media screen and (max-width: 768px) {
@@ -246,8 +250,8 @@
   border-radius: 10px;
   position: relative;
   text-align: left;
-  background: rgb(25, 25, 25);
   display: -webkit-box;
+  background: none;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -773,13 +777,14 @@
   font-size: 60px;
   font-weight: bold;
   padding-left: 0;
+  white-space: wrap;
 }
 
 .MovieDetail_info h2 {
   font-size: 25px;
   font-weight: normal;
   padding-left: 0;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   color: rgba(255, 255, 255, 0.714);
 }
 

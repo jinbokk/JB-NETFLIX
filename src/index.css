@@ -4,7 +4,11 @@
 }
 
 * {
-  font-family:"Netflix-sans";
+  font-family: "Netflix-sans";
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 html {
