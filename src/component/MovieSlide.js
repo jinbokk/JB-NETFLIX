@@ -1,14 +1,15 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+import { Lazy } from "swiper";
 import { MovieCard } from "./MovieCard";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/lazy";
 
 export default function MovieSlide({ movies }) {
-
   let moviesData = movies.filter((item) => item.poster_path !== null);
 
   return (
@@ -23,7 +24,7 @@ export default function MovieSlide({ movies }) {
         clickable: true,
       }}
       navigation={true}
-      modules={[Navigation]}
+      modules={[Navigation, Lazy]}
       breakpoints={{
         0: {
           slidesPerView: 4,
