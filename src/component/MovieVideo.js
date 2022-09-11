@@ -4,7 +4,6 @@ import { useSelector } from "react-redux/es/exports";
 
 function MovieVideo() {
   const movieKey = useSelector((state) => state.movie.movieKey);
-  // console.log("비디오아이디 테스트중", videoId);
   const opts = {
     height: "100%",
     width: "100%",

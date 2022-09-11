@@ -2,7 +2,6 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const TextAnimation = ({ movie }) => {
-  console.log("test movie is", movie);
   return (
     <>
       <div className="MovieDetail_info">
@@ -12,7 +11,6 @@ const TextAnimation = ({ movie }) => {
         </MoveUpTitle>
         <Wrapper>
           <MoveUpPreview>
-            {/* <p>{movie.overview}</p> */}
             <div className="movieDetail_genres">
               {movie.genres?.map((item, index) => (
                 <div className="movieDetail_genres_item" key={index}>

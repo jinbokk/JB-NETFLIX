@@ -28,8 +28,7 @@
   position: relative;
   width: 100px;
   object-fit: contain;
-  /* margin-right: 20px; */
-  /* padding-left: 40px; */
+
   cursor: pointer;
 }
 
@@ -174,7 +173,7 @@
 .banner {
   background-position: 50%;
   background-size: cover;
-  /* margin-bottom: 30px; */
+
   bottom: 0;
   left: 0;
   opacity: 1;
@@ -182,21 +181,7 @@
   right: 0;
   top: 0;
   width: 100%;
-  /* filter: alpha(opacity=100); */
-  /* -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); */
-  /* transition: opacity 0.4s cubic-bezier(0.665, 0.235, 0.265, 0.8) 0s; */
 }
-
-/* .banner::before {
-  position: absolute;
-  content: "";
-  height: 56.25vw;
-  max-height: 90vh;
-  width: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent),
-    linear-gradient(to top, black, transparent 200px);
-  pointer-events: none;
-} */
 
 .banner h1 {
   font-size: 4vw;
@@ -235,8 +220,6 @@
   position: relative;
   z-index: 1;
 }
-
-/* https://stackoverflow.com/questions/65469956/swiper-element-scaling-on-hover-overflow-hidden-problem */
 
 .swiper::before {
   z-index: 2;
@@ -354,9 +337,9 @@
   border-bottom-right-radius: 10px;
   z-index: 5;
   animation: fadein 0.5s alternate;
-  -moz-animation: fadein 0.5s alternate; /* Firefox */
-  -webkit-animation: fadein 0.5s alternate; /* Safari and Chrome */
-  -o-animation: fadein 0.5s alternate; /* Opera */
+  -moz-animation: fadein 0.5s alternate;
+  -webkit-animation: fadein 0.5s alternate;
+  -o-animation: fadein 0.5s alternate;
   box-shadow: rgb(0 0 0 / 75%) 0px 3px 10px;
   overflow: hidden;
 }
@@ -415,7 +398,7 @@
   font-size: 1.5em;
   font-weight: bold;
   width: 100%;
-  /* white-space: nowrap; */
+
   text-overflow: ellipsis;
 }
 
@@ -447,7 +430,7 @@
   margin-right: 10px;
   transform: scale(0.8);
   display: inline-block;
-  /* text-shadow: 1px 1px 1px rgb(0 0 0 / 45%); */
+
 }
 
 .preview_modal_G_rate {
@@ -460,7 +443,7 @@
   margin-left: 5px;
   transform: scale(0.8);
   display: inline-block;
-  /* text-shadow: 1px 1px 1px rgb(0 0 0 / 45%); */
+
 }
 
 .preview_modal_adult_rate {
@@ -472,7 +455,7 @@
   background-color: rgb(162, 0, 0);
   text-align: center;
   margin-left: 5px;
-  /* text-shadow: 1px 1px 1px rgb(0 0 0 / 45%); */
+
 }
 
 .preview_modal_genre {
@@ -481,10 +464,10 @@
   width: 140%;
   margin-top: 7px;
   transform-origin: top left;
-  /* flex-wrap: wrap; */
+
   font-size: 10px;
   transform: scale(0.7);
-  /* overflow: visible; */
+
 }
 
 .preview_modal_genre_tag {
@@ -492,12 +475,7 @@
   font-weight: bold;
   margin: 10px;
   color: rgb(225, 225, 225);
-  /* margin-right: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px; */
-  /* background-color: rgb(182, 0, 0); */
-  /* box-shadow: 4px 4px 10px black; */
-  /* text-shadow: 2px 2px 2px rgb(0 0 0 / 45%); */
+
 }
 
 /* ------------------------Movies------------------------ */
@@ -531,7 +509,7 @@
   width: 60px;
   height: 100vh;
   background-color: transparent;
-  /* padding: 10px; */
+
   color: white;
   font-weight: bold;
   border: none;
@@ -745,16 +723,6 @@
   background-color: #141414;
 }
 
-/* .MovieDetail_section::before {
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent),
-    linear-gradient(to bottom, black, transparent 200px);
-  pointer-events: none;
-} */
-
 .MovieDetail_section h1 {
   position: relative;
   z-index: 3;
@@ -792,7 +760,7 @@
   font-weight: normal;
   padding-left: 0;
   white-space: nowrap;
-  /* font-style: italic; */
+
   color: rgba(255, 255, 255, 0.714);
 }
 
@@ -813,12 +781,6 @@
     font-size: 15px;
   }
 }
-
-/* .MovieDetail_info p {
-  font-size: 1.1vw;
-  line-height: 30px;
-  width: 70vw;
-} */
 
 .movieDetail_genres {
   display: flex;
@@ -853,26 +815,9 @@
   position: relative;
   width: 100%;
   height: 200px;
-  /* overflow: hidden; */
-  /* padding: 5px; */
-  /* margin-top: 0; */
-  /* margin-bottom: 40px; */
+
 }
 
-/* .review_card:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-} */
-
-/* .review_card::before {
-  position: absolute;
-  content: "";
-  left: 0;
-  padding: 20px;
-  padding-top: 10px;
-  height: 200px;
-  width: 100%;
-  background: linear-gradient(to top, #141414, transparent 50px);
-} */
 
 .review_container {
   display: flex;
@@ -910,7 +855,7 @@
   height: 280px;
   white-space: wrap;
   overflow: scroll;
-  /* text-overflow: ellipsis; */
+
 }
 
 .review_content_section_modal:first-child {
@@ -932,7 +877,7 @@
   box-sizing: content-box;
   width: 100%;
   overflow: hidden;
-  /* white-space: nowrap; */
+
   text-overflow: ellipsis;
   line-height: 22px;
   color: rgb(210, 210, 210);
@@ -948,17 +893,10 @@
   opacity: 0.5;
 }
 
-/* .review_info {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-} */
-
 /* ------------------------MovieFilter------------------------ */
 
 #search_input {
   transition: 0.5s;
-  /* border-radius: 5px; */
   background-color: #4f0000;
   color: #fff;
 }
@@ -1004,11 +942,6 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
-
-/* #sort-label:focus {
-  color: white;
-  background-color: red;
-} */
 
 .noResultMessage {
   height: 100%;

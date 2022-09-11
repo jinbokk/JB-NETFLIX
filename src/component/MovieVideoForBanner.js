@@ -18,7 +18,6 @@ function MovieVideoForBanner() {
       fs: 0,
       rel: 0,
       loop: 1,
-      // iv_load_policy: 3,
     },
   };
 

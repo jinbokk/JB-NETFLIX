@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { movieActions } from "../redux/actions/movieActions";
 import { FadeLoader } from "react-spinners";
-import MovieList from "../component/MovieList";
 import FilteredMovieList from "../component/FilteredMovieList";
 import MovieFilterSlider from "../component/MovieFilterSlider";
 import MovieFilterButton from "../component/MovieFilterButton";
@@ -16,7 +14,6 @@ const Movies = () => {
     loading,
     moreMoviesData,
     moreMoviesDataLoading,
-    filteredMoviesData,
     genreListData,
     keyword,
     sortBy,
@@ -67,7 +64,6 @@ const Movies = () => {
     });
 
     if (moreMoviesData.results && moreMoviesData.results.length === 0) {
-      console.log("더이상 페이지가 없습니다");
       setHasMore(false);
       setMergeData((prevData) => [
         ...new Set([...prevData, ...loadMoreMovies.data.results]),
@@ -86,19 +82,16 @@ const Movies = () => {
     (node) => {
       if (moreMoviesDataLoading) {
         return;
-      } // 무한 api요청 방지
+      }
       if (observer.current) {
         observer.current.disconnect();
-      } // 이전의 마지막 영화요소에 대해 disconnect 하고, 아래 함수를 통해 새로운 마지막 영화요소를 찾기위함이다
+      }
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          //&& hasMore 또한 추가하여 영화가 더 없는데 계속 요청하지 않도록 방지해야함
-          console.log("Visible TEST 중입니다");
           setPageNum((prevPageNum) => prevPageNum + 1);
         }
       });
       if (node) observer.current.observe(node);
-      console.log("node 테스트중입니다", node);
     },
     [moreMoviesDataLoading, hasMore]
   );
@@ -185,22 +178,6 @@ const Movies = () => {
         </div>
 
         <div className="MovieListWrapper">
-          {/* <FilteredMovieList
-            movies={mergedData}
-            innerRef={lastMovieElementRef}
-          />
-          {moreMoviesDataLoading ? (
-            <div className="loadingSpinner_scrolling">
-              <FadeLoader
-                color="red"
-                loading={loading}
-                size={100}
-                speedMultiplier={3}
-              />
-            </div>
-          ) : moreMoviesDataLoading && !hasMore ? (
-            <div className="hasNoMore">NO MORE MOVIES</div>
-          ) : null} */}
           {moreMoviesDataLoading ? (
             <div className="loadingSpinner_scrolling">
               <FadeLoader

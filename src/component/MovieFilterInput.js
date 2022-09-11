@@ -2,9 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import MuiToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -114,18 +111,9 @@ const MovieFilterInput = () => {
               </MenuItem>
               <MenuItem value={"release_date.asc"}>release_date.asc</MenuItem>
               <MenuItem value={"release_date.desc"}>release_date.desc</MenuItem>
-              {/* <MenuItem value={"revenue.asc"}>revenue.asc</MenuItem>
-              <MenuItem value={"revenue.desc"}>revenue.desc</MenuItem> */}
-              {/* <MenuItem value={"primary_release_date.asc"}>
-                primary_release_date.asc
-              </MenuItem>
-              <MenuItem value={"primary_release_date.desc"}>
-                primary_release_date.desc
-              </MenuItem> */}
+
               <MenuItem value={"vote_average.asc"}>vote_average.asc</MenuItem>
               <MenuItem value={"vote_average.desc"}>vote_average.desc</MenuItem>
-              {/* <MenuItem value={"vote_count.asc"}>vote_count.asc</MenuItem>
-              <MenuItem value={"vote_count.desc"}>vote_count.desc</MenuItem> */}
             </Select>
           </MyFormControl>
         </div>

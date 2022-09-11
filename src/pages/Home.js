@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import Banner from "../component/Banner";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../redux/actions/movieActions";
 import MovieSlide from "../component/MovieSlide";
 import { FadeLoader } from "react-spinners";
-import MovieVideo from "../component/MovieVideo";
 import { movieDetailActions } from "../redux/actions/movieDetailActions";
 import api from "../redux/api";
 import Footer from "../component/Footer";

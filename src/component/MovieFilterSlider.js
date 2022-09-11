@@ -74,8 +74,6 @@ export default function MovieFilterSlider({ min, max, text, id }) {
 
   const handleDispatch = () => {
     if (id === "year") {
-      console.log("year change committed");
-
       dispatch({
         type: "RELEASE_DATE_FILTER_STORE_SUCCESS",
         payload: { date_gte: value[0], date_lte: value[1] },
@@ -83,7 +81,6 @@ export default function MovieFilterSlider({ min, max, text, id }) {
 
       dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" });
     } else if (id === "score") {
-      console.log("score change committed");
 
       dispatch({
         type: "SCORE_FILTER_STORE_SUCCESS",

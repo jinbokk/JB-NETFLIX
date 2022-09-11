@@ -6,7 +6,6 @@ import MuiToggleButton from "@mui/material/ToggleButton";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { movieFilterActions } from "../redux/actions/movieFilterActions";
-import api from "../redux/api";
 
 let genreStore = [];
 
@@ -56,9 +55,7 @@ export default function MovieFilterButton({ text, genreListData }) {
         dispatch({
           type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore.join(" || "),
-        }),
-        console.log("after pushing", genreStore)
-        // dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
+        })
       );
     } else {
       let tempArray = genreStore.filter((item) => item !== event.target.value);
@@ -68,9 +65,7 @@ export default function MovieFilterButton({ text, genreListData }) {
         dispatch({
           type: "STORE_MOVIE_GENRES_SUCCESS",
           payload: genreStore.join(" || "),
-        }),
-        console.log("after filtering", genreStore)
-        // dispatch({ type: "GET_FILTERED_MOVIES_REQUEST" })
+        })
       );
     }
   };

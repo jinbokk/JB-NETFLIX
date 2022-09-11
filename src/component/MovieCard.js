@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MovieVideo from "./MovieVideo";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import api from "../redux/api";
 import { useNavigate } from "react-router-dom";
-import { movieActions } from "../redux/actions/movieActions";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
@@ -17,8 +16,6 @@ const MovieCard = ({ movie }) => {
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
 
-    console.log("json is", selectedMovieJson);
-
     const movieKey = selectedMovieJson.data.results.find(
       (item) => item.name === "Official Trailer" || item.name === "Trailer"
     )
@@ -26,8 +23,6 @@ const MovieCard = ({ movie }) => {
           (item) => item.name === "Official Trailer" || item.name === "Trailer"
         ).key
       : selectedMovieJson.data.results[0].key;
-
-    console.log("find key is", movieKey);
 
     dispatch({
       type: "STORE_MOVIE_KEY_SUCCESS",
@@ -51,14 +46,11 @@ const MovieCard = ({ movie }) => {
   let isLoadMovie;
 
   const handleMouseEnter = () => {
-    console.log("mouseEnterEvent Fired");
     isHover = setTimeout(() => {
-      console.log("hover fired");
       setHover(true);
       getMovieKey();
     }, 1000);
     isLoadMovie = setTimeout(() => {
-      console.log("loadMovie fired");
       setloadMovie(true);
     }, 2000);
   };
@@ -129,7 +121,7 @@ const MovieCard = ({ movie }) => {
                 </div>
 
                 <div className="preview_modal_genre">
-                  {movie.genre_ids.slice(0,3).map((id, index) => (
+                  {movie.genre_ids.slice(0, 3).map((id, index) => (
                     <>
                       <div key={index} className="preview_modal_genre_tag">
                         <span

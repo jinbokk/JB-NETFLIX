@@ -6,7 +6,6 @@ import { FadeLoader } from "react-spinners";
 import api from "../redux/api";
 import MovieReview from "../component/MovieReview";
 import MovieSlide from "../component/MovieSlide";
-import MovieVideo from "../component/MovieVideo";
 import MovieVideoForBanner from "../component/MovieVideoForBanner";
 import TextAnimation from "../component/TextAnimation";
 import Row from "react-bootstrap/esm/Row";
@@ -33,17 +32,6 @@ const MovieDetail = () => {
     loading,
   } = useSelector((state) => state.movieDetail);
 
-  console.log("MovieDetailData 는", MovieDetailData);
-
-  // const [animate, setAnimate] = useState(false);
-  // const animateTrigger = () => {
-  //   setAnimate(true);
-  //   console.log("animation fire");
-  // };
-
-  // setTimeout(() => {
-  //   animateTrigger();
-  // }, 1000);
 
   const getMovieKeyForBanner = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
@@ -158,7 +146,6 @@ const MovieDetail = () => {
                 );
               } else {
                 let avatar_path = item.author_details.avatar_path;
-                console.log("avatar_path is", avatar_path);
                 return (
                   <Col lg={4}>
                     <MovieReview avatar_path={avatar_path} item={item} />

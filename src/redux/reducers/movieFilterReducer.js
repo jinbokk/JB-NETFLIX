@@ -1,7 +1,6 @@
 let initialState = {
   moreMoviesData: {},
   moreMoviesDataLoading: true,
-  filteredMoviesData: {},
   genreListData: {},
   keyword: "",
   loading: true,
@@ -32,7 +31,6 @@ function movieFilterReducer(state = initialState, action) {
     case "GET_FILTERED_MOVIES_SUCCESS":
       return {
         ...state,
-        filteredMoviesData: payload.FilteredMoviesJson.data,
         genreListData: payload.movieGenresJson.data,
         loading: false,
       };
@@ -84,7 +82,6 @@ function movieFilterReducer(state = initialState, action) {
     case "RESET_MOVIES_SEARCH_SUCCESS":
       return {
         ...state,
-        filteredMoviesData: {},
         keyword: {},
         loading: true,
       };

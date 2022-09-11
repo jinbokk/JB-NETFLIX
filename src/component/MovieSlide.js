@@ -24,7 +24,6 @@ export default function MovieSlide({ movies }) {
       navigation={true}
       modules={[Navigation]}
       breakpoints={{
-        // when window width is >= X px
         0: {
           slidesPerView: 4,
           slidesPerGroup: 2,
