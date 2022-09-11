@@ -65,7 +65,7 @@ const MovieCard = ({ movie }) => {
   return (
     <>
       <div
-        className="movieCard"
+        className="movieCard swiper-lazy"
         style={{
           backgroundImage:
             "url(" +
@@ -84,16 +84,15 @@ const MovieCard = ({ movie }) => {
                   <MovieVideo />
                 </div>
               ) : (
-                
-                  <div
-                    className="movieCard_preview"
-                    style={{
-                      backgroundImage:
-                        "url(" +
-                        `	https://www.themoviedb.org/t/p/w500_and_h282_face${movieBackdrop}` +
-                        ")",
-                    }}
-                  ></div>
+                <div
+                  className="movieCard_preview"
+                  style={{
+                    backgroundImage:
+                      "url(" +
+                      `	https://www.themoviedb.org/t/p/w500_and_h282_face${movieBackdrop}` +
+                      ")",
+                  }}
+                ></div>
               )}
               <div className="preview_modal_info">
                 <div>

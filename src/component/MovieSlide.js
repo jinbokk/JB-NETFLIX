@@ -1,7 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-import { Lazy } from "swiper";
+import { Navigation, Lazy } from "swiper";
 import { MovieCard } from "./MovieCard";
 
 import "swiper/css";
@@ -34,10 +33,6 @@ export default function MovieSlide({ movies }) {
           slidesPerView: 6,
           slidesPerGroup: 3,
         },
-        768: {
-          slidesPerView: 6,
-          slidesPerGroup: 3,
-        },
         920: {
           slidesPerView: 8,
           slidesPerGroup: 4,
@@ -45,9 +40,9 @@ export default function MovieSlide({ movies }) {
       }}
     >
       {moviesData &&
-        moviesData.map((item) => (
-          <SwiperSlide key={item.id}>
-            <MovieCard movie={item} />
+        moviesData.map((item, index) => (
+          <SwiperSlide key={index}>
+            <MovieCard movie={item} key={index} />
           </SwiperSlide>
         ))}
     </Swiper>
