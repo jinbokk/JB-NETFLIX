@@ -170,7 +170,7 @@ const Movies = () => {
           </div>
 
           <label
-            for="MoviesHandler_container_checkbox"
+            htmlFor="MoviesHandler_container_checkbox"
             className="MoviesHandler_toggleButton"
           >
             <p className="MoviesHandler_toggleButton_text">FILTER</p>

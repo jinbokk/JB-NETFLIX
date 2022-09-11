@@ -17,7 +17,7 @@ const FilteredMovieList = ({ movies, innerRef }) => {
             {moviesData.map((item, index) =>
               moviesData.length === index + 1 ? (
                 <Col
-                  key={item.id}
+                  key={index}
                   ref={innerRef}
                   sm={4}
                   md={3}
@@ -33,7 +33,7 @@ const FilteredMovieList = ({ movies, innerRef }) => {
                 ></Col>
               ) : (
                 <Col
-                  key={item.id}
+                  key={index}
                   sm={4}
                   md={3}
                   lg={2}
