@@ -9,6 +9,8 @@ import Footer from "../component/Footer";
 import MovieVideoForBanner from "../component/MovieVideoForBanner";
 import TextAnimation from "../component/TextAnimation";
 
+// const MovieSlide = React.lazy(() => import("../component/MovieSlide"));
+
 const Home = () => {
   const dispatch = useDispatch();
   const isMounted = useRef(false);
@@ -87,7 +89,7 @@ const Home = () => {
             style={{
               backgroundImage:
                 "url(" +
-                `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${popularMoviesData.results[0].poster_path}` +
+                `https://www.themoviedb.org/t/p/w220_and_h33020_and_h800_multi_faces${popularMoviesData.results[0].poster_path}` +
                 ")",
             }}
           ></div>

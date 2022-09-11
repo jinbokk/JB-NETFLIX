@@ -69,7 +69,7 @@ const MovieCard = ({ movie }) => {
         style={{
           backgroundImage:
             "url(" +
-            `	https://www.themoviedb.org/t/p/w440_and_h660_face${movieCardImg}` +
+            `	https://www.themoviedb.org/t/p/w220_and_h330_face${movieCardImg}` +
             ")",
         }}
         onClick={() => navigate(`/movies/${movie.id}`)}
@@ -84,15 +84,16 @@ const MovieCard = ({ movie }) => {
                   <MovieVideo />
                 </div>
               ) : (
-                <div
-                  className="movieCard_preview"
-                  style={{
-                    backgroundImage:
-                      "url(" +
-                      `	https://www.themoviedb.org/t/p/w500_and_h282_face${movieBackdrop}` +
-                      ")",
-                  }}
-                ></div>
+                
+                  <div
+                    className="movieCard_preview"
+                    style={{
+                      backgroundImage:
+                        "url(" +
+                        `	https://www.themoviedb.org/t/p/w500_and_h282_face${movieBackdrop}` +
+                        ")",
+                    }}
+                  ></div>
               )}
               <div className="preview_modal_info">
                 <div>

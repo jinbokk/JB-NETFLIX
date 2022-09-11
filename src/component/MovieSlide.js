@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 export default function MovieSlide({ movies }) {
+
   let moviesData = movies.filter((item) => item.poster_path !== null);
 
   return (
