@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { movieDetailActions } from "../redux/actions/movieDetailActions";
 import { FadeLoader } from "react-spinners";
+import { movieActions } from "../redux/actions/movieActions";
 import api from "../redux/api";
 import MovieReview from "../component/MovieReview";
 import MovieSlide from "../component/MovieSlide";
@@ -17,10 +18,11 @@ const MovieDetail = () => {
 
   const movie_id = useParams().id;
 
-  useEffect(() => {
-    dispatch(movieDetailActions.getMovieDetail(movie_id, 1));
-    dispatch({ type: "RESET_MOVIE_DETAIL_STORE_SUCCESS" });
-  }, [movie_id]);
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
+  const getGenres = api.get(
+    `/genre/movie/list?api_key=${API_KEY}&language=en-US&region=US`
+  );
 
   const {
     MovieDetailData,
@@ -31,7 +33,6 @@ const MovieDetail = () => {
   } = useSelector((state) => state.movieDetail);
 
   const getMovieKeyForBanner = async () => {
-    const API_KEY = process.env.REACT_APP_API_KEY;
     const selectedMovieJson = await api.get(
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
@@ -52,21 +53,29 @@ const MovieDetail = () => {
     });
   };
 
-  useEffect(() => {
-    getMovieKeyForBanner();
-    dispatch({
-      type: "RESET_MOVIE_KEY_SUCCESS",
-    });
-    dispatch({
-      type: "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS",
-    });
-  }, [movie_id]);
-
   const [bannerChange, setBannerChange] = useState(false);
 
-  const isTimeout = setTimeout(() => {
-    setBannerChange(true);
-  }, 2000);
+  useEffect(() => {
+    setBannerChange(false);
+    const isTimeout = setTimeout(() => {
+      setBannerChange(true);
+    }, 3000);
+
+    dispatch({ type: "STORE_GENRE_LIST_SUCCESS", payload: getGenres });
+    dispatch(movieDetailActions.getMovieDetail(movie_id, 1));
+    dispatch(movieActions.getMovies());
+    getMovieKeyForBanner();
+
+    return () => {
+      dispatch({
+        type: "RESET_MOVIE_KEY_SUCCESS",
+      });
+      dispatch({
+        type: "RESET_MOVIE_KEY_FOR_BANNER_SUCCESS",
+      });
+      dispatch({ type: "RESET_MOVIE_DETAIL_STORE_SUCCESS" });
+    };
+  }, [movie_id]);
 
   return loading ? (
     <div className="loadingSpinner">
@@ -109,28 +118,28 @@ const MovieDetail = () => {
         </h1>
         <Row>
           {MovieReviews.data.total_results !== 0 ? (
-            MovieReviews.data.results.map((item) => {
+            MovieReviews.data.results.map((item, index) => {
               if (
                 item.author_details.avatar_path !== null &&
                 item.author_details.avatar_path.includes("https") === true
               ) {
                 let avatar_path = item.author_details.avatar_path.slice(32);
                 return (
-                  <Col lg={4}>
+                  <Col lg={4} key={index}>
                     <MovieReview avatar_path={avatar_path} item={item} />
                   </Col>
                 );
               } else if (item.author_details.avatar_path == null) {
                 let avatar_path = "";
                 return (
-                  <Col lg={4}>
+                  <Col lg={4} key={index}>
                     <MovieReview avatar_path={avatar_path} item={item} />
                   </Col>
                 );
               } else {
                 let avatar_path = item.author_details.avatar_path;
                 return (
-                  <Col lg={4}>
+                  <Col lg={4} key={index}>
                     <MovieReview avatar_path={avatar_path} item={item} />
                   </Col>
                 );

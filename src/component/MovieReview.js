@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
@@ -25,7 +24,7 @@ export default function MovieReview({ avatar_path, item }) {
 
   return (
     <>
-      <Button
+      <button
         className="review_card_top"
         onClick={handleOpen}
         variant="text"
@@ -103,11 +102,11 @@ export default function MovieReview({ avatar_path, item }) {
             </div>
           </div>
           <div className="review_content_section">
-            <p className="review_content">{item.content}</p>
+            <div className="review_content">{item.content}</div>
             <div className="review_content_readMore">Read more</div>
           </div>
         </div>
-      </Button>
+      </button>
       <Modal
         open={open}
         onClose={handleClose}

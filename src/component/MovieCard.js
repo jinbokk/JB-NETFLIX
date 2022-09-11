@@ -106,7 +106,7 @@ const MovieCard = ({ movie }) => {
                   <span style={{ marginRight: "5px" }}>
                     <span>SCORE</span>
                     <span className="preview_modal_score">
-                      {movie.vote_average}
+                      {movie.vote_average.toFixed(1)}
                     </span>
                   </span>
 
