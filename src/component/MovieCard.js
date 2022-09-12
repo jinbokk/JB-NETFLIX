@@ -65,7 +65,7 @@ const MovieCard = ({ movie }) => {
   return (
     <>
       <div
-        className="movieCard swiper-lazy"
+        className="movieCard"
         style={{
           backgroundImage:
             "url(" +
