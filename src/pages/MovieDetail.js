@@ -44,10 +44,6 @@ const BannerImg = styled.div`
 const MovieDetail = () => {
   const dispatch = useDispatch();
 
-  // const swiperForCredits = new Swiper('.swiper_for_credits', {
-
-  // })
-
   const movie_id = useParams().id;
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -136,7 +132,62 @@ const MovieDetail = () => {
         </h1>
 
         <div className="MovieDetail_section_overview">
-          {MovieDetailData.overview}
+          <div className="MovieDetail_section_overview_item_left">
+            {MovieDetailData.overview}
+          </div>
+
+          <span className="MovieDetail_section_overview_divide_line"></span>
+
+          <div className="MovieDetail_section_overview_item_right">
+            <div>
+              <span>RELEASE DATE &nbsp; &nbsp;/</span>
+              <span>{MovieDetailData.release_date}</span>
+            </div>
+
+            <div>
+              <span>RUNTIME &nbsp; &nbsp;/</span>
+              <span>{MovieDetailData.runtime} min</span>
+            </div>
+
+            <div>
+              <div className="MovieDetail_section_overview_vote_container">
+                <div>
+                  <span>VOTE AVERAGE</span>
+                  <span className="overview_vote_average">
+                    {MovieDetailData.vote_average.toFixed(1)}
+                  </span>
+                </div>
+                <div>
+                  <span>VOTE COUNT</span>
+                  <span className="overview_vote_average">
+                    {MovieDetailData.vote_count}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <span>GENRES</span>
+              <span>
+                {MovieDetailData.genres.map((item, index) => (
+                  <span className="overview_genres" key={index}>
+                    {item.name}
+                  </span>
+                ))}
+              </span>
+            </div>
+
+            <div>
+              <span>RATED</span>
+              <span>
+                {!MovieDetailData.adult ? (
+                  <span className="overview_G_rate">G</span>
+                ) : (
+                  <span className="overview_adult_rate">18+</span>
+                )}
+              </span>
+            </div>
+          </div>
         </div>
 
         <h1>
@@ -170,10 +221,10 @@ const MovieDetail = () => {
                 slidesPerView: 6,
                 slidesPerGroup: 2,
               },
-              1200 :{
+              1200: {
                 slidesPerView: 8,
                 slidesPerGroup: 2,
-              }
+              },
             }}
           >
             {MovieCredits.data.cast.slice(0, 12).map((item, index) => (
