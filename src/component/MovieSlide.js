@@ -26,7 +26,7 @@ export default function MovieSlide({ movies }) {
       lazy={true}
       breakpoints={{
         0: {
-          slidesPerView: 2,
+          slidesPerView: 3,
           slidesPerGroup: 1,
         },
         450: {
