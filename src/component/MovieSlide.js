@@ -31,11 +31,11 @@ export default function MovieSlide({ movies }) {
         },
         450: {
           slidesPerView: 6,
-          slidesPerGroup: 3,
+          slidesPerGroup: 2,
         },
         920: {
           slidesPerView: 8,
-          slidesPerGroup: 4,
+          slidesPerGroup: 2,
         },
       }}
     >

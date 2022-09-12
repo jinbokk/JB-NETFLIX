@@ -69,7 +69,7 @@ const MovieCard = ({ movie }) => {
         style={{
           backgroundImage:
             "url(" +
-            `	https://www.themoviedb.org/t/p/w440_and_h660_face${movieCardImg}` +
+            `	https://image.tmdb.org/t/p/w440_and_h660_face${movieCardImg}` +
             ")",
         }}
         onClick={() => navigate(`/movies/${movie.id}`)}
