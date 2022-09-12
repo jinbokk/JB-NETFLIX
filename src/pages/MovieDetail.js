@@ -12,6 +12,32 @@ import TextAnimation from "../component/TextAnimation";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Footer from "../component/Footer";
+import styled from "styled-components";
+
+const BannerImg = styled.div`
+  background-position: 50%;
+  background-size: cover;
+  background-image: url("
+  https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${(props) =>
+    props.MovieDetailData.poster_path}
+  ");
+  left: 0;
+  top: 0;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    background-position: top;
+    background-image: url("
+    https://www.themoviedb.org/t/p/w500${(props) =>
+      props.MovieDetailData.poster_path}
+    ");
+  }
+`;
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
@@ -87,17 +113,12 @@ const MovieDetail = () => {
         <div className="MovieDetail_container_text">
           <TextAnimation movie={MovieDetailData} />
         </div>
-        <div
-          className="MovieDetail_Img"
-          style={{
-            backgroundImage:
-              "url(" +
-              `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${MovieDetailData.poster_path}` +
-              ")",
-          }}
-        >
-          {bannerChange ? <MovieVideoForBanner /> : null}
-        </div>
+        {}
+        <BannerImg MovieDetailData={MovieDetailData}>
+          <div className="MovieDetail_video">
+            {bannerChange ? <MovieVideoForBanner /> : null}
+          </div>
+        </BannerImg>
       </div>
 
       <div className="MovieDetail_section">

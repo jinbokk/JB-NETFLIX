@@ -8,6 +8,30 @@ import api from "../redux/api";
 import Footer from "../component/Footer";
 import MovieVideoForBanner from "../component/MovieVideoForBanner";
 import TextAnimation from "../component/TextAnimation";
+import styled from "styled-components";
+
+const BannerImg = styled.div`
+  background-position: 50%;
+  background-size: cover;
+  background-image: url("
+  https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${(props) =>
+    props.popularMoviesData.results[0].poster_path}
+  ");
+  top: 0;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
+  @media (max-width: 768px) {
+    background-position: top;
+    background-image: url("
+    https://www.themoviedb.org/t/p/w500${(props) =>
+      props.popularMoviesData.results[0].poster_path}
+    ");
+  }
+`;
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -77,21 +101,13 @@ const Home = () => {
           <TextAnimation movie={MovieDetailData} />
         </div>
 
-        {bannerChange ? (
-          <div className="bannerVideo_container">
-            <MovieVideoForBanner />
-          </div>
-        ) : (
-          <div
-            className="banner"
-            style={{
-              backgroundImage:
-                "url(" +
-                `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${popularMoviesData.results[0].poster_path}` +
-                ")",
-            }}
-          ></div>
-        )}
+        <BannerImg popularMoviesData={popularMoviesData}>
+          {bannerChange ? (
+            <div className="bannerVideo_container">
+              <MovieVideoForBanner />
+            </div>
+          ) : null}
+        </BannerImg>
       </div>
 
       <h1>
