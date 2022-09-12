@@ -23,13 +23,28 @@ const BannerImg = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  
+
+  &:before {
+    position: absolute;
+    z-index: 15;
+    content: "";
+    min-height: 600px;
+    height: 71.25vw;
+    width: 100%;
+    background: linear-gradient(to top, #141414, transparent);
+    pointer-events: none;
+  }
+
   @media (max-width: 768px) {
     background-position: top;
     background-image: url("
     https://www.themoviedb.org/t/p/w500${(props) =>
       props.popularMoviesData.results[0].poster_path}
     ");
+
+    &:before {
+      background: linear-gradient(to top, #141414, transparent);
+    }
   }
 `;
 
