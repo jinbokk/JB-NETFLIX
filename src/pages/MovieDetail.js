@@ -13,6 +13,8 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Footer from "../component/Footer";
 import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 
 const BannerImg = styled.div`
   background-position: 50%;
@@ -42,6 +44,10 @@ const BannerImg = styled.div`
 const MovieDetail = () => {
   const dispatch = useDispatch();
 
+  // const swiperForCredits = new Swiper('.swiper_for_credits', {
+
+  // })
+
   const movie_id = useParams().id;
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -56,6 +62,7 @@ const MovieDetail = () => {
     RecommendMovies,
     SimilarMovies,
     loading,
+    MovieCredits,
   } = useSelector((state) => state.movieDetail);
 
   const getMovieKeyForBanner = async () => {
@@ -130,6 +137,70 @@ const MovieDetail = () => {
 
         <div className="MovieDetail_section_overview">
           {MovieDetailData.overview}
+        </div>
+
+        <h1>
+          <span className="subTitle">&#10095;</span>
+          <span>TOP BILLED CAST</span>
+          <span className="divide_line"></span>
+        </h1>
+
+        <div className="MovieDetail_section_credits">
+          <Swiper
+            className="swiper_for_credits"
+            slidesPerView={8}
+            spaceBetween={10}
+            slidesPerGroup={2}
+            speed={800}
+            loop={true}
+            loopFillGroupWithBlank={false}
+            navigation={false}
+            modules={Navigation}
+            lazy={true}
+            breakpoints={{
+              0: {
+                slidesPerView: 2,
+                slidesPerGroup: 1,
+              },
+              450: {
+                slidesPerView: 4,
+                slidesPerGroup: 1,
+              },
+              920: {
+                slidesPerView: 6,
+                slidesPerGroup: 2,
+              },
+              1200 :{
+                slidesPerView: 8,
+                slidesPerGroup: 2,
+              }
+            }}
+          >
+            {MovieCredits.data.cast.slice(0, 12).map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="MovieDetail_section_credits_items">
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "175px",
+                      borderRadius: "10%",
+                      backgroundImage:
+                        "url(" +
+                        `https://www.themoviedb.org/t/p/w138_and_h175_face${item.profile_path}` +
+                        ")",
+                      backgroundSize: "cover",
+                      filter: "brightness(80%)",
+                      marginBottom: "15px",
+                    }}
+                  ></div>
+                  <div style={{ marginBottom: "10px" }}>{item.name}</div>
+                  <div style={{ fontWeight: "bold" }}>
+                    {"( " + item.character + " )"}
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
         <h1>

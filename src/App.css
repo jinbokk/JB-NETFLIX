@@ -223,15 +223,15 @@
   left: 0;
   width: 100%;
   height: 300px;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent 200px),
-    linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent 200px);
+  background: linear-gradient(to left, #141414, transparent 200px),
+    linear-gradient(to right, #141414, transparent 200px);
   pointer-events: none;
 }
 
 @media screen and (max-width: 768px) {
   .swiper::before {
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent 100px),
-      linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent 100px);
+    background: linear-gradient(to left, #141414, transparent 100px),
+      linear-gradient(to right, #141414, transparent 100px);
   }
 }
 
@@ -276,6 +276,27 @@
   .swiper-button-next::after {
     visibility: hidden;
   }
+}
+
+.swiper_for_credits {
+  width: 100vw;
+  height: 250px !important;
+  aspect-ratio: 138 / 175 !important;
+  overflow: visible !important;
+  position: relative;
+  z-index: 1;
+}
+
+.swiper_for_credits::before {
+  z-index: 2;
+  position: absolute;
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 250px !important;
+  background: linear-gradient(to left, #141414, transparent 70px),
+    linear-gradient(to right, #141414, transparent 70px);
+  pointer-events: none;
 }
 
 /* ------------------------movieCard------------------------ */
@@ -725,6 +746,19 @@
   padding: 0 30px;
   padding-bottom: 20px;
   line-height: 25px;
+}
+
+/* .MovieDetail_section_credits {
+  
+} */
+
+.MovieDetail_section_credits_items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 138px;
+  white-space: nowrap;
 }
 
 .MovieDetail_info {

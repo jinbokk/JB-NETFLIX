@@ -5,6 +5,7 @@ let initialState = {
   MovieReviews: {},
   RecommendMovies: {},
   SimilarMovies: {},
+  MovieCredits: {},
   loading: true,
 };
 
@@ -25,6 +26,7 @@ function movieDetailReducer(state = initialState, action) {
         RecommendMovies: payload.RecommendMovies,
         SimilarMovies: payload.SimilarMovies,
         loading: false,
+        MovieCredits: payload.MovieCredits,
       };
 
     case "RESET_MOVIE_DETAIL_STORE_SUCCESS":
@@ -38,11 +40,11 @@ function movieDetailReducer(state = initialState, action) {
         loading: true,
       };
 
-      case "RESET_MOVIE_VIDEOS_SUCCESS":
+    case "RESET_MOVIE_VIDEOS_SUCCESS":
       return {
         ...state,
         MovieVideos: {},
-      }
+      };
 
     case "GET_MOVIE_DETAIL_FAILURE":
       return alert(`Sorry,\n"${payload.error.message}"`);

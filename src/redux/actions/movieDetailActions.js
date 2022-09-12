@@ -26,18 +26,24 @@ function getMovieDetail(movie_id, pageNum) {
         `/movie/${movie_id}/similar?api_key=${API_KEY}&language=en-US&page=${pageNum}&region=US`
       );
 
+      const getCredits = api.get(
+        `/movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`
+      );
+
       const [
         MovieDetailJson,
         MovieVideos,
         MovieReviews,
         RecommendMovies,
         SimilarMovies,
+        MovieCredits,
       ] = await Promise.all([
         getMovieDetailJson,
         getMovieVideos,
         getMovieReviews,
         getRecommendMovies,
         getSimilarMovies,
+        getCredits,
       ]);
 
       dispatch({
@@ -48,6 +54,7 @@ function getMovieDetail(movie_id, pageNum) {
           MovieReviews: MovieReviews,
           RecommendMovies: RecommendMovies,
           SimilarMovies: SimilarMovies,
+          MovieCredits: MovieCredits,
         },
       });
     } catch (error) {
