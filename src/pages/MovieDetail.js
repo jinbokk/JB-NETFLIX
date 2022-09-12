@@ -197,7 +197,7 @@ const MovieDetail = () => {
         <div className="MovieDetail_section_credits">
           <Swiper
             className="swiper_for_credits"
-            slidesPerView={8}
+            slidesPerView={6}
             spaceBetween={10}
             slidesPerGroup={2}
             speed={800}
@@ -216,16 +216,16 @@ const MovieDetail = () => {
                 slidesPerGroup: 1,
               },
               920: {
-                slidesPerView: 6,
+                slidesPerView: 4,
                 slidesPerGroup: 2,
               },
               1200: {
-                slidesPerView: 8,
+                slidesPerView: 6,
                 slidesPerGroup: 2,
               },
             }}
           >
-            {MovieCredits.data.cast.slice(0, 12).map((item, index) => (
+            {MovieCredits.data.cast.slice(0, 6).map((item, index) => (
               <SwiperSlide key={index}>
                 <div className="MovieDetail_section_credits_items">
                   {item.profile_path ? (

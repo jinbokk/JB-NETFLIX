@@ -9,7 +9,9 @@ import "swiper/css/navigation";
 import "swiper/css/lazy";
 
 export default function MovieSlide({ movies }) {
-  let moviesData = movies.filter((item) => item.poster_path !== null);
+  let moviesData = movies
+    .filter((item) => item.poster_path !== null)
+    .slice(0, 6);
 
   return (
     <Swiper
@@ -24,16 +26,16 @@ export default function MovieSlide({ movies }) {
       lazy={true}
       breakpoints={{
         0: {
+          slidesPerView: 2,
+          slidesPerGroup: 1,
+        },
+        450: {
           slidesPerView: 4,
           slidesPerGroup: 2,
         },
-        450: {
-          slidesPerView: 6,
-          slidesPerGroup: 2,
-        },
         920: {
-          slidesPerView: 8,
-          slidesPerGroup: 2,
+          slidesPerView: 6,
+          slidesPerGroup: 3,
         },
       }}
     >
