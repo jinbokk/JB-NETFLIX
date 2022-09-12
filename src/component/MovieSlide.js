@@ -9,9 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/lazy";
 
 export default function MovieSlide({ movies }) {
-  let moviesData = movies
-    .filter((item) => item.poster_path !== null)
-    .slice(0, 10);
+  let moviesData = movies.filter((item) => item.poster_path !== null);
 
   return (
     <Swiper

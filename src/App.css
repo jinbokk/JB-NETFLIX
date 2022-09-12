@@ -482,7 +482,6 @@
   width: 140%;
   margin-top: 7px;
   transform-origin: top left;
-
   font-size: 10px;
   transform: scale(0.7);
 }
@@ -810,6 +809,8 @@
   margin-top: 20px;
   border-radius: 5px;
   background-color: red;
+  color: rgb(205, 205, 205);
+
 }
 
 .overview_G_rate {

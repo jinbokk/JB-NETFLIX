@@ -49,7 +49,7 @@ const MovieCard = ({ movie }) => {
     isHover = setTimeout(() => {
       setHover(true);
       getMovieKey();
-    }, 1000);
+    }, 1200);
     isLoadMovie = setTimeout(() => {
       setloadMovie(true);
     }, 2000);

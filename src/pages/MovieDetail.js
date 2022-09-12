@@ -228,21 +228,42 @@ const MovieDetail = () => {
             {MovieCredits.data.cast.slice(0, 12).map((item, index) => (
               <SwiperSlide key={index}>
                 <div className="MovieDetail_section_credits_items">
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "175px",
-                      borderRadius: "10%",
-                      backgroundImage:
-                        "url(" +
-                        `https://www.themoviedb.org/t/p/w138_and_h175_face${item.profile_path}` +
-                        ")",
-                      backgroundSize: "cover",
-                      filter: "brightness(80%)",
-                      marginBottom: "15px",
-                      cursor:"pointer"
-                    }}
-                  ></div>
+                  {item.profile_path ? (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "175px",
+                        borderRadius: "10%",
+                        backgroundImage:
+                          "url(" +
+                          `https://www.themoviedb.org/t/p/w138_and_h175_face${item.profile_path}` +
+                          ")",
+
+                        backgroundSize: "cover",
+                        filter: "brightness(80%)",
+                        marginBottom: "15px",
+                        cursor: "pointer",
+                      }}
+                    ></div>
+                  ) : (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "175px",
+                        borderRadius: "10%",
+                        backgroundImage:
+                          "url(" +
+                          `https://www.pngkey.com/png/detail/121-1219231_user-default-profile.png` +
+                          ")",
+
+                        backgroundSize: "cover",
+                        backgroundPositionX: "center",
+                        filter: "brightness(50%)",
+                        marginBottom: "15px",
+                        cursor: "pointer",
+                      }}
+                    ></div>
+                  )}
                   <div style={{ marginBottom: "10px" }}>{item.name}</div>
                   <div style={{ fontWeight: "bold" }}>
                     {"( " + item.character + " )"}
