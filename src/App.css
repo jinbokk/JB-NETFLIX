@@ -777,6 +777,7 @@
 }
 
 .MovieDetail_section_overview_item_right div span {
+  font-size: 13px;
   margin-right: 10px;
   font-weight: bold;
 }
@@ -799,8 +800,9 @@
 }
 
 .overview_genres {
-  word-break: keep-all;
+  word-break: break-all;
   white-space: nowrap;
+  overflow: scroll;
   font-weight: bold;
   padding: 5px 10px;
   margin-left: 5px;
@@ -812,7 +814,7 @@
 
 .overview_G_rate {
   color: rgb(30, 30, 30);
-  font-size: 20px;
+  font-size: 18px !important;
   font-weight: bolder;
   padding: 5px 15px;
   border-radius: 5px;

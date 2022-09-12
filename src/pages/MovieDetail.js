@@ -168,13 +168,11 @@ const MovieDetail = () => {
 
             <div>
               <span>GENRES</span>
-              <span>
-                {MovieDetailData.genres.map((item, index) => (
-                  <span className="overview_genres" key={index}>
-                    {item.name}
-                  </span>
-                ))}
-              </span>
+              {MovieDetailData.genres.map((item, index) => (
+                <span className="overview_genres" key={index}>
+                  {item.name}
+                </span>
+              ))}
             </div>
 
             <div>
@@ -242,6 +240,7 @@ const MovieDetail = () => {
                       backgroundSize: "cover",
                       filter: "brightness(80%)",
                       marginBottom: "15px",
+                      cursor:"pointer"
                     }}
                   ></div>
                   <div style={{ marginBottom: "10px" }}>{item.name}</div>

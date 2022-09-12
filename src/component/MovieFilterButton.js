@@ -112,24 +112,25 @@ export default function MovieFilterButton({ text, genreListData }) {
       <h2>{text}</h2>
       <div className="genreButton_container_top">
         <div className="genreButton_container">
-          {genreListData.genres.map((item, index) => (
-            <ToggleButtonGroup
-              value={formats}
-              onChange={handleFormat}
-              color="primary"
-              key={index}
-            >
-              {item.name === "Documentary" ? (
-                <MyToggleButton value={item.id}>DOCU</MyToggleButton>
-              ) : item.name === "Science Fiction" ? (
-                <MyToggleButton value={item.id}>SF</MyToggleButton>
-              ) : item.name === "TV Movie" ? (
-                <MyToggleButton value={item.id}>TV</MyToggleButton>
-              ) : (
-                <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
-              )}
-            </ToggleButtonGroup>
-          ))}
+          {genreListData.genres &&
+            genreListData.genres.map((item, index) => (
+              <ToggleButtonGroup
+                value={formats}
+                onChange={handleFormat}
+                color="primary"
+                key={index}
+              >
+                {item.name === "Documentary" ? (
+                  <MyToggleButton value={item.id}>DOCU</MyToggleButton>
+                ) : item.name === "Science Fiction" ? (
+                  <MyToggleButton value={item.id}>SF</MyToggleButton>
+                ) : item.name === "TV Movie" ? (
+                  <MyToggleButton value={item.id}>TV</MyToggleButton>
+                ) : (
+                  <MyToggleButton value={item.id}>{item.name}</MyToggleButton>
+                )}
+              </ToggleButtonGroup>
+            ))}
         </div>
       </div>
     </ThemeProvider>
