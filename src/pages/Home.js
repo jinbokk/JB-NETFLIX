@@ -66,12 +66,12 @@ const Home = () => {
       `/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
 
-    const movieKeyForBanner = selectedMovieJson.data.results.find(
+    let movieKeyForBanner = selectedMovieJson.data.results.find(
       (item) => item.name === "Official Trailer" || item.name === "Trailer"
-    )
-      ? selectedMovieJson.data.results.find(
-          (item) => item.name === "Official Trailer" || item.name === "Trailer"
-        ).key
+    );
+
+    movieKeyForBanner = movieKeyForBanner
+      ? movieKeyForBanner.key
       : selectedMovieJson.data.results[0].key || null;
 
     dispatch({

@@ -169,6 +169,7 @@
 .banner_container_text {
   position: absolute;
   top: 0;
+  left: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -810,7 +811,6 @@
   border-radius: 5px;
   background-color: red;
   color: rgb(205, 205, 205);
-
 }
 
 .overview_G_rate {
