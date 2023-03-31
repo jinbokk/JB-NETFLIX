@@ -7,6 +7,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   function (config) {
+    console.log(config)
     return config;
   },
   function (error) {
@@ -16,6 +17,7 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   function (response) {
+    console.log(response)
     return response;
   },
   function (error) {

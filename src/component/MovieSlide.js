@@ -11,7 +11,7 @@ import "swiper/css/lazy";
 export default function MovieSlide({ movies }) {
   let moviesData = movies
     .filter((item) => item.poster_path !== null)
-    .slice(0, 6);
+    .slice(0, 8);
 
   return (
     <Swiper
@@ -34,8 +34,8 @@ export default function MovieSlide({ movies }) {
           slidesPerGroup: 2,
         },
         920: {
-          slidesPerView: 6,
-          slidesPerGroup: 3,
+          slidesPerView: 8,
+          slidesPerGroup: 2,
         },
       }}
     >
