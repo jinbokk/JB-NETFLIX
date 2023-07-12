@@ -27,22 +27,17 @@ Users can also access details such as the cast and reviews of a particular movie
 ## Features
 
 - ***Categorized Information on Main Page:***
-
-    On the main page, movies are sorted into categories such as popular movies and recently released movies. 
+    - On the main page, movies are sorted into categories such as popular movies and recently released movies. 
     Users can conveniently access a large amount of movie information at once.
 
 - ***Instant Movie Trailer Viewing:***
-
-    Users have the ability to watch movie trailers directly on the website.
-    This feature allows users to quickly preview movies and make informed decisions.
+    - Users have the ability to watch movie trailers directly on the website. This feature allows users to quickly preview movies and make informed decisions.
 
 - ***Movie Search by Name, Release Year, Genre, and IBM Score:***
-
-    Users can search for movies based on their titles, release years, genres, and IBM scores. This functionality provides flexibility in finding movies based on specific criteria.
+    - Users can search for movies based on their titles, release years, genres, and IBM scores. This functionality provides flexibility in finding movies based on specific criteria.
 
 - ***Sorting Searched Data:***
-
-    Users can sort the searched movie data based on different criteria such as the most recent, oldest, or popular. This sorting feature enables users to customize the display of search results according to their preferences.
+    - Users can sort the searched movie data based on different criteria such as the most recent, oldest, or popular. This sorting feature enables users to customize the display of search results according to their preferences.
 
 
 ## Acknowledgements
